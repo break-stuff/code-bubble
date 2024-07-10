@@ -18,13 +18,131 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/code-block/sandbox-configs.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "openSandbox",
+          "parameters": [
+            {
+              "name": "example",
+              "default": "''"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "openSandbox",
+          "declaration": {
+            "name": "openSandbox",
+            "module": "src/code-block/sandbox-configs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/code-block/code-block.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "CodeBlock",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "attribute": "example"
+            },
+            {
+              "kind": "field",
+              "name": "showSource",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "showRTL",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "htmlCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "reactCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getCode",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleExampleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "example",
+                  "type": {
+                    "text": "'html' | 'react'"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSandboxClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleCopyClick",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "example-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "fieldName": "example"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -85,7 +203,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: (args) => template(args), args: {}, }"
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">import { badge } from '@harmony/enablers/react'; const Badge = scope.forReact(badge); export default () =&gt; { return ( &lt;&gt; &lt;Badge appearance=&quot;accent&quot;&gt;Accent&lt;/Badge&gt; &lt;Badge appearance=&quot;neutral&quot;&gt;Neutral&lt;/Badge&gt; &lt;Badge appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Badge&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
         }
       ],
       "exports": [

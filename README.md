@@ -11,3 +11,4 @@ Features:
 [ ] Example toggle (examples render in light DOM in a `details` element)
 [ ] RTL toggle
 [ ] Sandbox button
+[ ] Copy button
