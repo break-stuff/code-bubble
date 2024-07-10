@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/code-block/code-block.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/code-block/code-block.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/code-block/code-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeBlock",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "stack-blitz-code-block",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "CodeBlock",
+            "module": "src/code-block/code-block.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeBlock",
+          "declaration": {
+            "name": "CodeBlock",
+            "module": "src/code-block/code-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./code-block/code-block.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/code-block/code-block.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta<CodeBlock>"
+          },
+          "default": "{ title: 'Components/Code Block', component: 'stack-blitz-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: (args) => template(args), args: {}, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "stack-blitz-code-block",
+          "declaration": {
+            "name": "CodeBlock",
+            "module": "/src/code-block/code-block"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/code-block/code-block.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/code-block/code-block.stories.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
