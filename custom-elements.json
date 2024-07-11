@@ -29,6 +29,43 @@
               "default": "''"
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "isObject",
+          "parameters": [
+            {
+              "name": "item",
+              "type": {
+                "text": "never"
+              }
+            }
+          ],
+          "description": "Simple object check.",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "mergeDeep",
+          "parameters": [
+            {
+              "name": "target",
+              "type": {
+                "text": "never"
+              }
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "never"
+              }
+            }
+          ],
+          "description": "Deep merge two objects."
         }
       ],
       "exports": [
@@ -37,6 +74,22 @@
           "name": "openSandbox",
           "declaration": {
             "name": "openSandbox",
+            "module": "src/code-block/sandbox-configs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isObject",
+          "declaration": {
+            "name": "isObject",
+            "module": "src/code-block/sandbox-configs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "mergeDeep",
+          "declaration": {
+            "name": "mergeDeep",
             "module": "src/code-block/sandbox-configs.ts"
           }
         }

@@ -1,4 +1,15 @@
-import sdk from '@stackblitz/sdk';
+import sdk, { OpenOptions, Project } from '@stackblitz/sdk';
+
+export type Config = {
+  html?: {
+    project?: Project;
+    options?: OpenOptions;
+  },
+  react?: {
+    project?: Project;
+    options?: OpenOptions;
+  },
+};
 
 export function openSandbox(example = '') {
   sdk.openProject(
@@ -122,7 +133,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }`,
-'package.json': `{
+        'package.json': `{
   "name": "vite-starter",
   "private": true,
   "version": "0.0.0",
@@ -135,7 +146,7 @@ button:focus-visible {
   "devDependencies": {
     "vite": "^5.3.2"
   }
-}`
+}`,
       },
       settings: {
         compile: {
@@ -149,4 +160,32 @@ button:focus-visible {
       openFile: ['index.html'],
     },
   );
+}
+
+/**
+ * Simple object check.
+ * @param item
+ * @returns {boolean}
+ */
+export function isObject(item: never) {
+  return item && typeof item === 'object' && !Array.isArray(item);
+}
+
+/**
+ * Deep merge two objects.
+ * @param target
+ * @param source
+ */
+export function mergeDeep(target: never, source: never) {
+  if (isObject(target) && isObject(source)) {
+    for (const key in (source as object)) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+  return mergeDeep(target, source);
 }
