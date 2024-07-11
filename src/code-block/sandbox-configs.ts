@@ -1,14 +1,29 @@
-import sdk, { OpenOptions, Project } from '@stackblitz/sdk';
+import sdk from '@stackblitz/sdk';
+
+export type ProjectConfig = {
+  title?: string;
+  description?: string;
+  files?: {
+    [name: string]: string | ((example: string) => string);
+  };
+  dependencies?: {
+    [name: string]: string;
+  };
+};
 
 export type Config = {
   html?: {
-    project?: Project;
-    options?: OpenOptions;
-  },
+    project?: ProjectConfig;
+  };
   react?: {
-    project?: Project;
-    options?: OpenOptions;
-  },
+    project?: ProjectConfig;
+  };
+};
+
+export const defaultHTMLConfig = {
+  title: 'HTML Example',
+  description: 'Blank starter project for building ES6 apps.',
+  files: {}
 };
 
 export function openSandbox(example = '') {
@@ -34,7 +49,7 @@ export function openSandbox(example = '') {
     <script type="module" src="/main.js"></script>
   </body>
 </html>`,
-        'main.js': `import './style.css';
+        'src/main.js': `import './style.css';
 
 document.querySelector('#app').innerHTML = '<div>Hello, World!!!</div>'`,
         'style.css': `:root {
@@ -178,7 +193,7 @@ export function isObject(item: never) {
  */
 export function mergeDeep(target: never, source: never) {
   if (isObject(target) && isObject(source)) {
-    for (const key in (source as object)) {
+    for (const key in source as object) {
       if (isObject(source[key])) {
         if (!target[key]) Object.assign(target, { [key]: {} });
         mergeDeep(target[key], source[key]);

@@ -69,7 +69,7 @@ export default class CodeBlock extends LitElement {
           <details id="code-block" class="code-block" ?open=${this.showSource}>
             <summary></summary>
             <slot name="${this.example || 'html'}"></slot>
-            <button class="copy-code" @click=${this.handleCopyClick}>Copy</button>
+            <button class="copy-code" part="copy-button" @click=${this.handleCopyClick}>Copy</button>
           </details>
           <div class="controls">
             <button
