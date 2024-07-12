@@ -1,10 +1,9 @@
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-block.styles.js';
-import { openSandbox } from './sandbox-configs.js';
 
 /**
- * @tag stack-blitz-code-block
+ * @tag code-block
  */
 export default class CodeBlock extends LitElement {
   static styles = [styles];
@@ -18,6 +17,8 @@ export default class CodeBlock extends LitElement {
 
   @state()
   private showRTL = false;
+
+  protected openSandbox: (example?: string, exampleType?: string) => void = () => {};
 
   private htmlCode?: string;
   private reactCode?: string;
@@ -52,7 +53,7 @@ export default class CodeBlock extends LitElement {
   }
 
   private handleSandboxClick() {
-    openSandbox(this.example === 'html' ? this.htmlCode : this.reactCode);
+    this.openSandbox(this.example === 'html' ? this.htmlCode : this.reactCode, this.example);
   }
 
   private handleCopyClick() {

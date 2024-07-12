@@ -4,100 +4,21 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/code-block/code-block.styles.ts",
+      "path": "src/components/code-block/code-block.styles.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/code-block/code-block.styles.ts"
+            "module": "src/components/code-block/code-block.styles.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/code-block/sandbox-configs.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "openSandbox",
-          "parameters": [
-            {
-              "name": "example",
-              "default": "''"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "isObject",
-          "parameters": [
-            {
-              "name": "item",
-              "type": {
-                "text": "never"
-              }
-            }
-          ],
-          "description": "Simple object check.",
-          "return": {
-            "type": {
-              "text": "boolean"
-            }
-          }
-        },
-        {
-          "kind": "function",
-          "name": "mergeDeep",
-          "parameters": [
-            {
-              "name": "target",
-              "type": {
-                "text": "never"
-              }
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "never"
-              }
-            }
-          ],
-          "description": "Deep merge two objects."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "openSandbox",
-          "declaration": {
-            "name": "openSandbox",
-            "module": "src/code-block/sandbox-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "isObject",
-          "declaration": {
-            "name": "isObject",
-            "module": "src/code-block/sandbox-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "mergeDeep",
-          "declaration": {
-            "name": "mergeDeep",
-            "module": "src/code-block/sandbox-configs.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/code-block/code-block.ts",
+      "path": "src/components/code-block/code-block.ts",
       "declarations": [
         {
           "kind": "class",
@@ -131,6 +52,14 @@
               },
               "privacy": "private",
               "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "openSandbox",
+              "type": {
+                "text": "(example?: string, exampleType?: string) => void"
+              },
+              "privacy": "protected"
             },
             {
               "kind": "field",
@@ -200,7 +129,7 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "stack-blitz-code-block",
+          "tagName": "code-block",
           "customElement": true
         }
       ],
@@ -210,7 +139,7 @@
           "name": "default",
           "declaration": {
             "name": "CodeBlock",
-            "module": "src/code-block/code-block.ts"
+            "module": "src/components/code-block/code-block.ts"
           }
         },
         {
@@ -218,7 +147,7 @@
           "name": "CodeBlock",
           "declaration": {
             "name": "CodeBlock",
-            "module": "src/code-block/code-block.ts"
+            "module": "src/components/code-block/code-block.ts"
           }
         }
       ]
@@ -226,21 +155,177 @@
     {
       "kind": "javascript-module",
       "path": "src/index.ts",
-      "declarations": [],
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "sbCodeBloc"
+        }
+      ],
       "exports": [
         {
           "kind": "js",
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "./code-block/code-block.js"
+            "package": "./components/code-block/code-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sbCodeBloc",
+          "declaration": {
+            "name": "sbCodeBloc",
+            "module": "src/index.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/code-block/code-block.stories.ts",
+      "path": "src/editor-configs/index.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "openSandbox"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "openSandbox",
+          "declaration": {
+            "name": "openSandbox",
+            "module": "src/editor-configs/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/editor-configs/stack-blitz-configs.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "defaultHTMLConfig",
+          "type": {
+            "text": "StackBlitzProjectConfig['html']"
+          },
+          "default": "{ project: { title: 'HTML Example', description: 'Example of using the code in HTML.', files: { 'index.html': `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"></div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, 'main.js': `import './style.css';`, 'style.css': `body { font: 16px sans-serif; padding: 1rem; }`, 'package.json': `{ \"name\": \"vite-starter\", \"private\": true, \"version\": \"0.0.0\", \"type\": \"module\", \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"vite\": \"^5.3.2\" } }`, }, }, exampleTemplate: { fileName: 'index.html', template: example => `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"> ${example} </div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "defaultReactConfig",
+          "type": {
+            "text": "StackBlitzProjectConfig['react']"
+          },
+          "default": "{ project: { title: 'React Example', description: 'Example of using the code in React.', files: { 'src/App.tsx': `export default () => { return ( <h1>Hello, World!</h1> ); }; `, 'src/index.tsx': `import { render } from \"react-dom\"; import App from \"./App\"; import './styles.css'; const rootElement = document.getElementById(\"root\"); render(<App />, rootElement); `, 'src/style.css': `body { font: 16px sans-serif; padding: 1rem; } `, 'index.html': `<!DOCTYPE html> <html lang=\"en\" class=\"he-theme-light\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Harmony + React</title> </head> <body> <div id=\"root\"></div> <script type=\"module\" src=\"/src/index.tsx\"></script> </body> </html>`, 'package.json': `{ \"name\": \"react-sandbox\", \"version\": \"1.0.0\", \"main\": \"src/index.tsx\", \"dependencies\": { \"react\": \"^18.2.0\", \"react-dom\": \"^18.2.0\" }, \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"lint\": \"eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"@types/react\": \"^18.3.3\", \"@types/react-dom\": \"^18.3.0\", \"@typescript-eslint/eslint-plugin\": \"^7.15.0\", \"@typescript-eslint/parser\": \"^7.15.0\", \"@vitejs/plugin-react\": \"^4.3.1\", \"eslint\": \"^8.57.0\", \"eslint-plugin-react-hooks\": \"^4.6.2\", \"eslint-plugin-react-refresh\": \"^0.4.7\", \"typescript\": \"^5.2.2\", \"vite\": \"^5.3.2\" } } `, 'tsconfig.json': `{ \"include\": [\"./src/**/*\"], \"compilerOptions\": { \"strict\": false, \"esModuleInterop\": true, \"lib\": [\"ESNext\", \"DOM\", \"DOM.Iterable\"], \"jsx\": \"react-jsx\", \"baseUrl\": \".\" } }`, 'vite.config.js': `import { defineConfig } from 'vite' import react from '@vitejs/plugin-react' // https://vitejs.dev/config/ export default defineConfig({ plugins: [react()], })`, }, }, exampleTemplate: { fileName: 'src/App.tsx', template: example => example, }, }"
+        },
+        {
+          "kind": "function",
+          "name": "useStackBlitzSandbox",
+          "parameters": [
+            {
+              "name": "example",
+              "default": "''"
+            },
+            {
+              "name": "exampleType",
+              "default": "'html'"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defaultHTMLConfig",
+          "declaration": {
+            "name": "defaultHTMLConfig",
+            "module": "src/editor-configs/stack-blitz-configs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defaultReactConfig",
+          "declaration": {
+            "name": "defaultReactConfig",
+            "module": "src/editor-configs/stack-blitz-configs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "useStackBlitzSandbox",
+          "declaration": {
+            "name": "useStackBlitzSandbox",
+            "module": "src/editor-configs/stack-blitz-configs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utilities/deep-merge.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "isObject",
+          "parameters": [
+            {
+              "name": "item",
+              "type": {
+                "text": "never"
+              }
+            }
+          ],
+          "description": "Simple object check.",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "mergeDeep",
+          "parameters": [
+            {
+              "name": "target",
+              "type": {
+                "text": "never"
+              }
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "never"
+              }
+            }
+          ],
+          "description": "Deep merge two objects."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "isObject",
+          "declaration": {
+            "name": "isObject",
+            "module": "src/utilities/deep-merge.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "mergeDeep",
+          "declaration": {
+            "name": "mergeDeep",
+            "module": "src/utilities/deep-merge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/code-block/code-block.stories.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -248,7 +333,7 @@
           "type": {
             "text": "Meta<CodeBlock>"
           },
-          "default": "{ title: 'Components/Code Block', component: 'stack-blitz-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+          "default": "{ title: 'Components/Code Block', component: 'code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
@@ -256,16 +341,16 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">import { badge } from '@harmony/enablers/react'; const Badge = scope.forReact(badge); export default () =&gt; { return ( &lt;&gt; &lt;Badge appearance=&quot;accent&quot;&gt;Accent&lt;/Badge&gt; &lt;Badge appearance=&quot;neutral&quot;&gt;Neutral&lt;/Badge&gt; &lt;Badge appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Badge&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
         }
       ],
       "exports": [
         {
           "kind": "custom-element-definition",
-          "name": "stack-blitz-code-block",
+          "name": "code-block",
           "declaration": {
             "name": "CodeBlock",
-            "module": "/src/code-block/code-block"
+            "module": "/src/components/code-block/code-block"
           }
         },
         {
@@ -273,7 +358,7 @@
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/code-block/code-block.stories.ts"
+            "module": "src/components/code-block/code-block.stories.ts"
           }
         },
         {
@@ -281,7 +366,472 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/code-block/code-block.stories.ts"
+            "module": "src/components/code-block/code-block.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/cp-code-block/cp-code-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CpCodeBlock",
+          "superclass": {
+            "name": "CodeBlock",
+            "module": "/src/components/code-block/code-block.js"
+          },
+          "tagName": "cp-code-block",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "fieldName": "example",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "attribute": "example",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showSource",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showRTL",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "openSandbox",
+              "type": {
+                "text": "(example?: string, exampleType?: string) => void"
+              },
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "htmlCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reactCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getCode",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleExampleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "example",
+                  "type": {
+                    "text": "'html' | 'react'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleSandboxClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleCopyClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "example-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "CpCodeBlock",
+            "module": "src/components/cp-code-block/cp-code-block.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CpCodeBlock",
+          "declaration": {
+            "name": "CpCodeBlock",
+            "module": "src/components/cp-code-block/cp-code-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/cp-code-block/cp-code-block.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta<CpCodeBlock>"
+          },
+          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "cp-code-block",
+          "declaration": {
+            "name": "CpCodeBlock",
+            "module": "/src/components/cp-code-block/cp-code-block"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/sb-code-block/sb-code-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SbCodeBlock",
+          "members": [
+            {
+              "kind": "field",
+              "name": "openSandbox",
+              "type": {
+                "text": "(example?: string, exampleType?: string) => void"
+              },
+              "privacy": "protected",
+              "default": "useStackBlitzSandbox",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "attribute": "example",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showSource",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showRTL",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "htmlCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reactCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getCode",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleExampleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "example",
+                  "type": {
+                    "text": "'html' | 'react'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleSandboxClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleCopyClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CodeBlock",
+            "module": "/src/components/code-block/code-block.js"
+          },
+          "tagName": "sb-code-block",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "fieldName": "example",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "example-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SbCodeBlock",
+            "module": "src/components/sb-code-block/sb-code-block.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SbCodeBlock",
+          "declaration": {
+            "name": "SbCodeBlock",
+            "module": "src/components/sb-code-block/sb-code-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/sb-code-block/sb-code-block.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta<SbCodeBlock>"
+          },
+          "default": "{ title: 'Components/StackBlitz Code Block', component: 'sb-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "sb-code-block",
+          "declaration": {
+            "name": "SbCodeBlock",
+            "module": "/src/components/sb-code-block/sb-code-block"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
           }
         }
       ]
