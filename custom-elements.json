@@ -318,7 +318,7 @@
           "type": {
             "text": "CodePenConfig"
           },
-          "default": "{ component: componentConfig, sandbox: options }"
+          "default": "{ component: componentConfig, sandbox: options, }"
         },
         {
           "kind": "function",
@@ -1096,14 +1096,6 @@
         }
       ],
       "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "cp-code-block",
-          "declaration": {
-            "name": "CpCodeBlock",
-            "module": "/src/components/cp-code-block/cp-code-block"
-          }
-        },
         {
           "kind": "js",
           "name": "default",

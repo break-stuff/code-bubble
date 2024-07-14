@@ -15,7 +15,7 @@ export function isObject(item: never) {
  */
 export function mergeDeep(target: never, source: never) {
   if (!isObject(target) || !isObject(source)) {
-    return source;
+    return target;
   }
 
   for (const key in source as object) {

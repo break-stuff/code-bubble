@@ -2,11 +2,16 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 import CpCodeBlock from './cp-code-block';
 import { html } from 'lit';
+import { cpCodeBlock } from '../..';
 
 const { events, args, argTypes, template } =
   getWcStorybookHelpers('cp-code-block');
 
-customElements.define('cp-code-block', CpCodeBlock);
+cpCodeBlock({
+  component: {
+    defaultExample: 'react'
+  }
+});
 
 const meta: Meta<CpCodeBlock> = {
   title: 'Components/CodePen Code Block',

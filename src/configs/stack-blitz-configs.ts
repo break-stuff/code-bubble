@@ -210,7 +210,7 @@ export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
     throw new Error(`Invalid example type: ${exampleType}`);
   }
 
-  const openFile = exampleType === 'html' ? 'index.html' : 'src/App.tsx';
+  const templateFile = config?.exampleTemplate?.fileName || 'index.html';
 
   sdk.openProject(
     {
@@ -221,7 +221,7 @@ export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
       template: 'node',
       files: {
         ...config!.project!.files,
-        [config?.exampleTemplate?.fileName || 'index.html']: await formatCode(
+        [templateFile]: await formatCode(
           config?.exampleTemplate?.template(example) || example,
           exampleType,
         ),
@@ -229,13 +229,13 @@ export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
       settings: {
         compile: {
           trigger: 'auto',
-          clearConsole: false,
+          clearConsole: true,
         },
       },
     },
     {
       newWindow: true,
-      openFile: [openFile],
+      openFile: [templateFile],
     },
   );
 }

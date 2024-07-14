@@ -13,7 +13,6 @@ export default class SbCodeBlock extends CodeBlock {
     this.openSandbox = useStackBlitzSandbox;
     this.componentConfig = configuration.component!;
     this.updateConfig();
-    console.log(this.example);
   }
 }
 

@@ -18,19 +18,28 @@ export type ExampleTemplateConfig = {
 };
 
 export type CodePenProjectConfig = {
+  /** Pen title */
   title?: string;
+  /** Pen description */
   description?: string;
-  private?: boolean; // true || false - When the Pen is saved, it will save as Private if logged in user has that privledge, otherwise it will save as public
-  parent?: string; // If supplied, the Pen will save as a fork of this id. Note it's not the slug, but ID. You can find the ID of a Pen with `window.CP.pen.id` in the browser console.
-  tags?: string[]; // an array of strings
-  editors?: '001' | '010' | '100' | '011' | '101' | '110' | '111'; // Set which editors are open. In this example HTML open, CSS closed, JS open
+  /** When the Pen is saved, it will save as Private if logged in user has that privledge, otherwise it will save as public */
+  private?: boolean;
+  /** If supplied, the Pen will save as a fork of this id. Note it's not the slug, but ID. You can find the ID of a Pen with `window.CP.pen.id` in the browser console. */
+  parent?: string;
+  /** Words to help identify and categorize the sandbox */
+  tags?: string[];
+  /** Set which editors are open. "1" is open and "0" is collapsed. The order is "HTML", "CSS", and "JS" */
+  editors?: '001' | '010' | '100' | '011' | '101' | '110' | '111';
   layout?: 'top' | 'left' | 'right';
+  /** Content in the HTML panel */
   html?: string;
   html_pre_processor?: 'none' | 'slim' | 'haml' | 'markdown';
+  /** Content in the HTML panel */
   css?: string;
   css_pre_processor?: 'none' | 'less' | 'scss' | 'sass' | 'stylus';
   css_starter?: 'normalize' | 'reset' | 'neither';
   css_prefix?: 'autoprefixer' | 'prefixfree' | 'neither';
+  /** Content in the HTML panel */
   js?: string;
   js_pre_processor?:
     | 'none'
@@ -38,16 +47,20 @@ export type CodePenProjectConfig = {
     | 'babel'
     | 'livescript'
     | 'typescript';
+  /** Class names applied to the `<html>` element */
   html_classes?: string;
+  /** Content for the `<head>` tag */
   head?: string;
-  css_external?: string; // semi-colon separate multiple files
-  js_external?: string; // semi-colon separate multiple files
+  /** Semi-colon separate list of CDN urls to include in the pen */
+  css_external?: string;
+  /** Semi-colon separate list of CDN urls to include in the pen */
+  js_external?: string;
 };
 
 export type CodePenConfig = {
   component?: ComponentConfig;
   sandbox?: CpSandboxConfig;
-}
+};
 
 const options: CpSandboxConfig = {
   html: {
@@ -79,12 +92,16 @@ const options: CpSandboxConfig = {
       editors: '111',
       layout: 'top',
       html: '<div id="root"></div>',
-      css: 'body { font: 16px sans-serif; padding: 1rem; }',
+      css: `body { 
+  font: 16px sans-serif; 
+  padding: 1rem; 
+}`,
       js: `import React from 'react'; 
 import ReactDOM from 'react-dom'; 
 ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));`,
       js_pre_processor: 'babel',
-      js_external: 'https://esm.sh/react@18.2.0;https://esm.sh/react-dom@latest'
+      js_external:
+        'https://esm.sh/react@18.2.0;https://esm.sh/react-dom@latest',
     },
     exampleTemplate: {
       fileName: 'js',
@@ -105,8 +122,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 export let configuration: CodePenConfig = {
   component: componentConfig,
-  sandbox: options
-} 
+  sandbox: options,
+};
 
 export function updateCodePenConfig(userConfig?: CodePenConfig) {
   configuration = mergeDeep(configuration as never, userConfig as never);
