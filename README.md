@@ -1,14 +1,15 @@
-# stack-blitz-code-block
+# Code Block
 
-This component provide inline code examples that link out to StackBlitz sandboxes
+This component is designed to showcase code examples where there may be variations in code examples for things like web components.
 
 Features:
 
-- Preview (renders in light DOM)
-- Preview resize
-- Framework sync (event listener on document)
-- Framework example radio
-- Example toggle (examples render in light DOM in a `details` element)
-- RTL toggle
-- Sandbox button
-- Copy button
+- ✅ Code preview
+- ✅ Multiple framework (currently HTML and React examples)
+- ✅ Example code toggle
+- ✅ RTL toggle
+- ✅ Open in Sandbox (currently supports [CodePen](https://codepen.io/) and [StackBlitz](https://stackblitz.com/))
+- ✅ Copy code button
+- ✅ Framework example selection sync across instances 
+- ✅ Persist selected option
+- ❌ Preview resize (coming soon)

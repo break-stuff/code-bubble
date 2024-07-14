@@ -18,30 +18,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/configs/component-config.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "componentConfig",
-          "type": {
-            "text": "ComponentConfig"
-          },
-          "default": "{ openShowCode: false, hideShowCodeButton: false, showCodeButtonLabel: 'Show Code', hideCopyCodeButton: false, copyCodeButtonLabel: 'Copy', copyCodeButtonCopiedLabel: 'Copied', defaultExample: 'html', hideRtlButton: false, rtlButtonLabel: 'RTL', hideSandboxButton: false, sandboxButtonLabel: 'Sandbox', htmlButtonLabel: 'HTML', reactButtonLabel: 'React' }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "componentConfig",
-          "declaration": {
-            "name": "componentConfig",
-            "module": "src/configs/component-config.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/code-block/code-block.ts",
       "declarations": [
         {
@@ -205,172 +181,48 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/utilities/deep-merge.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "isObject",
-          "parameters": [
-            {
-              "name": "item",
-              "type": {
-                "text": "never"
-              }
-            }
-          ],
-          "description": "Simple object check.",
-          "return": {
-            "type": {
-              "text": "boolean"
-            }
-          }
-        },
-        {
-          "kind": "function",
-          "name": "mergeDeep",
-          "parameters": [
-            {
-              "name": "target",
-              "type": {
-                "text": "never"
-              },
-              "description": "object being merged into"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "never"
-              }
-            },
-            {
-              "description": "data to merge into the target",
-              "name": "sources"
-            }
-          ],
-          "description": "Merges the content of two objects",
-          "return": {
-            "type": {
-              "text": ""
-            }
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "isObject",
-          "declaration": {
-            "name": "isObject",
-            "module": "src/utilities/deep-merge.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "mergeDeep",
-          "declaration": {
-            "name": "mergeDeep",
-            "module": "src/utilities/deep-merge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/utilities/format-code.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "formatCode",
-          "parameters": [
-            {
-              "name": "code",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "exampleType",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "formatCode",
-          "declaration": {
-            "name": "formatCode",
-            "module": "src/utilities/format-code.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/configs/code-pen-sandbox.ts",
+      "path": "src/components/code-block/code-block.stories.ts",
       "declarations": [
         {
           "kind": "variable",
-          "name": "configuration",
+          "name": "meta",
           "type": {
-            "text": "CodePenConfig"
+            "text": "Meta<CodeBlock>"
           },
-          "default": "{ component: componentConfig, sandbox: options, }"
+          "default": "{ title: 'Components/Code Block', component: 'code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
-          "kind": "function",
-          "name": "updateCodePenConfig",
-          "parameters": [
-            {
-              "name": "userConfig",
-              "optional": true,
-              "type": {
-                "text": "CodePenConfig"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "useCodePenSandbox",
-          "parameters": [
-            {
-              "name": "example",
-              "default": "''"
-            },
-            {
-              "name": "exampleType",
-              "default": "'html'"
-            }
-          ]
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
         }
       ],
       "exports": [
         {
-          "kind": "js",
-          "name": "configuration",
+          "kind": "custom-element-definition",
+          "name": "code-block",
           "declaration": {
-            "name": "configuration",
-            "module": "src/configs/code-pen-sandbox.ts"
+            "name": "CodeBlock",
+            "module": "/src/components/code-block/code-block"
           }
         },
         {
           "kind": "js",
-          "name": "updateCodePenConfig",
+          "name": "default",
           "declaration": {
-            "name": "updateCodePenConfig",
-            "module": "src/configs/code-pen-sandbox.ts"
+            "name": "meta",
+            "module": "src/components/code-block/code-block.stories.ts"
           }
         },
         {
           "kind": "js",
-          "name": "useCodePenSandbox",
+          "name": "Default",
           "declaration": {
-            "name": "useCodePenSandbox",
-            "module": "src/configs/code-pen-sandbox.ts"
+            "name": "Default",
+            "module": "src/components/code-block/code-block.stories.ts"
           }
         }
       ]
@@ -597,105 +449,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/configs/stack-blitz-configs.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "defaultHTMLConfig",
-          "type": {
-            "text": "StackBlitzProjectConfig['html']"
-          },
-          "default": "{ project: { title: 'HTML Example', description: 'Example of using the code in HTML.', files: { 'index.html': `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"></div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, 'main.js': `import './styles.css';`, 'styles.css': `body { font: 16px sans-serif; padding: 1rem; }`, 'package.json': `{ \"name\": \"vite-starter\", \"private\": true, \"version\": \"0.0.0\", \"type\": \"module\", \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"vite\": \"^5.3.2\" } }`, }, }, exampleTemplate: { fileName: 'index.html', template: example => `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"> ${example} </div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, }, }"
-        },
-        {
-          "kind": "variable",
-          "name": "defaultReactConfig",
-          "type": {
-            "text": "StackBlitzProjectConfig['react']"
-          },
-          "default": "{ project: { title: 'React Example', description: 'Example of using the code in React.', files: { 'src/App.tsx': `export default () => { return ( <h1>Hello, World!</h1> ); }; `, 'src/index.tsx': `import { render } from \"react-dom\"; import App from \"./App\"; import './styles.css'; const rootElement = document.getElementById(\"root\"); render(<App />, rootElement); `, 'src/styles.css': `body { font: 16px sans-serif; padding: 1rem; } `, 'index.html': `<!DOCTYPE html> <html lang=\"en\" class=\"he-theme-light\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Harmony + React</title> </head> <body> <div id=\"root\"></div> <script type=\"module\" src=\"/src/index.tsx\"></script> </body> </html>`, 'package.json': `{ \"name\": \"react-sandbox\", \"version\": \"1.0.0\", \"main\": \"src/index.tsx\", \"dependencies\": { \"react\": \"^18.2.0\", \"react-dom\": \"^18.2.0\" }, \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"lint\": \"eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"@types/react\": \"^18.3.3\", \"@types/react-dom\": \"^18.3.0\", \"@typescript-eslint/eslint-plugin\": \"^7.15.0\", \"@typescript-eslint/parser\": \"^7.15.0\", \"@vitejs/plugin-react\": \"^4.3.1\", \"eslint\": \"^8.57.0\", \"eslint-plugin-react-hooks\": \"^4.6.2\", \"eslint-plugin-react-refresh\": \"^0.4.7\", \"typescript\": \"^5.2.2\", \"vite\": \"^5.3.2\" } } `, 'tsconfig.json': `{ \"include\": [\"./src/**/*\"], \"compilerOptions\": { \"strict\": false, \"esModuleInterop\": true, \"lib\": [\"ESNext\", \"DOM\", \"DOM.Iterable\"], \"jsx\": \"react-jsx\", \"baseUrl\": \".\" } }`, 'vite.config.js': `import { defineConfig } from 'vite' import react from '@vitejs/plugin-react' // https://vitejs.dev/config/ export default defineConfig({ plugins: [react()], })`, }, }, exampleTemplate: { fileName: 'src/App.tsx', template: example => `export default () => { return ( <> ${example} </> ); };`, }, }"
-        },
-        {
-          "kind": "variable",
-          "name": "configuration",
-          "type": {
-            "text": "StackBlitzConfig"
-          },
-          "default": "{ component: componentConfig, sandbox: sandboxOptions }"
-        },
-        {
-          "kind": "function",
-          "name": "updateStackBlitzConfig",
-          "parameters": [
-            {
-              "name": "userConfig",
-              "optional": true,
-              "type": {
-                "text": "StackBlitzConfig"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "useStackBlitzSandbox",
-          "parameters": [
-            {
-              "name": "example",
-              "default": "''"
-            },
-            {
-              "name": "exampleType",
-              "default": "'html'"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "defaultHTMLConfig",
-          "declaration": {
-            "name": "defaultHTMLConfig",
-            "module": "src/configs/stack-blitz-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "defaultReactConfig",
-          "declaration": {
-            "name": "defaultReactConfig",
-            "module": "src/configs/stack-blitz-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "configuration",
-          "declaration": {
-            "name": "configuration",
-            "module": "src/configs/stack-blitz-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "updateStackBlitzConfig",
-          "declaration": {
-            "name": "updateStackBlitzConfig",
-            "module": "src/configs/stack-blitz-configs.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "useStackBlitzSandbox",
-          "declaration": {
-            "name": "useStackBlitzSandbox",
-            "module": "src/configs/stack-blitz-configs.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/sb-code-block/sb-code-block.ts",
       "declarations": [
         {
@@ -916,87 +669,15 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "sbCodeBloc",
-          "parameters": [
-            {
-              "name": "userConfig",
-              "optional": true,
-              "type": {
-                "text": "StackBlitzConfig"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "cpCodeBlock",
-          "parameters": [
-            {
-              "name": "userConfig",
-              "optional": true,
-              "type": {
-                "text": "CodePenConfig"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "sbCodeBloc",
-          "declaration": {
-            "name": "sbCodeBloc",
-            "module": "src/index.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sb-code-block",
-          "declaration": {
-            "name": "SbCodeBlock",
-            "module": "/src/components/sb-code-block/sb-code-block.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "cpCodeBlock",
-          "declaration": {
-            "name": "cpCodeBlock",
-            "module": "src/index.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "cp-code-block",
-          "declaration": {
-            "name": "CpCodeBlock",
-            "module": "/src/components/cp-code-block/cp-code-block.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/configs/index.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/code-block/code-block.stories.ts",
+      "path": "src/components/cp-code-block/cp-code-block.stories.ts",
       "declarations": [
         {
           "kind": "variable",
           "name": "meta",
           "type": {
-            "text": "Meta<CodeBlock>"
+            "text": "Meta<CpCodeBlock>"
           },
-          "default": "{ title: 'Components/Code Block', component: 'code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
@@ -1004,24 +685,24 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> `, ), args: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "CodeBlockSync",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: () => html` <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> `, args: {}, }"
         }
       ],
       "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "code-block",
-          "declaration": {
-            "name": "CodeBlock",
-            "module": "/src/components/code-block/code-block"
-          }
-        },
         {
           "kind": "js",
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/components/code-block/code-block.stories.ts"
+            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
           }
         },
         {
@@ -1029,7 +710,15 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/components/code-block/code-block.stories.ts"
+            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeBlockSync",
+          "declaration": {
+            "name": "CodeBlockSync",
+            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
           }
         }
       ]
@@ -1053,46 +742,14 @@
             "text": "Story"
           },
           "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> `, ), args: {}, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/cp-code-block/cp-code-block.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta<CpCodeBlock>"
-          },
-          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
-          "name": "Default",
+          "name": "CodeBlockSync",
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> `, ), args: {}, }"
+          "default": "{ render: () => html` <sb-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> <sb-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> <sb-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> `, args: {}, }"
         }
       ],
       "exports": [
@@ -1101,7 +758,7 @@
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
           }
         },
         {
@@ -1109,7 +766,15 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeBlockSync",
+          "declaration": {
+            "name": "CodeBlockSync",
+            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
           }
         }
       ]

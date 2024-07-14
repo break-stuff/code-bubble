@@ -33,6 +33,7 @@ export default class CodeBlock extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.getCode();
+    this.setAttribute('code-block', '');
   }
 
   firstUpdated(): void {
@@ -63,7 +64,7 @@ export default class CodeBlock extends LitElement {
 
   private handleExampleClick(example: 'html' | 'react') {
     this.example = example;
-    this.dispatchEvent(new CustomEvent('example-change', { detail: example }));
+    this.dispatchEvent(new CustomEvent('example-change', { bubbles: true, detail: example }));
     localStorage.setItem('code_block_example', example);
   }
 
