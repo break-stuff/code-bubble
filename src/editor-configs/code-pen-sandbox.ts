@@ -1,3 +1,5 @@
+import { formatCode } from '../utilities/format-code';
+
 export type CodePenProjectConfig = {
   html?: ProjectConfig;
   react?: ProjectConfig;
@@ -9,7 +11,7 @@ export type ProjectConfig = {
 };
 
 export type ExampleTemplateConfig = {
-  fileName: string;
+  fileName: 'html' | 'css' | 'js';
   template: (example: string) => string;
 };
 
@@ -21,7 +23,7 @@ export type CodePenConfig = {
   tags?: string[]; // an array of strings
   editors?: '001' | '010' | '100' | '011' | '101' | '110' | '111'; // Set which editors are open. In this example HTML open, CSS closed, JS open
   layout?: 'top' | 'left' | 'right';
-  html?: '<div>HTML here.</div>';
+  html?: string;
   html_pre_processor?: 'none' | 'slim' | 'haml' | 'markdown';
   css?: string;
   css_pre_processor?: 'none' | 'less' | 'scss' | 'sass' | 'stylus';
@@ -40,57 +42,86 @@ export type CodePenConfig = {
   js_external?: string; // semi-colon separate multiple files
 };
 
-// const options: CodePenProjectConfig = {
-//   html: {
-//     project: {
-//       title: 'HTML Example',
-//       description: 'Example of using the code in HTML.',
-//       private: false,
-//       tags: ['html', 'example'],
-//       editors: '111',
-//       layout: 'top',
-//       html: '<div>HTML here.</div>',
-//       css: 'body { font: 16px sans-serif; padding: 1rem; }',
-//       js: `console.log('Hello, world!');`,
-//     },
-//     exampleTemplate: {
-//       fileName: 'index.html',
-//       template: (example) => example
-//     }
-//   },
-//   react: {
-//     project: {
-//       title: 'React Example',
-//       description: 'Example of using the code in React.',
-//       private: false,
-//       tags: ['react', 'example'],
-//       editors: '001',
-//       layout: 'top',
-//       // html: '<div id="root"></div>',
-//       css: 'body { font: 16px sans-serif; padding: 1rem; }',
-//       js: `import React from 'react'; import ReactDOM from 'react-dom'; ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));`,
-//     },
-//     exampleTemplate: {
-//       fileName: 'index.html',
-//       template: (example) => `import React from 'https://esm.sh/react@18.2.0';
-// import ReactDOM from 'https://esm.sh/react-dom@18.2.0';
+const options: CodePenProjectConfig = {
+  html: {
+    project: {
+      title: 'HTML Example',
+      description: 'Example of using the code in HTML.',
+      private: false,
+      tags: ['html', 'example'],
+      editors: '111',
+      layout: 'top',
+      html: '<div>HTML here.</div>',
+      css: `body { 
+  font: 16px sans-serif; 
+  padding: 1rem; 
+}`,
+      js: ``,
+    },
+    exampleTemplate: {
+      fileName: 'html',
+      template: example => example,
+    },
+  },
+  react: {
+    project: {
+      title: 'React Example',
+      description: 'Example of using the code in React.',
+      private: false,
+      tags: ['react', 'example'],
+      editors: '111',
+      layout: 'top',
+      html: '<div id="root"></div>',
+      css: 'body { font: 16px sans-serif; padding: 1rem; }',
+      js: `import React from 'react'; 
+import ReactDOM from 'react-dom'; 
+ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));`,
+      js_pre_processor: 'babel',
+      js_external: 'https://esm.sh/react@18.2.0;https://esm.sh/react-dom@latest'
+    },
+    exampleTemplate: {
+      fileName: 'js',
+      template: example => `import React from 'https://esm.sh/react@latest';
+import ReactDOM from 'https://esm.sh/react-dom@latest';
 
-// ${example}
+const App = () => (
+  <>
+${example}
+  </>
+);
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-// `
-//     }
-//   }
-// }
+ReactDOM.render(<App />, document.getElementById('root'));
+`,
+    },
+  },
+};
 
-// export function useCodePenSandbox(example = '', exampleType = 'html') {
-//   // const config = options[exampleType as keyof StackBlitzProjectConfig];
-//   // if (!config) {
-//   //   throw new Error(`Invalid example type: ${exampleType}`);
-//   // }
+export async function useCodePenSandbox(example = '', exampleType = 'html') {
+  const config = options[exampleType as keyof CodePenProjectConfig];
+  if (!config) {
+    throw new Error(`Invalid example type: ${exampleType}`);
+  }
 
-//   const form = document.createElement('form');
-//   form.action = 'https://codepen.io/pen/define';
-//   form.method = 'POST';
-//   form.target = '_blank';
-// }
+  const sandboxConfig = {
+    ...config.project,
+    [config.exampleTemplate.fileName]: await formatCode(
+      config.exampleTemplate.template(example),
+      exampleType,
+    ),
+  };
+
+  const form = document.createElement('form');
+  form.action = 'https://codepen.io/pen/define';
+  form.method = 'POST';
+  form.target = '_blank';
+
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'data';
+  input.value = JSON.stringify(sandboxConfig);
+  form.append(input);
+
+  document.documentElement.append(form);
+  form.submit();
+  form.remove();
+}

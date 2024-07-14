@@ -37,15 +37,9 @@ export const Default: Story = {
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>
-        <pre><code class="language-jsx">export default () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
-      &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
-      &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
-    &lt;/&gt;
-  );
-};
+        <pre><code class="language-jsx">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>
       `,
     ),

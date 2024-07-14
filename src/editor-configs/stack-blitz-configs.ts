@@ -1,4 +1,5 @@
 import sdk from '@stackblitz/sdk';
+import { formatCode } from '../utilities/format-code';
 
 export type SandboxConfig = {
   title?: string;
@@ -46,8 +47,8 @@ export const defaultHTMLConfig: StackBlitzProjectConfig['html'] = {
     <script type="module" src="/main.js"></script>
   </body>
 </html>`,
-      'main.js': `import './style.css';`,
-      'style.css': `body {
+      'main.js': `import './styles.css';`,
+      'styles.css': `body {
   font: 16px sans-serif;
   padding: 1rem;
 }`,
@@ -105,7 +106,7 @@ import './styles.css';
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);
       `,
-      'src/style.css': `body {
+      'src/styles.css': `body {
   font: 16px sans-serif;
   padding: 1rem;
 }
@@ -172,7 +173,13 @@ export default defineConfig({
   },
   exampleTemplate: {
     fileName: 'src/App.tsx',
-    template: example => example,
+    template: example => `export default () => {
+  return (
+    <>
+      ${example}
+    </>
+  );
+};`,
   },
 };
 
@@ -181,8 +188,8 @@ const options: StackBlitzProjectConfig = {
   react: defaultReactConfig,
 };
 
-export function useStackBlitzSandbox(example = '', exampleType = 'html') {
-  const config = options[(exampleType as keyof StackBlitzProjectConfig)];
+export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
+  const config = options[exampleType as keyof StackBlitzProjectConfig];
   if (!config) {
     throw new Error(`Invalid example type: ${exampleType}`);
   }
@@ -192,12 +199,16 @@ export function useStackBlitzSandbox(example = '', exampleType = 'html') {
   sdk.openProject(
     {
       title: config.project?.title || 'Example',
-      description: config.project?.description || 'Blank starter project for building ES6 apps.',
+      description:
+        config.project?.description ||
+        'Blank starter project for building ES6 apps.',
       template: 'node',
       files: {
         ...config!.project!.files,
-        [config?.exampleTemplate?.fileName || 'index.html']:
-        config?.exampleTemplate?.template(example) || example,
+        [config?.exampleTemplate?.fileName || 'index.html']: await formatCode(
+          config?.exampleTemplate?.template(example) || example,
+          exampleType,
+        ),
       },
       settings: {
         compile: {

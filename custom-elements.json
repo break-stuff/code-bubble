@@ -182,6 +182,36 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/editor-configs/code-pen-sandbox.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "useCodePenSandbox",
+          "parameters": [
+            {
+              "name": "example",
+              "default": "''"
+            },
+            {
+              "name": "exampleType",
+              "default": "'html'"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "useCodePenSandbox",
+          "declaration": {
+            "name": "useCodePenSandbox",
+            "module": "src/editor-configs/code-pen-sandbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/editor-configs/index.ts",
       "declarations": [
         {
@@ -210,7 +240,7 @@
           "type": {
             "text": "StackBlitzProjectConfig['html']"
           },
-          "default": "{ project: { title: 'HTML Example', description: 'Example of using the code in HTML.', files: { 'index.html': `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"></div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, 'main.js': `import './style.css';`, 'style.css': `body { font: 16px sans-serif; padding: 1rem; }`, 'package.json': `{ \"name\": \"vite-starter\", \"private\": true, \"version\": \"0.0.0\", \"type\": \"module\", \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"vite\": \"^5.3.2\" } }`, }, }, exampleTemplate: { fileName: 'index.html', template: example => `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"> ${example} </div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, }, }"
+          "default": "{ project: { title: 'HTML Example', description: 'Example of using the code in HTML.', files: { 'index.html': `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"></div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, 'main.js': `import './styles.css';`, 'styles.css': `body { font: 16px sans-serif; padding: 1rem; }`, 'package.json': `{ \"name\": \"vite-starter\", \"private\": true, \"version\": \"0.0.0\", \"type\": \"module\", \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"vite\": \"^5.3.2\" } }`, }, }, exampleTemplate: { fileName: 'index.html', template: example => `<!doctype html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Vite App</title> </head> <body> <div id=\"app\"> ${example} </div> <script type=\"module\" src=\"/main.js\"></script> </body> </html>`, }, }"
         },
         {
           "kind": "variable",
@@ -218,7 +248,7 @@
           "type": {
             "text": "StackBlitzProjectConfig['react']"
           },
-          "default": "{ project: { title: 'React Example', description: 'Example of using the code in React.', files: { 'src/App.tsx': `export default () => { return ( <h1>Hello, World!</h1> ); }; `, 'src/index.tsx': `import { render } from \"react-dom\"; import App from \"./App\"; import './styles.css'; const rootElement = document.getElementById(\"root\"); render(<App />, rootElement); `, 'src/style.css': `body { font: 16px sans-serif; padding: 1rem; } `, 'index.html': `<!DOCTYPE html> <html lang=\"en\" class=\"he-theme-light\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Harmony + React</title> </head> <body> <div id=\"root\"></div> <script type=\"module\" src=\"/src/index.tsx\"></script> </body> </html>`, 'package.json': `{ \"name\": \"react-sandbox\", \"version\": \"1.0.0\", \"main\": \"src/index.tsx\", \"dependencies\": { \"react\": \"^18.2.0\", \"react-dom\": \"^18.2.0\" }, \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"lint\": \"eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"@types/react\": \"^18.3.3\", \"@types/react-dom\": \"^18.3.0\", \"@typescript-eslint/eslint-plugin\": \"^7.15.0\", \"@typescript-eslint/parser\": \"^7.15.0\", \"@vitejs/plugin-react\": \"^4.3.1\", \"eslint\": \"^8.57.0\", \"eslint-plugin-react-hooks\": \"^4.6.2\", \"eslint-plugin-react-refresh\": \"^0.4.7\", \"typescript\": \"^5.2.2\", \"vite\": \"^5.3.2\" } } `, 'tsconfig.json': `{ \"include\": [\"./src/**/*\"], \"compilerOptions\": { \"strict\": false, \"esModuleInterop\": true, \"lib\": [\"ESNext\", \"DOM\", \"DOM.Iterable\"], \"jsx\": \"react-jsx\", \"baseUrl\": \".\" } }`, 'vite.config.js': `import { defineConfig } from 'vite' import react from '@vitejs/plugin-react' // https://vitejs.dev/config/ export default defineConfig({ plugins: [react()], })`, }, }, exampleTemplate: { fileName: 'src/App.tsx', template: example => example, }, }"
+          "default": "{ project: { title: 'React Example', description: 'Example of using the code in React.', files: { 'src/App.tsx': `export default () => { return ( <h1>Hello, World!</h1> ); }; `, 'src/index.tsx': `import { render } from \"react-dom\"; import App from \"./App\"; import './styles.css'; const rootElement = document.getElementById(\"root\"); render(<App />, rootElement); `, 'src/styles.css': `body { font: 16px sans-serif; padding: 1rem; } `, 'index.html': `<!DOCTYPE html> <html lang=\"en\" class=\"he-theme-light\"> <head> <meta charset=\"UTF-8\" /> <link rel=\"icon\" type=\"image/svg+xml\" href=\"/vite.svg\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>Harmony + React</title> </head> <body> <div id=\"root\"></div> <script type=\"module\" src=\"/src/index.tsx\"></script> </body> </html>`, 'package.json': `{ \"name\": \"react-sandbox\", \"version\": \"1.0.0\", \"main\": \"src/index.tsx\", \"dependencies\": { \"react\": \"^18.2.0\", \"react-dom\": \"^18.2.0\" }, \"scripts\": { \"dev\": \"vite\", \"build\": \"vite build\", \"lint\": \"eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0\", \"preview\": \"vite preview\" }, \"devDependencies\": { \"@types/react\": \"^18.3.3\", \"@types/react-dom\": \"^18.3.0\", \"@typescript-eslint/eslint-plugin\": \"^7.15.0\", \"@typescript-eslint/parser\": \"^7.15.0\", \"@vitejs/plugin-react\": \"^4.3.1\", \"eslint\": \"^8.57.0\", \"eslint-plugin-react-hooks\": \"^4.6.2\", \"eslint-plugin-react-refresh\": \"^0.4.7\", \"typescript\": \"^5.2.2\", \"vite\": \"^5.3.2\" } } `, 'tsconfig.json': `{ \"include\": [\"./src/**/*\"], \"compilerOptions\": { \"strict\": false, \"esModuleInterop\": true, \"lib\": [\"ESNext\", \"DOM\", \"DOM.Iterable\"], \"jsx\": \"react-jsx\", \"baseUrl\": \".\" } }`, 'vite.config.js': `import { defineConfig } from 'vite' import react from '@vitejs/plugin-react' // https://vitejs.dev/config/ export default defineConfig({ plugins: [react()], })`, }, }, exampleTemplate: { fileName: 'src/App.tsx', template: example => `export default () => { return ( <> ${example} </> ); };`, }, }"
         },
         {
           "kind": "function",
@@ -379,28 +409,20 @@
           "kind": "class",
           "description": "",
           "name": "CpCodeBlock",
-          "superclass": {
-            "name": "CodeBlock",
-            "module": "/src/components/code-block/code-block.js"
-          },
-          "tagName": "cp-code-block",
-          "customElement": true,
-          "attributes": [
+          "members": [
             {
-              "name": "example",
+              "kind": "field",
+              "name": "openSandbox",
               "type": {
-                "text": "'html' | 'react'"
+                "text": "(example?: string, exampleType?: string) => void"
               },
-              "default": "'html'",
-              "description": "Indicates which example should be displayed",
-              "fieldName": "example",
+              "privacy": "protected",
+              "default": "useCodePenSandbox",
               "inheritedFrom": {
                 "name": "CodeBlock",
                 "module": "src/components/code-block/code-block.ts"
               }
-            }
-          ],
-          "members": [
+            },
             {
               "kind": "field",
               "name": "example",
@@ -436,18 +458,6 @@
               },
               "privacy": "private",
               "default": "false",
-              "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "openSandbox",
-              "type": {
-                "text": "(example?: string, exampleType?: string) => void"
-              },
-              "privacy": "protected",
               "inheritedFrom": {
                 "name": "CodeBlock",
                 "module": "src/components/code-block/code-block.ts"
@@ -522,6 +532,27 @@
               }
             }
           ],
+          "superclass": {
+            "name": "CodeBlock",
+            "module": "/src/components/code-block/code-block.js"
+          },
+          "tagName": "cp-code-block",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "example",
+              "type": {
+                "text": "'html' | 'react'"
+              },
+              "default": "'html'",
+              "description": "Indicates which example should be displayed",
+              "fieldName": "example",
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            }
+          ],
           "events": [
             {
               "name": "example-change",
@@ -573,7 +604,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> `, ), args: {}, }"
         }
       ],
       "exports": [
@@ -806,7 +837,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> `, ), args: {}, }"
         }
       ],
       "exports": [
