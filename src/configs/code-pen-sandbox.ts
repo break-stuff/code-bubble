@@ -1,12 +1,14 @@
+import { mergeDeep } from '../utilities/deep-merge';
 import { formatCode } from '../utilities/format-code';
+import { componentConfig, ComponentConfig } from './component-config';
 
-export type CodePenProjectConfig = {
+export type CpSandboxConfig = {
   html?: ProjectConfig;
   react?: ProjectConfig;
 };
 
 export type ProjectConfig = {
-  project?: CodePenConfig;
+  project?: CodePenProjectConfig;
   exampleTemplate: ExampleTemplateConfig;
 };
 
@@ -15,7 +17,7 @@ export type ExampleTemplateConfig = {
   template: (example: string) => string;
 };
 
-export type CodePenConfig = {
+export type CodePenProjectConfig = {
   title?: string;
   description?: string;
   private?: boolean; // true || false - When the Pen is saved, it will save as Private if logged in user has that privledge, otherwise it will save as public
@@ -42,7 +44,12 @@ export type CodePenConfig = {
   js_external?: string; // semi-colon separate multiple files
 };
 
-const options: CodePenProjectConfig = {
+export type CodePenConfig = {
+  component?: ComponentConfig;
+  sandbox?: CpSandboxConfig;
+}
+
+const options: CpSandboxConfig = {
   html: {
     project: {
       title: 'HTML Example',
@@ -96,8 +103,17 @@ ReactDOM.render(<App />, document.getElementById('root'));
   },
 };
 
+export let configuration: CodePenConfig = {
+  component: componentConfig,
+  sandbox: options
+} 
+
+export function updateCodePenConfig(userConfig?: CodePenConfig) {
+  configuration = mergeDeep(configuration as never, userConfig as never);
+}
+
 export async function useCodePenSandbox(example = '', exampleType = 'html') {
-  const config = options[exampleType as keyof CodePenProjectConfig];
+  const config = configuration.sandbox![exampleType as keyof CpSandboxConfig];
   if (!config) {
     throw new Error(`Invalid example type: ${exampleType}`);
   }

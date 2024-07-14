@@ -9,6 +9,7 @@ const { events, args, argTypes, template } = getWcStorybookHelpers(
 
 customElements.define('code-block', CodeBlock);
 
+
 const meta: Meta<CodeBlock> = {
   title: 'Components/Code Block',
   component: 'code-block',

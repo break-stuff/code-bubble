@@ -1,7 +1,9 @@
 import sdk from '@stackblitz/sdk';
 import { formatCode } from '../utilities/format-code';
+import { componentConfig, ComponentConfig } from './component-config';
+import { mergeDeep } from '../utilities/deep-merge';
 
-export type SandboxConfig = {
+export type SbSandboxConfig = {
   title?: string;
   description?: string;
   /**
@@ -20,7 +22,7 @@ export type StackBlitzProjectConfig = {
 };
 
 export type ProjectConfig = {
-  project?: SandboxConfig;
+  project?: SbSandboxConfig;
   exampleTemplate: ExampleTemplateConfig;
 };
 
@@ -28,6 +30,11 @@ export type ExampleTemplateConfig = {
   fileName: string;
   template: (example: string) => string;
 };
+
+export type StackBlitzConfig = {
+  component?: ComponentConfig;
+  sandbox?: StackBlitzProjectConfig;
+}
 
 export const defaultHTMLConfig: StackBlitzProjectConfig['html'] = {
   project: {
@@ -183,13 +190,22 @@ export default defineConfig({
   },
 };
 
-const options: StackBlitzProjectConfig = {
+const sandboxOptions: StackBlitzProjectConfig = {
   html: defaultHTMLConfig,
   react: defaultReactConfig,
 };
 
+export let configuration: StackBlitzConfig = {
+  component: componentConfig,
+  sandbox: sandboxOptions
+}
+
+export function updateStackBlitzConfig(userConfig?: StackBlitzConfig) {
+  configuration = mergeDeep(configuration as never, userConfig as never);
+}
+
 export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
-  const config = options[exampleType as keyof StackBlitzProjectConfig];
+  const config = configuration.sandbox![exampleType as keyof StackBlitzProjectConfig];
   if (!config) {
     throw new Error(`Invalid example type: ${exampleType}`);
   }

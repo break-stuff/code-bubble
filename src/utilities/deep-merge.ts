@@ -8,20 +8,23 @@ export function isObject(item: never) {
 }
 
 /**
- * Deep merge two objects.
- * @param target
- * @param source
+ * Merges the content of two objects
+ * @param target object being merged into
+ * @param sources data to merge into the target
+ * @returns object
  */
 export function mergeDeep(target: never, source: never) {
-  if (isObject(target) && isObject(source)) {
-    for (const key in source as object) {
-      if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} });
-        mergeDeep(target[key], source[key]);
-      } else {
-        Object.assign(target, { [key]: source[key] });
-      }
+  if (!isObject(target) || !isObject(source)) {
+    return source;
+  }
+
+  for (const key in source as object) {
+    if (isObject(source[key])) {
+      Object.assign(target, { [key]: mergeDeep(target[key], source[key]) });
+    } else {
+      Object.assign(target, { [key]: source[key] });
     }
   }
-  return mergeDeep(target, source);
+
+  return target;
 }

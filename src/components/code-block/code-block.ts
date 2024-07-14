@@ -1,6 +1,9 @@
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-block.styles.js';
+import { ComponentConfig } from '../../configs/component-config.js';
+
+export type CodeExamples = 'html' | 'react';
 
 /**
  * @tag code-block
@@ -9,16 +12,20 @@ export default class CodeBlock extends LitElement {
   static styles = [styles];
 
   /** Indicates which example should be displayed */
-  @property()
-  example: 'html' | 'react' = 'html';
+  @property({ reflect: true })
+  example?: CodeExamples;
 
   @state()
-  private showSource = false;
+  protected showSource = false;
 
   @state()
-  private showRTL = false;
+  protected showRTL = false;
 
-  protected openSandbox: (example?: string, exampleType?: string) => void = () => {};
+  @state()
+  protected componentConfig: ComponentConfig = {};
+
+  protected openSandbox: (example?: string, exampleType?: string) => void =
+    () => {};
 
   private htmlCode?: string;
   private reactCode?: string;
@@ -26,7 +33,6 @@ export default class CodeBlock extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.getCode();
-    this.example = localStorage.getItem('code_block_example') === 'react' ? 'react' : 'html';
   }
 
   firstUpdated(): void {
@@ -34,6 +40,15 @@ export default class CodeBlock extends LitElement {
     preview.setAttribute('slot', 'preview');
     preview.innerHTML = this.htmlCode || '';
     this.appendChild(preview);
+  }
+
+  protected updateConfig() {
+    this.updateComplete.then(() => {
+      this.showSource = this.componentConfig.openShowCode!;
+      this.example =
+        (localStorage.getItem('code_block_example') as CodeExamples) ||
+        this.componentConfig.defaultExample!;
+    });
   }
 
   private getCode() {
@@ -53,11 +68,22 @@ export default class CodeBlock extends LitElement {
   }
 
   private handleSandboxClick() {
-    this.openSandbox(this.example === 'html' ? this.htmlCode : this.reactCode, this.example);
+    this.openSandbox(
+      this.example === 'html' ? this.htmlCode : this.reactCode,
+      this.example,
+    );
   }
 
-  private handleCopyClick() {
-    navigator.clipboard.writeText((this.example === 'html' ? this.htmlCode : this.reactCode) || '');
+  private handleCopyClick(e: MouseEvent) {
+    const button = e.target as HTMLButtonElement;
+    navigator.clipboard.writeText(
+      (this.example === 'html' ? this.htmlCode : this.reactCode) || '',
+    );
+    button.innerText = this.componentConfig.copyCodeButtonCopiedLabel!;
+    setTimeout(
+      () => (button.innerText = this.componentConfig.copyCodeButtonLabel!),
+      1_000,
+    );
   }
 
   render() {
@@ -68,9 +94,16 @@ export default class CodeBlock extends LitElement {
             <slot name="preview"></slot>
           </div>
           <details id="code-block" class="code-block" ?open=${this.showSource}>
+            <!-- required to prevent the user-agent summery from displaying -->
             <summary></summary>
             <slot name="${this.example || 'html'}"></slot>
-            <button class="copy-code" part="copy-button" @click=${this.handleCopyClick}>Copy</button>
+            <button
+              class="copy-code"
+              part="copy-button"
+              @click=${this.handleCopyClick}
+            >
+              ${this.componentConfig.copyCodeButtonLabel}
+            </button>
           </details>
           <div class="controls">
             <button
@@ -78,27 +111,29 @@ export default class CodeBlock extends LitElement {
               aria-expanded=${this.showSource}
               @click=${() => (this.showSource = !this.showSource)}
             >
-              ${this.showSource ? 'Hide' : 'Show'} Source
+              ${this.componentConfig.showCodeButtonLabel}
             </button>
             <button
               aria-pressed=${this.example === 'html'}
               @click=${() => this.handleExampleClick('html')}
             >
-              HTML
+              ${this.componentConfig.htmlButtonLabel}
             </button>
             <button
               aria-pressed=${this.example === 'react'}
               @click=${() => this.handleExampleClick('react')}
             >
-              React
+              ${this.componentConfig.reactButtonLabel}
             </button>
             <button
               aria-pressed=${this.showRTL}
               @click=${() => (this.showRTL = !this.showRTL)}
             >
-              RTL
+              ${this.componentConfig.rtlButtonLabel}
             </button>
-            <button @click=${this.handleSandboxClick}>Sandbox</button>
+            <button @click=${this.handleSandboxClick}>
+              ${this.componentConfig.sandboxButtonLabel}
+            </button>
           </div>
         </div>
       </div>
