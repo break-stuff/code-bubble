@@ -3,21 +3,27 @@ import { formatCode } from '../utilities/format-code';
 import { componentConfig, ComponentConfig } from './component-config';
 
 export type CpSandboxConfig = {
+  /** CodePen project configuration for HTML examples */
   html?: ProjectConfig;
+  /** CodePen project configuration for React examples */
   react?: ProjectConfig;
 };
 
 export type ProjectConfig = {
-  project?: CodePenProjectConfig;
+  /** CodePen project configuration */
+  project?: CodePenApiConfig;
+  /** Controls how the code is rendered in the example */
   exampleTemplate: ExampleTemplateConfig;
 };
 
 export type ExampleTemplateConfig = {
+  /** Indicates which code block has the template */
   fileName: 'html' | 'css' | 'js';
+  /** Template function that returns the code block with the example in it */
   template: (example: string) => string;
 };
 
-export type CodePenProjectConfig = {
+export type CodePenApiConfig = {
   /** Pen title */
   title?: string;
   /** Pen description */
@@ -30,17 +36,23 @@ export type CodePenProjectConfig = {
   tags?: string[];
   /** Set which editors are open. "1" is open and "0" is collapsed. The order is "HTML", "CSS", and "JS" */
   editors?: '001' | '010' | '100' | '011' | '101' | '110' | '111';
+  /** Determines the position of the code */
   layout?: 'top' | 'left' | 'right';
   /** Content in the HTML panel */
   html?: string;
+  /** Specifies an alternative markup syntax  */
   html_pre_processor?: 'none' | 'slim' | 'haml' | 'markdown';
   /** Content in the HTML panel */
   css?: string;
+  /** Specifies an alternative style syntax */
   css_pre_processor?: 'none' | 'less' | 'scss' | 'sass' | 'stylus';
+  /** Adds a CSS reset or normalizer to your pen */
   css_starter?: 'normalize' | 'reset' | 'neither';
+  /** Adds vendor prefixes to your CSS */
   css_prefix?: 'autoprefixer' | 'prefixfree' | 'neither';
   /** Content in the HTML panel */
   js?: string;
+  /** Specifies an alternative script syntax */
   js_pre_processor?:
     | 'none'
     | 'coffeescript'
@@ -58,7 +70,9 @@ export type CodePenProjectConfig = {
 };
 
 export type CodePenConfig = {
+  /** Configuration for the component rendered on the site */
   component?: ComponentConfig;
+  /** Configuration for the CodePen sandbox */
   sandbox?: CpSandboxConfig;
 };
 

@@ -1,9 +1,9 @@
 import { CpSandboxConfig } from "./code-pen-sandbox";
 import { ComponentConfig } from "./component-config";
-import { SbSandboxConfig } from "./stack-blitz-configs";
+import { SbApiConfig } from "./stack-blitz-configs";
 
 export type StackBlitzConfig = ComponentConfig & {
-  sandbox: SbSandboxConfig
+  sandbox: SbApiConfig
 }
 
 export type CodePenConfig = ComponentConfig &  {
