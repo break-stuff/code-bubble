@@ -67,11 +67,13 @@ export const CodeBlockSync: Story = {
 </sb-code-block>
 <br>
     <sb-code-block>
-        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+        <pre><code class="language-html">
+&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>
-        <pre><code class="language-jsx">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt;
+        <pre><code class="language-jsx">
+&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt;
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
