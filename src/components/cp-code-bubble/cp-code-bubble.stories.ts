@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
-import CpCodeBlock from './cp-code-block';
+import CpCodeBubble from './cp-code-bubble';
 import { html } from 'lit';
-import { cpCodeBlock } from '../..';
+import { cpCodeBubble } from '../..';
 
 const { events, args, argTypes, template } =
-  getWcStorybookHelpers('cp-code-block');
+  getWcStorybookHelpers('cp-code-bubble');
 
-cpCodeBlock({
+cpCodeBubble({
   component: {
     defaultExample: 'react'
   }
 });
 
-const meta: Meta<CpCodeBlock> = {
+const meta: Meta<CpCodeBubble> = {
   title: 'Components/CodePen Code Block',
-  component: 'cp-code-block',
+  component: 'cp-code-bubble',
   args,
   argTypes,
   parameters: {
@@ -30,7 +30,7 @@ export default meta;
  * create Story type that will provide autocomplete and docs for `args`,
  * but also allow for namespaced args like CSS Shadow Parts and Slots
  */
-type Story = StoryObj<CpCodeBlock & typeof args>;
+type Story = StoryObj<CpCodeBubble & typeof args>;
 
 export const Default: Story = {
   render: args =>
@@ -50,10 +50,10 @@ export const Default: Story = {
   args: {},
 };
 
-export const CodeBlockSync: Story = {
+export const CodeBubbleSync: Story = {
   render: () =>
     html`
-    <cp-code-block>
+    <cp-code-bubble>
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
@@ -62,9 +62,9 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</cp-code-block>
+</cp-code-bubble>
 <br>
-    <cp-code-block>
+    <cp-code-bubble>
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
@@ -73,9 +73,9 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</cp-code-block>
+</cp-code-bubble>
 <br>
-    <cp-code-block>
+    <cp-code-bubble>
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
@@ -84,7 +84,7 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</cp-code-block>
+</cp-code-bubble>
 <br>
       `,
   args: {},

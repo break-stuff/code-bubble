@@ -1,10 +1,10 @@
-# Code Blox
+# Code Bubble
 
 This is a platform agnostic web component designed to showcase code examples and generate sandbox environments in [CodePen](https://codepen.io/) or [StackBlitz](https://stackblitz.com/).
 
-![code block example](https://github.com/break-stuff/code-blox/blob/main/img/code-block.png?raw=true)
+![code bubble example](https://github.com/break-stuff/code-blox/blob/main/img/code-bubble.png?raw=true)
 
-![code block example with source code open](https://github.com/break-stuff/code-blox/blob/main/img/code-block_open.png?raw=true)
+![code bubble example with source code open](https://github.com/break-stuff/code-blox/blob/main/img/code-bubble_open.png?raw=true)
 
 Features:
 
@@ -25,24 +25,24 @@ Import the desired sandbox configuration at the root of your project:
 
 ```ts
 // CodePen sandbox
-import { cpCodeBlock, CodePenConfig } from 'code-block';
+import { cpCodeBubble, CodePenConfig } from 'code-bubble';
 
 const options: CodePenConfig {
   /* configuration options */
 };
 
-cpCodeBlock(options);
+cpCodeBubble(options);
 ```
 
 ```ts
 // StackBlitz sandbox
-import { sbCodeBlock, StackBlitzConfig } from 'code-block';
+import { sbCodeBubble, StackBlitzConfig } from 'code-bubble';
 
 const options: StackBlitzConfig {
   /* configuration options */
 };
 
-sbCodeBlock(options);
+sbCodeBubble(options);
 ```
 
 ### Use the Components
@@ -53,7 +53,7 @@ If you are using it markdown, be sure to include new lines between the markdown 
 
 ````html
 <!-- CodePen Example -->
-<cp-code-block>
+<cp-code-bubble>
 
 ```html
 <my-button appearance="accent">Accent</my-button>
@@ -63,10 +63,10 @@ If you are using it markdown, be sure to include new lines between the markdown 
 <MyButton appearance="accent">Accent</MyButton>
 ```
 
-</cp-code-block>
+</cp-code-bubble>
 
 <!-- StackBlitz Example -->
-<sb-code-block>
+<sb-code-bubble>
 
 ```html
 <my-button appearance="accent">Accent</my-button>
@@ -76,7 +76,7 @@ If you are using it markdown, be sure to include new lines between the markdown 
 <MyButton appearance="accent">Accent</MyButton>
 ```
 
-</sb-code-block>
+</sb-code-bubble>
 ````
 
 If you are using it HTML, the component will be looking for `<pre>` element with a nested `<code>` element. 
@@ -87,7 +87,7 @@ The `<code>` element should contain escaped characters for the tags to properly 
 
 ```html
 <!-- CodePen Example -->
-<cp-code-block>
+<cp-code-bubble>
 <pre><code class="language-html">
 &lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
 </code></pre>
@@ -95,10 +95,10 @@ The `<code>` element should contain escaped characters for the tags to properly 
 <pre><code class="language-jsx">
 &lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
 </code></pre>
-</cp-code-block>
+</cp-code-bubble>
 
 <!-- StackBlitz Example -->
-<sb-code-block>
+<sb-code-bubble>
 <pre><code class="language-html">
 &lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
 </code></pre>
@@ -106,5 +106,5 @@ The `<code>` element should contain escaped characters for the tags to properly 
 <pre><code class="language-jsx">
 &lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
 </code></pre>
-</sb-code-block>
+</sb-code-bubble>
 ```

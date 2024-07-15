@@ -1,4 +1,4 @@
-import CodeBlock from '../components/code-block/code-block';
+import CodeBubble from '../components/code-bubble/code-bubble';
 
 declare global {
   interface WindowEventMap {
@@ -8,7 +8,7 @@ declare global {
 
 export function syncSandboxes() {
   window.addEventListener('example-change', (e: CustomEvent) => {
-    document.querySelectorAll<CodeBlock>('[code-block]').forEach(y => {
+    document.querySelectorAll<CodeBubble>('[code-bubble]').forEach(y => {
       y.example = e.detail;
     });
   });

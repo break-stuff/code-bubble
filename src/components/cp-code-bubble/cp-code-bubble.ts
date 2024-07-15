@@ -1,10 +1,10 @@
-import CodeBlock from '../code-block/code-block.js';
+import CodeBubble from '../code-bubble/code-bubble.js';
 import { configuration, useCodePenSandbox } from '../../configs/code-pen-sandbox.js';
 
 /**
- * @tag cp-code-block
+ * @tag cp-code-bubble
  */
-export default class CpCodeBlock extends CodeBlock {
+export default class CpCodeBubble extends CodeBubble {
   constructor() {
     super();
     this.openSandbox = useCodePenSandbox;
@@ -13,4 +13,4 @@ export default class CpCodeBlock extends CodeBlock {
   }
 }
 
-export { CpCodeBlock };
+export { CpCodeBubble };

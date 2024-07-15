@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
-import SbCodeBlock from './sb-code-block';
+import SbCodeBubble from './sb-code-bubble';
 import { html } from 'lit';
 import { sbCodeBloc } from '../..';
 
 const { events, args, argTypes, template } = getWcStorybookHelpers(
-  'sb-code-block',
+  'sb-code-bubble',
 );
 
-// customElements.define('sb-code-block', SbCodeBlock);
+// customElements.define('sb-code-bubble', SbCodeBubble);
 sbCodeBloc({
   component: {
   }
 });
 
-const meta: Meta<SbCodeBlock> = {
+const meta: Meta<SbCodeBubble> = {
   title: 'Components/StackBlitz Code Block',
-  component: 'sb-code-block',
+  component: 'sb-code-bubble',
   args,
   argTypes,
   parameters: {
@@ -31,7 +31,7 @@ export default meta;
  * create Story type that will provide autocomplete and docs for `args`,
  * but also allow for namespaced args like CSS Shadow Parts and Slots
  */
-type Story = StoryObj<SbCodeBlock & typeof args>;
+type Story = StoryObj<SbCodeBubble & typeof args>;
 
 export const Default: Story = {
   render: args =>
@@ -52,10 +52,10 @@ export const Default: Story = {
 };
 
 
-export const CodeBlockSync: Story = {
+export const CodeBubbleSync: Story = {
   render: () =>
     html`
-    <sb-code-block>
+    <sb-code-bubble>
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
@@ -64,9 +64,9 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</sb-code-block>
+</sb-code-bubble>
 <br>
-    <sb-code-block>
+    <sb-code-bubble>
         <pre><code class="language-html">
 &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
@@ -77,9 +77,9 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</sb-code-block>
+</sb-code-bubble>
 <br>
-    <sb-code-block>
+    <sb-code-bubble>
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
@@ -88,7 +88,7 @@ export const CodeBlockSync: Story = {
 &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
 &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
 </code></pre>
-</sb-code-block>
+</sb-code-bubble>
 <br>
       `,
   args: {},

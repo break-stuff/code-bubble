@@ -1,13 +1,13 @@
-import CodeBlock from '../code-block/code-block.js';
+import CodeBubble from '../code-bubble/code-bubble.js';
 import {
   configuration,
   useStackBlitzSandbox,
 } from '../../configs/stack-blitz-configs.js';
 
 /**
- * @tag sb-code-block
+ * @tag sb-code-bubble
  */
-export default class SbCodeBlock extends CodeBlock {
+export default class SbCodeBubble extends CodeBubble {
   constructor() {
     super();
     this.openSandbox = useStackBlitzSandbox;
@@ -16,4 +16,4 @@ export default class SbCodeBlock extends CodeBlock {
   }
 }
 
-export { SbCodeBlock };
+export { SbCodeBubble };

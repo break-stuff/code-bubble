@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
-import CodeBlock from './code-block';
+import CodeBubble from './code-bubble';
 import { html } from 'lit';
 
 const { events, args, argTypes, template } = getWcStorybookHelpers(
-  'code-block',
+  'code-bubble',
 );
 
-customElements.define('code-block', CodeBlock);
+customElements.define('code-bubble', CodeBubble);
 
 
-const meta: Meta<CodeBlock> = {
+const meta: Meta<CodeBubble> = {
   title: 'Components/Code Block',
-  component: 'code-block',
+  component: 'code-bubble',
   args,
   argTypes,
   parameters: {
@@ -27,7 +27,7 @@ export default meta;
  * create Story type that will provide autocomplete and docs for `args`,
  * but also allow for namespaced args like CSS Shadow Parts and Slots
  */
-type Story = StoryObj<CodeBlock & typeof args>;
+type Story = StoryObj<CodeBubble & typeof args>;
 
 export const Default: Story = {
   render: args =>

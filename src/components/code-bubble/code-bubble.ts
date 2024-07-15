@@ -1,14 +1,14 @@
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import styles from './code-block.styles.js';
+import styles from './code-bubble.styles.js';
 import { ComponentConfig } from '../../configs/component-config.js';
 
 export type CodeExamples = 'html' | 'react';
 
 /**
- * @tag code-block
+ * @tag code-bubble
  */
-export default class CodeBlock extends LitElement {
+export default class CodeBubble extends LitElement {
   static styles = [styles];
 
   /** Indicates which example should be displayed */
@@ -33,7 +33,7 @@ export default class CodeBlock extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.getCode();
-    this.setAttribute('code-block', '');
+    this.setAttribute('code-bubble', '');
   }
 
   firstUpdated(): void {
@@ -53,16 +53,16 @@ export default class CodeBlock extends LitElement {
   }
 
   private getCode() {
-    const htmlCodeBlock = this.getCodeBlock('html');
-    htmlCodeBlock?.setAttribute('slot', 'html');
-    this.htmlCode = htmlCodeBlock?.querySelector('code')?.innerText;
+    const htmlCodeBubble = this.getCodeBubble('html');
+    htmlCodeBubble?.setAttribute('slot', 'html');
+    this.htmlCode = htmlCodeBubble?.querySelector('code')?.innerText;
 
-    const reactCodeBlock = this.getCodeBlock('jsx');
-    reactCodeBlock?.setAttribute('slot', 'react');
-    this.reactCode = reactCodeBlock?.querySelector('code')?.innerText;
+    const reactCodeBubble = this.getCodeBubble('jsx');
+    reactCodeBubble?.setAttribute('slot', 'react');
+    this.reactCode = reactCodeBubble?.querySelector('code')?.innerText;
   }
 
-  private getCodeBlock(language: 'html' | 'jsx' = 'html') {
+  private getCodeBubble(language: 'html' | 'jsx' = 'html') {
     return (
       (this.querySelector(`pre.language-${language}`) ||
         this.querySelector(`pre:has(code.language-${language})`) ||
@@ -104,11 +104,11 @@ export default class CodeBlock extends LitElement {
   render() {
     return html`
       <div>
-        <div class="code-block-base">
+        <div class="code-bubble-base">
           <div class="preview" dir=${this.showRTL ? 'rtl' : 'auto'}>
             <slot name="preview"></slot>
           </div>
-          <details id="code-block" class="code-block" ?open=${this.showSource}>
+          <details id="code-bubble" class="code-bubble" ?open=${this.showSource}>
             <!-- required to prevent the user-agent summery from displaying -->
             <summary></summary>
             <slot name="${this.example || 'html'}"></slot>
@@ -122,7 +122,7 @@ export default class CodeBlock extends LitElement {
           </details>
           <div class="controls">
             <button
-              aria-controls="code-block"
+              aria-controls="code-bubble"
               aria-expanded=${this.showSource}
               @click=${() => (this.showSource = !this.showSource)}
             >
@@ -156,4 +156,4 @@ export default class CodeBlock extends LitElement {
   }
 }
 
-export { CodeBlock };
+export { CodeBubble };

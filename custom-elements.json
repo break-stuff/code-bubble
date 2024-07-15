@@ -4,26 +4,26 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/components/code-block/code-block.styles.ts",
+      "path": "src/components/code-bubble/code-bubble.styles.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "src/components/code-block/code-block.styles.ts"
+            "module": "src/components/code-bubble/code-bubble.styles.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/code-block/code-block.ts",
+      "path": "src/components/code-bubble/code-bubble.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "CodeBlock",
+          "name": "CodeBubble",
           "members": [
             {
               "kind": "field",
@@ -101,7 +101,7 @@
             },
             {
               "kind": "method",
-              "name": "getCodeBlock",
+              "name": "getCodeBubble",
               "privacy": "private",
               "parameters": [
                 {
@@ -162,7 +162,7 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "code-block",
+          "tagName": "code-bubble",
           "customElement": true
         }
       ],
@@ -171,31 +171,31 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "CodeBlock",
-            "module": "src/components/code-block/code-block.ts"
+            "name": "CodeBubble",
+            "module": "src/components/code-bubble/code-bubble.ts"
           }
         },
         {
           "kind": "js",
-          "name": "CodeBlock",
+          "name": "CodeBubble",
           "declaration": {
-            "name": "CodeBlock",
-            "module": "src/components/code-block/code-block.ts"
+            "name": "CodeBubble",
+            "module": "src/components/code-bubble/code-bubble.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/code-block/code-block.stories.ts",
+      "path": "src/components/code-bubble/code-bubble.stories.ts",
       "declarations": [
         {
           "kind": "variable",
           "name": "meta",
           "type": {
-            "text": "Meta<CodeBlock>"
+            "text": "Meta<CodeBubble>"
           },
-          "default": "{ title: 'Components/Code Block', component: 'code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+          "default": "{ title: 'Components/Code Block', component: 'code-bubble', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
@@ -209,10 +209,10 @@
       "exports": [
         {
           "kind": "custom-element-definition",
-          "name": "code-block",
+          "name": "code-bubble",
           "declaration": {
-            "name": "CodeBlock",
-            "module": "/src/components/code-block/code-block"
+            "name": "CodeBubble",
+            "module": "/src/components/code-bubble/code-bubble"
           }
         },
         {
@@ -220,7 +220,7 @@
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/components/code-block/code-block.stories.ts"
+            "module": "src/components/code-bubble/code-bubble.stories.ts"
           }
         },
         {
@@ -228,19 +228,19 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/components/code-block/code-block.stories.ts"
+            "module": "src/components/code-bubble/code-bubble.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/cp-code-block/cp-code-block.ts",
+      "path": "src/components/cp-code-bubble/cp-code-bubble.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "CpCodeBlock",
+          "name": "CpCodeBubble",
           "members": [
             {
               "kind": "field",
@@ -251,8 +251,8 @@
               "privacy": "protected",
               "default": "useCodePenSandbox",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -264,8 +264,8 @@
               "privacy": "protected",
               "default": "configuration.component!",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -281,8 +281,8 @@
                 "text": "'html' | 'react' | undefined"
               },
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -294,8 +294,8 @@
               "privacy": "protected",
               "default": "false",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -307,8 +307,8 @@
               "privacy": "protected",
               "default": "false",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -319,8 +319,8 @@
               },
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -331,8 +331,8 @@
               },
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -340,8 +340,8 @@
               "name": "updateConfig",
               "privacy": "protected",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -349,13 +349,13 @@
               "name": "getCode",
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
               "kind": "method",
-              "name": "getCodeBlock",
+              "name": "getCodeBubble",
               "privacy": "private",
               "parameters": [
                 {
@@ -367,8 +367,8 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -384,8 +384,8 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -393,8 +393,8 @@
               "name": "handleSandboxClick",
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -410,16 +410,16 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             }
           ],
           "superclass": {
-            "name": "CodeBlock",
-            "module": "/src/components/code-block/code-block.js"
+            "name": "CodeBubble",
+            "module": "/src/components/code-bubble/code-bubble.js"
           },
-          "tagName": "cp-code-block",
+          "tagName": "cp-code-bubble",
           "customElement": true,
           "attributes": [
             {
@@ -433,8 +433,8 @@
                 "text": "'html' | 'react' | undefined"
               },
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             }
           ]
@@ -445,28 +445,28 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "CpCodeBlock",
-            "module": "src/components/cp-code-block/cp-code-block.ts"
+            "name": "CpCodeBubble",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
           }
         },
         {
           "kind": "js",
-          "name": "CpCodeBlock",
+          "name": "CpCodeBubble",
           "declaration": {
-            "name": "CpCodeBlock",
-            "module": "src/components/cp-code-block/cp-code-block.ts"
+            "name": "CpCodeBubble",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/sb-code-block/sb-code-block.ts",
+      "path": "src/components/sb-code-bubble/sb-code-bubble.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SbCodeBlock",
+          "name": "SbCodeBubble",
           "members": [
             {
               "kind": "field",
@@ -477,8 +477,8 @@
               "privacy": "protected",
               "default": "useStackBlitzSandbox",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -490,8 +490,8 @@
               "privacy": "protected",
               "default": "configuration.component!",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -507,8 +507,8 @@
                 "text": "'html' | 'react' | undefined"
               },
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -520,8 +520,8 @@
               "privacy": "protected",
               "default": "false",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -533,8 +533,8 @@
               "privacy": "protected",
               "default": "false",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -545,8 +545,8 @@
               },
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -557,8 +557,8 @@
               },
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -566,8 +566,8 @@
               "name": "updateConfig",
               "privacy": "protected",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -575,13 +575,13 @@
               "name": "getCode",
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
               "kind": "method",
-              "name": "getCodeBlock",
+              "name": "getCodeBubble",
               "privacy": "private",
               "parameters": [
                 {
@@ -593,8 +593,8 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -610,8 +610,8 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -619,8 +619,8 @@
               "name": "handleSandboxClick",
               "privacy": "private",
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             },
             {
@@ -636,16 +636,16 @@
                 }
               ],
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             }
           ],
           "superclass": {
-            "name": "CodeBlock",
-            "module": "/src/components/code-block/code-block.js"
+            "name": "CodeBubble",
+            "module": "/src/components/code-bubble/code-bubble.js"
           },
-          "tagName": "sb-code-block",
+          "tagName": "sb-code-bubble",
           "customElement": true,
           "attributes": [
             {
@@ -659,8 +659,8 @@
                 "text": "'html' | 'react' | undefined"
               },
               "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
               }
             }
           ]
@@ -671,31 +671,31 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "SbCodeBlock",
-            "module": "src/components/sb-code-block/sb-code-block.ts"
+            "name": "SbCodeBubble",
+            "module": "src/components/sb-code-bubble/sb-code-bubble.ts"
           }
         },
         {
           "kind": "js",
-          "name": "SbCodeBlock",
+          "name": "SbCodeBubble",
           "declaration": {
-            "name": "SbCodeBlock",
-            "module": "src/components/sb-code-block/sb-code-block.ts"
+            "name": "SbCodeBubble",
+            "module": "src/components/sb-code-bubble/sb-code-bubble.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/cp-code-block/cp-code-block.stories.ts",
+      "path": "src/components/cp-code-bubble/cp-code-bubble.stories.ts",
       "declarations": [
         {
           "kind": "variable",
           "name": "meta",
           "type": {
-            "text": "Meta<CpCodeBlock>"
+            "text": "Meta<CpCodeBubble>"
           },
-          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-bubble', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
@@ -707,11 +707,11 @@
         },
         {
           "kind": "variable",
-          "name": "CodeBlockSync",
+          "name": "CodeBubbleSync",
           "type": {
             "text": "Story"
           },
-          "default": "{ render: () => html` <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> <cp-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-block> <br> `, args: {}, }"
+          "default": "{ render: () => html` <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> `, args: {}, }"
         }
       ],
       "exports": [
@@ -720,7 +720,7 @@
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
           }
         },
         {
@@ -728,30 +728,30 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
           }
         },
         {
           "kind": "js",
-          "name": "CodeBlockSync",
+          "name": "CodeBubbleSync",
           "declaration": {
-            "name": "CodeBlockSync",
-            "module": "src/components/cp-code-block/cp-code-block.stories.ts"
+            "name": "CodeBubbleSync",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/sb-code-block/sb-code-block.stories.ts",
+      "path": "src/components/sb-code-bubble/sb-code-bubble.stories.ts",
       "declarations": [
         {
           "kind": "variable",
           "name": "meta",
           "type": {
-            "text": "Meta<SbCodeBlock>"
+            "text": "Meta<SbCodeBubble>"
           },
-          "default": "{ title: 'Components/StackBlitz Code Block', component: 'sb-code-block', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+          "default": "{ title: 'Components/StackBlitz Code Block', component: 'sb-code-bubble', args, argTypes, parameters: { actions: { handles: events, }, }, }"
         },
         {
           "kind": "variable",
@@ -763,11 +763,11 @@
         },
         {
           "kind": "variable",
-          "name": "CodeBlockSync",
+          "name": "CodeBubbleSync",
           "type": {
             "text": "Story"
           },
-          "default": "{ render: () => html` <sb-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> <sb-code-block> <pre><code class=\"language-html\"> &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\"> &lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> <sb-code-block> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-block> <br> `, args: {}, }"
+          "default": "{ render: () => html` <sb-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-bubble> <br> <sb-code-bubble> <pre><code class=\"language-html\"> &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\"> &lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-bubble> <br> <sb-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </sb-code-bubble> <br> `, args: {}, }"
         }
       ],
       "exports": [
@@ -776,7 +776,7 @@
           "name": "default",
           "declaration": {
             "name": "meta",
-            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
+            "module": "src/components/sb-code-bubble/sb-code-bubble.stories.ts"
           }
         },
         {
@@ -784,15 +784,15 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
-            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
+            "module": "src/components/sb-code-bubble/sb-code-bubble.stories.ts"
           }
         },
         {
           "kind": "js",
-          "name": "CodeBlockSync",
+          "name": "CodeBubbleSync",
           "declaration": {
-            "name": "CodeBlockSync",
-            "module": "src/components/sb-code-block/sb-code-block.stories.ts"
+            "name": "CodeBubbleSync",
+            "module": "src/components/sb-code-bubble/sb-code-bubble.stories.ts"
           }
         }
       ]

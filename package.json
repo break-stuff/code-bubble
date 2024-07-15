@@ -1,5 +1,5 @@
 {
-  "name": "code-blox",
+  "name": "code-bubble",
   "version": "1.0.0-alpha.0",
   "description": "Reusable components for displaying code examples and providing links to a sandbox environment.",
   "main": "index.js",
