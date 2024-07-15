@@ -2,9 +2,9 @@
 
 This is a platform agnostic web component designed to showcase code examples and generate sandbox environments in [CodePen](https://codepen.io/) or [StackBlitz](https://stackblitz.com/).
 
-![code bubble example](https://github.com/break-stuff/code-blox/blob/main/img/code-bubble.png?raw=true)
+![code bubble example](https://github.com/break-stuff/code-bubble/blob/main/img/code-bubble.png?raw=true)
 
-![code bubble example with source code open](https://github.com/break-stuff/code-blox/blob/main/img/code-bubble_open.png?raw=true)
+![code bubble example with source code open](https://github.com/break-stuff/code-bubble/blob/main/img/code-bubble_open.png?raw=true)
 
 Features:
 
