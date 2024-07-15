@@ -1,7 +1,7 @@
 {
-  "name": "stack-blitz-code-block",
-  "version": "1.0.0",
-  "description": "",
+  "name": "code-blox",
+  "version": "1.0.0-alpha.0",
+  "description": "Reusable components for displaying code examples and providing links to a sandbox environment.",
   "main": "index.js",
   "types": "index.d.ts",
   "type": "module",
@@ -11,6 +11,7 @@
     "dev": "run-p analyze:dev storybook",
     "test": "wtr test/**/*.test.js --node-resolve",
     "build": "tsc",
+    "deploy": "npm run build && npm publish",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "format": "npm run format:eslint && npm run format:prettier",
     "lint:eslint": "npx eslint",
@@ -67,5 +68,20 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/break-stuff/code-blox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/break-stuff/code-blox/issues"
+  },
+  "homepage": "https://github.com/break-stuff/code-blox#readme",
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.js",
+    "package.json",
+    "custom-elements.json"
+  ]
 }

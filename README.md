@@ -1,6 +1,6 @@
-# Code Block
+# Code Blox
 
-This component is designed to showcase code examples where there may be variations in code examples for things like web components.
+This is a platform agnostic web component designed to showcase code examples and generate sandbox environments in [CodePen](https://codepen.io/) or [StackBlitz](https://stackblitz.com/).
 
 Features:
 
@@ -45,38 +45,62 @@ sbCodeBlock(options);
 
 Once the project is configured, that's it! Start using the components.
 
-If you are using it HTML, the component will be looking for `<pre>` element with a nested `<code class="language-html">` (or `class="language-jsx"`) and escaped characters for the tags to properly render the examples.
+If you are using it markdown, be sure to include new lines between the markdown code block.
+
+````html
+<!-- CodePen Example -->
+<cp-code-block>
+
+```html
+<my-button appearance="accent">Accent</my-button>
+```
+
+```jsx
+<MyButton appearance="accent">Accent</MyButton>
+```
+
+</cp-code-block>
+
+<!-- StackBlitz Example -->
+<sb-code-block>
+
+```html
+<my-button appearance="accent">Accent</my-button>
+```
+
+```jsx
+<MyButton appearance="accent">Accent</MyButton>
+```
+
+</sb-code-block>
+````
+
+If you are using it HTML, the component will be looking for `<pre>` element with a nested `<code>` element. 
+
+Unfortunately, markdown parsers don't follow a consistent pattern for identifying the language for a code block so the componet will look for `class="language-html"` or `data-language="html"` on the parent, `pre`, or `code` elements to help identify which code block it is (for react it would be `class="language-jsx"`/`data-language="jsx"`). 
+
+The `<code>` element should contain escaped characters for the tags to properly render the examples.
 
 ```html
 <!-- CodePen Example -->
 <cp-code-block>
 <pre><code class="language-html">
-&lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
-&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
-&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+&lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
 </code></pre>
 
 <pre><code class="language-jsx">
-&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt;
-&lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
-&lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
+&lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
 </code></pre>
 </cp-code-block>
 
 <!-- StackBlitz Example -->
 <sb-code-block>
 <pre><code class="language-html">
-&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
-&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
-&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+&lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
 </code></pre>
 
 <pre><code class="language-jsx">
-&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt;
-&lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt;
-&lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt;
+&lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
 </code></pre>
 </sb-code-block>
 ```
-
-If you are using it markdown, be sure to include new lines between the open and 

@@ -53,18 +53,32 @@ export default class CodeBlock extends LitElement {
   }
 
   private getCode() {
-    const htmlCodeBlock = this.querySelector('pre:has(code.language-html)');
+    const htmlCodeBlock = this.getCodeBlock('html');
     htmlCodeBlock?.setAttribute('slot', 'html');
     this.htmlCode = htmlCodeBlock?.querySelector('code')?.innerText;
 
-    const reactCodeBlock = this.querySelector('pre:has(code.language-jsx)');
+    const reactCodeBlock = this.getCodeBlock('jsx');
     reactCodeBlock?.setAttribute('slot', 'react');
     this.reactCode = reactCodeBlock?.querySelector('code')?.innerText;
   }
 
+  private getCodeBlock(language: 'html' | 'jsx' = 'html') {
+    return (
+      (this.querySelector(`pre.language-${language}`) ||
+        this.querySelector(`pre:has(code.language-${language})`) ||
+        this.querySelector(`pre[data-language="${language}"]`) ||
+        this.querySelector(`.language-${language} pre`) ||
+        this.querySelector(`[data-language="${language}"] pre`)) ??
+        this.querySelector('pre')
+    );
+  }
+
   private handleExampleClick(example: 'html' | 'react') {
     this.example = example;
-    this.dispatchEvent(new CustomEvent('example-change', { bubbles: true, detail: example }));
+    /** @internal this is used to keep the code blocks in sync */
+    this.dispatchEvent(
+      new CustomEvent('example-change', { bubbles: true, detail: example }),
+    );
     localStorage.setItem('code_block_example', example);
   }
 

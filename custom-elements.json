@@ -101,6 +101,20 @@
             },
             {
               "kind": "method",
+              "name": "getCodeBlock",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "language",
+                  "default": "'html'",
+                  "type": {
+                    "text": "'html' | 'jsx'"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "handleExampleClick",
               "privacy": "private",
               "parameters": [
@@ -129,14 +143,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "events": [
-            {
-              "name": "example-change",
-              "type": {
-                "text": "CustomEvent"
-              }
             }
           ],
           "attributes": [
@@ -349,6 +355,24 @@
             },
             {
               "kind": "method",
+              "name": "getCodeBlock",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "language",
+                  "default": "'html'",
+                  "type": {
+                    "text": "'html' | 'jsx'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
               "name": "handleExampleClick",
               "privacy": "private",
               "parameters": [
@@ -407,18 +431,6 @@
               "fieldName": "example",
               "expandedType": {
                 "text": "'html' | 'react' | undefined"
-              },
-              "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "example-change",
-              "type": {
-                "text": "CustomEvent"
               },
               "inheritedFrom": {
                 "name": "CodeBlock",
@@ -569,6 +581,24 @@
             },
             {
               "kind": "method",
+              "name": "getCodeBlock",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "language",
+                  "default": "'html'",
+                  "type": {
+                    "text": "'html' | 'jsx'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBlock",
+                "module": "src/components/code-block/code-block.ts"
+              }
+            },
+            {
+              "kind": "method",
               "name": "handleExampleClick",
               "privacy": "private",
               "parameters": [
@@ -627,18 +657,6 @@
               "fieldName": "example",
               "expandedType": {
                 "text": "'html' | 'react' | undefined"
-              },
-              "inheritedFrom": {
-                "name": "CodeBlock",
-                "module": "src/components/code-block/code-block.ts"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "example-change",
-              "type": {
-                "text": "CustomEvent"
               },
               "inheritedFrom": {
                 "name": "CodeBlock",
