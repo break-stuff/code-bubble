@@ -10,7 +10,7 @@
     "analyze:dev": "cem analyze --watch",
     "dev": "run-p analyze:dev storybook",
     "test": "wtr test/**/*.test.js --node-resolve",
-    "build": "tsc && tsup src/index.ts --out-dir cdn --format esm --minify",
+    "build": "tsup src/index.ts --format esm,cjs --out-dir dist --dts && vite build",
     "deploy": "npm run build && npm publish",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "format": "npm run format:eslint && npm run format:prettier",
@@ -54,6 +54,7 @@
     "tsup": "^8.1.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
+    "vite": "^5.3.4",
     "wc-storybook-helpers": "^2.0.2"
   },
   "lint-staged": {
