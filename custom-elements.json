@@ -27,13 +27,11 @@
           "members": [
             {
               "kind": "field",
-              "name": "example",
+              "name": "framework",
               "type": {
                 "text": "CodeExamples | undefined"
               },
               "description": "Indicates which example should be displayed",
-              "attribute": "example",
-              "reflects": true,
               "expandedType": {
                 "text": "'html' | 'react' | undefined"
               }
@@ -63,7 +61,7 @@
                 "text": "ComponentConfig"
               },
               "privacy": "protected",
-              "default": "{}"
+              "default": "configuration.component!"
             },
             {
               "kind": "field",
@@ -143,19 +141,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "example",
-              "type": {
-                "text": "CodeExamples | undefined"
-              },
-              "description": "Indicates which example should be displayed",
-              "fieldName": "example",
-              "expandedType": {
-                "text": "'html' | 'react' | undefined"
-              }
             }
           ],
           "superclass": {
@@ -203,18 +188,10 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, ), args: {}, }"
+          "default": "{ render: args => html` <script type=\"module\"> </script> ${template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, )}`, args: {}, }"
         }
       ],
       "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "code-bubble",
-          "declaration": {
-            "name": "CodeBubble",
-            "module": "/src/components/code-bubble/code-bubble"
-          }
-        },
         {
           "kind": "js",
           "name": "default",
@@ -229,232 +206,6 @@
           "declaration": {
             "name": "Default",
             "module": "src/components/code-bubble/code-bubble.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/cp-code-bubble/cp-code-bubble.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "CpCodeBubble",
-          "members": [
-            {
-              "kind": "field",
-              "name": "openSandbox",
-              "type": {
-                "text": "(example?: string, exampleType?: string) => void"
-              },
-              "privacy": "protected",
-              "default": "useCodePenSandbox",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "componentConfig",
-              "type": {
-                "text": "ComponentConfig"
-              },
-              "privacy": "protected",
-              "default": "configuration.component!",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "example",
-              "type": {
-                "text": "CodeExamples | undefined"
-              },
-              "description": "Indicates which example should be displayed",
-              "attribute": "example",
-              "reflects": true,
-              "expandedType": {
-                "text": "'html' | 'react' | undefined"
-              },
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "showSource",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "protected",
-              "default": "false",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "showRTL",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "protected",
-              "default": "false",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "htmlCode",
-              "type": {
-                "text": "string | undefined"
-              },
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "reactCode",
-              "type": {
-                "text": "string | undefined"
-              },
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "updateConfig",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getCode",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getCodeBubble",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "language",
-                  "default": "'html'",
-                  "type": {
-                    "text": "'html' | 'jsx'"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleExampleClick",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "example",
-                  "type": {
-                    "text": "'html' | 'react'"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleSandboxClick",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleCopyClick",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "CodeBubble",
-            "module": "/src/components/code-bubble/code-bubble.js"
-          },
-          "tagName": "cp-code-bubble",
-          "customElement": true,
-          "attributes": [
-            {
-              "name": "example",
-              "type": {
-                "text": "CodeExamples | undefined"
-              },
-              "description": "Indicates which example should be displayed",
-              "fieldName": "example",
-              "expandedType": {
-                "text": "'html' | 'react' | undefined"
-              },
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "CpCodeBubble",
-            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CpCodeBubble",
-          "declaration": {
-            "name": "CpCodeBubble",
-            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
           }
         }
       ]
@@ -496,13 +247,11 @@
             },
             {
               "kind": "field",
-              "name": "example",
+              "name": "framework",
               "type": {
                 "text": "CodeExamples | undefined"
               },
               "description": "Indicates which example should be displayed",
-              "attribute": "example",
-              "reflects": true,
               "expandedType": {
                 "text": "'html' | 'react' | undefined"
               },
@@ -646,24 +395,7 @@
             "module": "/src/components/code-bubble/code-bubble.js"
           },
           "tagName": "sb-code-bubble",
-          "customElement": true,
-          "attributes": [
-            {
-              "name": "example",
-              "type": {
-                "text": "CodeExamples | undefined"
-              },
-              "description": "Indicates which example should be displayed",
-              "fieldName": "example",
-              "expandedType": {
-                "text": "'html' | 'react' | undefined"
-              },
-              "inheritedFrom": {
-                "name": "CodeBubble",
-                "module": "src/components/code-bubble/code-bubble.ts"
-              }
-            }
-          ]
+          "customElement": true
         }
       ],
       "exports": [
@@ -681,62 +413,6 @@
           "declaration": {
             "name": "SbCodeBubble",
             "module": "src/components/sb-code-bubble/sb-code-bubble.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/cp-code-bubble/cp-code-bubble.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta<CpCodeBubble>"
-          },
-          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-bubble', args, argTypes, parameters: { actions: { handles: events, }, }, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> `, ), args: {}, }"
-        },
-        {
-          "kind": "variable",
-          "name": "CodeBubbleSync",
-          "type": {
-            "text": "Story"
-          },
-          "default": "{ render: () => html` <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> `, args: {}, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CodeBubbleSync",
-          "declaration": {
-            "name": "CodeBubbleSync",
-            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
           }
         }
       ]
@@ -793,6 +469,269 @@
           "declaration": {
             "name": "CodeBubbleSync",
             "module": "src/components/sb-code-bubble/sb-code-bubble.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/cp-code-bubble/cp-code-bubble.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CpCodeBubble",
+          "members": [
+            {
+              "kind": "field",
+              "name": "openSandbox",
+              "type": {
+                "text": "(example?: string, exampleType?: string) => void"
+              },
+              "privacy": "protected",
+              "default": "useCodePenSandbox",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "componentConfig",
+              "type": {
+                "text": "ComponentConfig"
+              },
+              "privacy": "protected",
+              "default": "configuration.component!",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "framework",
+              "type": {
+                "text": "CodeExamples | undefined"
+              },
+              "description": "Indicates which example should be displayed",
+              "expandedType": {
+                "text": "'html' | 'react' | undefined"
+              },
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showSource",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showRTL",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "htmlCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reactCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "updateConfig",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getCode",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getCodeBubble",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "language",
+                  "default": "'html'",
+                  "type": {
+                    "text": "'html' | 'jsx'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleExampleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "example",
+                  "type": {
+                    "text": "'html' | 'react'"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleSandboxClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleCopyClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "CodeBubble",
+                "module": "src/components/code-bubble/code-bubble.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CodeBubble",
+            "module": "/src/components/code-bubble/code-bubble.js"
+          },
+          "tagName": "cp-code-bubble",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "CpCodeBubble",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CpCodeBubble",
+          "declaration": {
+            "name": "CpCodeBubble",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/cp-code-bubble/cp-code-bubble.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta<CpCodeBubble>"
+          },
+          "default": "{ title: 'Components/CodePen Code Block', component: 'cp-code-bubble', args, argTypes, parameters: { actions: { handles: events, }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> `, ), args: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "CodeBubbleSync",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: () => html` <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> <cp-code-bubble> <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">&lt;Button appearance=&quot;accent&quot;&gt;Accent&lt;/Button&gt; &lt;Button appearance=&quot;neutral&quot;&gt;Neutral&lt;/Button&gt; &lt;Button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/Button&gt; </code></pre> </cp-code-bubble> <br> `, args: {}, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeBubbleSync",
+          "declaration": {
+            "name": "CodeBubbleSync",
+            "module": "src/components/cp-code-bubble/cp-code-bubble.stories.ts"
           }
         }
       ]

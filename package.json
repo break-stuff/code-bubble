@@ -10,7 +10,7 @@
     "analyze:dev": "cem analyze --watch",
     "dev": "run-p analyze:dev storybook",
     "test": "wtr test/**/*.test.js --node-resolve",
-    "build": "tsc",
+    "build": "tsc && tsup src/index.ts --out-dir cdn --format esm --minify",
     "deploy": "npm run build && npm publish",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "format": "npm run format:eslint && npm run format:prettier",
@@ -51,6 +51,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.2",
     "storybook": "^8.1.11",
+    "tsup": "^8.1.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
     "wc-storybook-helpers": "^2.0.2"
@@ -60,7 +61,6 @@
     "*.format:prettier": "prettier --write"
   },
   "dependencies": {
-    "@prettier/sync": "^0.5.2",
     "@stackblitz/sdk": "^1.11.0",
     "lit": "^3.1.4"
   },
@@ -78,6 +78,7 @@
   },
   "homepage": "https://github.com/break-stuff/code-blox#readme",
   "files": [
+    "cdn",
     "dist",
     "index.d.ts",
     "index.js",

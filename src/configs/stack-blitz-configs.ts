@@ -1,44 +1,6 @@
-import sdk from '@stackblitz/sdk';
-import { formatCode } from '../utilities/format-code';
-import { componentConfig, ComponentConfig } from './component-config';
-import { mergeDeep } from '../utilities/deep-merge';
+import { FrameworkConfig, StackBlitz } from './sandbox-configs.js';
 
-export type SbProjectConfig = {
-  html?: ProjectConfig;
-  react?: ProjectConfig;
-};
-
-export type ProjectConfig = {
-  project?: SbApiConfig;
-  exampleTemplate: ExampleTemplateConfig;
-};
-
-export type SbApiConfig = {
-  title?: string;
-  description?: string;
-  /**
-   * Provide project files, as code strings.
-   *
-   * Binary files and blobs are not supported.
-   */
-  files?: {
-    [name: string]: string;
-  };
-};
-
-export type ExampleTemplateConfig = {
-  /** Indicates which file has the template */
-  fileName: string;
-  /** Template function that returns the file contents with the example in it */
-  template: (example: string) => string;
-};
-
-export type StackBlitzConfig = {
-  component?: ComponentConfig;
-  sandbox?: SbProjectConfig;
-};
-
-export const defaultHTMLConfig: SbProjectConfig['html'] = {
+export const defaultHTMLConfig: FrameworkConfig<StackBlitz>['html'] = {
   project: {
     title: 'HTML Example',
     description: 'Example of using the code in HTML.',
@@ -79,7 +41,7 @@ export const defaultHTMLConfig: SbProjectConfig['html'] = {
   },
   exampleTemplate: {
     fileName: 'index.html',
-    template: example => `<!doctype html>
+    template: `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -89,7 +51,7 @@ export const defaultHTMLConfig: SbProjectConfig['html'] = {
   </head>
   <body>
     <div id="app">
-      ${example}
+      %example%
     </div>
     <script type="module" src="/main.js"></script>
   </body>
@@ -97,7 +59,7 @@ export const defaultHTMLConfig: SbProjectConfig['html'] = {
   },
 };
 
-export const defaultReactConfig: SbProjectConfig['react'] = {
+export const defaultReactConfig: FrameworkConfig<StackBlitz>['react'] = {
   project: {
     title: 'React Example',
     description: 'Example of using the code in React.',
@@ -182,62 +144,17 @@ export default defineConfig({
   },
   exampleTemplate: {
     fileName: 'src/App.tsx',
-    template: example => `export default () => {
+    template: `export default () => {
   return (
     <>
-      ${example}
+      %example%
     </>
   );
 };`,
   },
 };
 
-const sandboxOptions: SbProjectConfig = {
+export const stackBlitzDefaultConfig: FrameworkConfig<StackBlitz> = {
   html: defaultHTMLConfig,
   react: defaultReactConfig,
 };
-
-export let configuration: StackBlitzConfig = {
-  component: componentConfig,
-  sandbox: sandboxOptions,
-};
-
-export function updateStackBlitzConfig(userConfig?: StackBlitzConfig) {
-  configuration = mergeDeep(configuration as never, userConfig as never);
-}
-
-export async function useStackBlitzSandbox(example = '', exampleType = 'html') {
-  const config = configuration.sandbox![exampleType as keyof SbProjectConfig];
-  if (!config) {
-    throw new Error(`Invalid example type: ${exampleType}`);
-  }
-
-  const templateFile = config?.exampleTemplate?.fileName || 'index.html';
-
-  sdk.openProject(
-    {
-      title: config.project?.title || 'Example',
-      description:
-        config.project?.description ||
-        'Blank starter project for building ES6 apps.',
-      template: 'node',
-      files: {
-        ...config!.project!.files,
-        [templateFile]: await formatCode(
-          config?.exampleTemplate?.template(example) || example,
-          exampleType,
-        ),
-      },
-      settings: {
-        compile: {
-          trigger: 'auto',
-          clearConsole: true,
-        },
-      },
-    },
-    {
-      newWindow: true,
-      openFile: [templateFile],
-    },
-  );
-}

@@ -220,8 +220,8 @@ type CodePenApiConfig = {
 type ExampleTemplateConfig = {
   /** Indicates which code block has the template */
   fileName: 'html' | 'css' | 'js';
-  /** Template function that returns the code block with the example in it */
-  template: (example: string) => string;
+  /** Template string that returns the code block with the example in it */
+  template: string;
 };
 ```
 
@@ -254,8 +254,8 @@ type SbApiConfig = {
 type ExampleTemplateConfig = {
   /** Indicates which file has the template */
   fileName: string;
-  /** Template function that returns the file contents with the example in it */
-  template: (example: string) => string;
+  /** Template string that returns the file contents with the example in it */
+  template: string;
 };
 ```
 
@@ -268,7 +268,7 @@ const config: SbProjectConfig = {
   html: {
     exampleTemplate: {
       fileName: 'index.html',
-      template: (example: string) => `<!doctype html>
+      template: `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -278,7 +278,7 @@ const config: SbProjectConfig = {
   </head>
   <body>
     <div id="app">
-      ${example}
+      %example%
     </div>
     <script type="module" src="/main.js"></script>
   </body>

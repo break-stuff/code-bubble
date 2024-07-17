@@ -1,15 +1,21 @@
-import { format } from 'prettier/standalone';
-import htmlPlugin from 'prettier/plugins/html';
-import typescriptPlugin from 'prettier/plugins/typescript';
-import estreePlugin from 'prettier/plugins/estree';
+export function formatCode(template: string = '', code: string = '') {
+  if (!code) {
+    return template;
+  }
 
-export async function formatCode(code: string, exampleType: string) {
-  return await format(
-    code,
-    {
-      parser: exampleType === 'html' ? 'html' : 'typescript',
-      plugins: [htmlPlugin, typescriptPlugin, estreePlugin],
-    },
-  )
+  if (!template) {
+    return code;
+  }
+
+  return template
+    .split('\n')
+    .map(line =>
+      !line.includes('%example%')
+        ? line
+        : code
+            .split('\n')
+            .map(c => line.replace('%example%', c))
+            .join('\n'),
+    )
+    .join('\n');
 }
-

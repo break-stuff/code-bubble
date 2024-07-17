@@ -9,7 +9,7 @@ declare global {
 export function syncSandboxes() {
   window.addEventListener('example-change', (e: CustomEvent) => {
     document.querySelectorAll<CodeBubble>('[code-bubble]').forEach(y => {
-      y.example = e.detail;
+      y.framework = e.detail;
     });
   });
 }
