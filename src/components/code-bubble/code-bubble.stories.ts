@@ -32,15 +32,14 @@ type Story = StoryObj<CodeBubble & typeof args>;
 
 export const Default: Story = {
   render: args =>
-    html` 
-      ${template(
-        args,
-        html`
-          <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+    html` ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>
-          <pre><code class="language-jsx">export default () =&gt; {
+        <pre><code class="language-jsx">export default () =&gt; {
   return (
     &lt;&gt;
       &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -50,28 +49,27 @@ export const Default: Story = {
     );
 };
 </code></pre>
-        `,
-      )}`,
+      `,
+    )}`,
   args: {},
 };
 
 export const SingleFramework: Story = {
-  render: args =>
-    html` 
-      ${template(
-        args,
-        html`
-          <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>
-        `,
-      )}
-      <br />
-      ${template(
-        args,
-        html`
-          <pre><code class="language-jsx">export default () =&gt; {
+      `,
+    )}
+    <br />
+    ${template(
+      args,
+      html`
+        <pre><code class="language-jsx">export default () =&gt; {
   return (
     &lt;&gt;
       &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -81,9 +79,23 @@ export const SingleFramework: Story = {
     );
 };
 </code></pre>
-        `,
-      )}
-      
       `,
+    )}
+  `,
+  args: {},
+};
+
+export const NoFramework: Story = {
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+      `,
+    )}
+  `,
   args: {},
 };

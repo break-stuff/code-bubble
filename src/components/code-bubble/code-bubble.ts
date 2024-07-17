@@ -49,6 +49,7 @@ export default class CodeBubble extends LitElement {
   firstUpdated(): void {
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
+    console.log(this.htmlCode, this.reactCode);
     preview.innerHTML = this.htmlCode || this.reactCode || '';
     this.appendChild(preview);
   }
@@ -63,24 +64,39 @@ export default class CodeBubble extends LitElement {
   }
 
   private getCode() {
-    const htmlCodeBubble = this.getCodeBubble('html');
-    htmlCodeBubble?.setAttribute('slot', 'html');
-    this.htmlCode = htmlCodeBubble?.querySelector('code')?.innerText;
-
-    const reactCodeBubble = this.getCodeBubble('jsx');
-    reactCodeBubble?.setAttribute('slot', 'react');
-    this.reactCode = reactCodeBubble?.querySelector('code')?.innerText;
+    this.getReactCode();
+    this.getHtmlCode();
     this.setFallbackFramework();
   }
 
-  private getCodeBubble(language: 'html' | 'jsx' = 'html') {
-    return (
-      this.querySelector(`pre.language-${language}`) ||
-      this.querySelector(`pre:has(code.language-${language})`) ||
-      this.querySelector(`pre[data-language="${language}"]`) ||
-      this.querySelector(`.language-${language} pre`) ||
-      this.querySelector(`[data-language="${language}"] pre`)
-    );
+  private getHtmlCode() {
+    let htmlCodeBubble = this.getCodeBubble('html');
+    if (
+      !htmlCodeBubble &&
+      !this.reactCode &&
+      this.componentConfig.defaultExample === 'html'
+    ) {
+      htmlCodeBubble = this.getCodeBubble();
+    }
+
+    htmlCodeBubble?.setAttribute('slot', 'html');
+    this.htmlCode = htmlCodeBubble?.querySelector('code')?.innerText;
+  }
+
+  private getReactCode() {
+    const reactCodeBubble = this.getCodeBubble('jsx');
+    reactCodeBubble?.setAttribute('slot', 'react');
+    this.reactCode = reactCodeBubble?.querySelector('code')?.innerText;
+  }
+
+  private getCodeBubble(language?: 'html' | 'jsx') {
+    return !language
+      ? this.querySelector('pre')
+      : this.querySelector(`pre.language-${language}`) ||
+          this.querySelector(`pre:has(code.language-${language})`) ||
+          this.querySelector(`pre[data-language="${language}"]`) ||
+          this.querySelector(`.language-${language} pre`) ||
+          this.querySelector(`[data-language="${language}"] pre`);
   }
 
   private async setFallbackFramework() {
@@ -89,13 +105,10 @@ export default class CodeBubble extends LitElement {
       this.framework = 'html';
     } else if (!this.htmlCode && this.reactCode) {
       this.framework = 'react';
-    } else {
+    }  else {
       this.framework = this.componentConfig.defaultExample!;
     }
 
-    console.log('html', this.htmlCode);
-    console.log('react', this.reactCode);
-    console.log('framework', this.framework);
     this.requestUpdate();
   }
 

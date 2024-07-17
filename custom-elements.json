@@ -99,12 +99,22 @@
             },
             {
               "kind": "method",
+              "name": "getHtmlCode",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getReactCode",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
               "name": "getCodeBubble",
               "privacy": "private",
               "parameters": [
                 {
                   "name": "language",
-                  "default": "'html'",
+                  "optional": true,
                   "type": {
                     "text": "'html' | 'jsx'"
                   }
@@ -202,6 +212,14 @@
             "text": "Story"
           },
           "default": "{ render: args => html` ${template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> `, )} <br /> ${template( args, html` <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, )} `, args: {}, }"
+        },
+        {
+          "kind": "variable",
+          "name": "NoFramework",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => html` ${template( args, html` <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> `, )} `, args: {}, }"
         }
       ],
       "exports": [
@@ -226,6 +244,14 @@
           "name": "SingleFramework",
           "declaration": {
             "name": "SingleFramework",
+            "module": "src/components/code-bubble/code-bubble.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "NoFramework",
+          "declaration": {
+            "name": "NoFramework",
             "module": "src/components/code-bubble/code-bubble.stories.ts"
           }
         }
