@@ -6,7 +6,7 @@ import sdk from '@stackblitz/sdk';
 import { stackBlitzDefaultConfig } from './stack-blitz-configs.js';
 
 export type CodeBubbleConfig = {
-  /** Sandbox environment */
+  /** Which sandbox environment your code will open in */
   sandbox?: 'codepen' | 'stackblitz';
   /** Configuration for the component rendered on the site */
   component?: ComponentConfig;

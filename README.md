@@ -24,25 +24,13 @@ Features:
 Import the desired sandbox configuration at the root of your project:
 
 ```ts
-// CodePen sandbox
-import { cpCodeBubble, CodePenConfig } from 'code-bubble';
+import { codeBubble, CodeBubbleConfig } from 'code-bubble';
 
-const options: CodePenConfig {
+const options: CodeBubbleConfig {
   /* configuration options */
 };
 
-cpCodeBubble(options);
-```
-
-```ts
-// StackBlitz sandbox
-import { sbCodeBubble, StackBlitzConfig } from 'code-bubble';
-
-const options: StackBlitzConfig {
-  /* configuration options */
-};
-
-sbCodeBubble(options);
+codeBubble(options);
 ```
 
 ### Use the Components
@@ -52,23 +40,17 @@ Once the project is configured, that's it! Start using the components.
 If you are using it markdown, be sure to include new lines between the markdown code block.
 
 ````html
-<!-- CodePen Example -->
-<cp-code-bubble>
-  ```html
-  <my-button appearance="accent">Accent</my-button>
-  ``` ```jsx
-  <MyButton appearance="accent">Accent</MyButton>
-  ```
-</cp-code-bubble>
+<code-bubble>
 
-<!-- StackBlitz Example -->
-<sb-code-bubble>
-  ```html
-  <my-button appearance="accent">Accent</my-button>
-  ``` ```jsx
-  <MyButton appearance="accent">Accent</MyButton>
-  ```
-</sb-code-bubble>
+```html
+<my-button appearance="accent">Accent</my-button>
+``` 
+
+```jsx
+<MyButton appearance="accent">Accent</MyButton>
+```
+
+</code-bubble>
 ````
 
 If you are using it HTML, the component will be looking for `<pre>` element with a nested `<code>` element.
@@ -78,27 +60,19 @@ Unfortunately, markdown parsers don't follow a consistent pattern for identifyin
 The `<code>` element should contain escaped characters for the tags to properly render the examples.
 
 ```html
-<!-- CodePen Example -->
-<cp-code-bubble>
-  <pre><code class="language-html">
+<code-bubble>
+  <pre>
+    <code class="language-html">
 &lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
-</code></pre>
+    </code>
+  </pre>
 
-  <pre><code class="language-jsx">
+  <pre>
+    <code class="language-jsx">
 &lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
-</code></pre>
-</cp-code-bubble>
-
-<!-- StackBlitz Example -->
-<sb-code-bubble>
-  <pre><code class="language-html">
-&lt;my-button appearance=&quot;accent&quot;&gt;Accent&lt;/my-button&gt;
-</code></pre>
-
-  <pre><code class="language-jsx">
-&lt;MyButton appearance=&quot;accent&quot;&gt;Accent&lt;/MyButton&gt;
-</code></pre>
-</sb-code-bubble>
+    </code>
+  </pre>
+</code-bubble>
 ```
 
 ## Configuration
@@ -106,16 +80,18 @@ The `<code>` element should contain escaped characters for the tags to properly 
 The components are pre-configured and should work without any custom configuration, but if you would like to customize the implementation, each sandbox has it's own options.
 
 ```ts
-type CodePenConfig = {
+type CodeBubbleConfig = {
+  /** Which sandbox environment your code will open in */
+  sandbox?: 'codepen' | 'stackblitz';
+  /** Configuration for the component rendered on the site */
   component?: ComponentConfig;
-  sandbox?: CpSandboxConfig;
-};
-```
-
-```ts
-type StackBlitzConfig = {
-  component?: ComponentConfig;
-  sandbox?: StackBlitzProjectConfig;
+  /** Configurations for the sandboxes */
+  sandboxConfig?: {
+    /** CodePen sandbox configuration */
+    codePen: FrameworkConfig<CodePen>;
+    /** StackBlitz sandbox configuration */
+    stackBlitz: FrameworkConfig<StackBlitz>;
+  };
 };
 ```
 
@@ -154,24 +130,38 @@ type ComponentConfig = {
 };
 ```
 
-### CodePen
+### Sandbox Configuration
+
+Each sandbox supports an HTML and a React variation.
 
 ```ts
-type CpSandboxConfig = {
+type FrameworkConfig<T extends CodePen | StackBlitz> = {
   /** CodePen project configuration for HTML examples */
-  html?: ProjectConfig;
+  html?: ProjectConfig<T>;
   /** CodePen project configuration for React examples */
-  react?: ProjectConfig;
+  react?: ProjectConfig<T>;
 };
 
-type ProjectConfig = {
-  /** CodePen project configuration */
-  project?: CodePenApiConfig;
+type ProjectConfig<T extends CodePen | StackBlitz> = {
+  /** Sandbox API configuration */
+  project?: T;
   /** Controls how the code is rendered in the example */
   exampleTemplate: ExampleTemplateConfig;
 };
 
-type CodePenApiConfig = {
+export type ExampleTemplateConfig = {
+  /** Indicates which code block has the template */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  fileName: 'html' | 'css' | 'js' | (string & {});
+  /** Template function that returns the code block with the example in it */
+  template: string;
+};
+```
+
+#### CodePen
+
+```ts
+type CodePen = {
   /** Pen title */
   title?: string;
   /** Pen description */
@@ -216,29 +206,12 @@ type CodePenApiConfig = {
   /** Semi-colon separate list of CDN urls to include in the pen */
   js_external?: string;
 };
-
-type ExampleTemplateConfig = {
-  /** Indicates which code block has the template */
-  fileName: 'html' | 'css' | 'js';
-  /** Template string that returns the code block with the example in it */
-  template: string;
-};
 ```
 
 ### StackBlitz
 
 ```ts
-type SbProjectConfig = {
-  html?: ProjectConfig;
-  react?: ProjectConfig;
-};
-
-type ProjectConfig = {
-  project?: SbApiConfig;
-  exampleTemplate: ExampleTemplateConfig;
-};
-
-type SbApiConfig = {
+type StackBlitz = {
   title?: string;
   description?: string;
   /**
@@ -250,21 +223,14 @@ type SbApiConfig = {
     [name: string]: string;
   };
 };
-
-type ExampleTemplateConfig = {
-  /** Indicates which file has the template */
-  fileName: string;
-  /** Template string that returns the file contents with the example in it */
-  template: string;
-};
 ```
 
 ### Customizing the Code Example
 
-Each of the project configurations has a `exampleTemplate` property that allows you configure how your example gets rendered. The `fileName` indicates which file or code block them template is in and `template` shows an example of how your example code should be rendered in the template file.
+Each of the project configurations has an `exampleTemplate` property that allows you configure how your example gets rendered. The `fileName` indicates which file or code block them template is in and `template` shows an example of how your example code should be rendered in the template file.
 
 ```ts
-const config: SbProjectConfig = {
+const config: FrameworkConfig<StackBlitz> = {
   html: {
     exampleTemplate: {
       fileName: 'index.html',
