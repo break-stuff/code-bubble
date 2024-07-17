@@ -26,7 +26,6 @@ export default class CodeBubble extends LitElement {
   @state()
   protected showRTL = false;
 
-  
   protected componentConfig: ComponentConfig = {};
 
   protected openSandbox: (example?: string, exampleType?: string) => void =
@@ -50,7 +49,7 @@ export default class CodeBubble extends LitElement {
   firstUpdated(): void {
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
-    preview.innerHTML = this.htmlCode || '';
+    preview.innerHTML = this.htmlCode || this.reactCode || '';
     this.appendChild(preview);
   }
 
@@ -71,17 +70,33 @@ export default class CodeBubble extends LitElement {
     const reactCodeBubble = this.getCodeBubble('jsx');
     reactCodeBubble?.setAttribute('slot', 'react');
     this.reactCode = reactCodeBubble?.querySelector('code')?.innerText;
+    this.setFallbackFramework();
   }
 
   private getCodeBubble(language: 'html' | 'jsx' = 'html') {
     return (
-      (this.querySelector(`pre.language-${language}`) ||
-        this.querySelector(`pre:has(code.language-${language})`) ||
-        this.querySelector(`pre[data-language="${language}"]`) ||
-        this.querySelector(`.language-${language} pre`) ||
-        this.querySelector(`[data-language="${language}"] pre`)) ??
-      this.querySelector('pre')
+      this.querySelector(`pre.language-${language}`) ||
+      this.querySelector(`pre:has(code.language-${language})`) ||
+      this.querySelector(`pre[data-language="${language}"]`) ||
+      this.querySelector(`.language-${language} pre`) ||
+      this.querySelector(`[data-language="${language}"] pre`)
     );
+  }
+
+  private async setFallbackFramework() {
+    await this.updateComplete;
+    if (this.htmlCode && !this.reactCode) {
+      this.framework = 'html';
+    } else if (!this.htmlCode && this.reactCode) {
+      this.framework = 'react';
+    } else {
+      this.framework = this.componentConfig.defaultExample!;
+    }
+
+    console.log('html', this.htmlCode);
+    console.log('react', this.reactCode);
+    console.log('framework', this.framework);
+    this.requestUpdate();
   }
 
   private handleExampleClick(example: 'html' | 'react') {
@@ -144,18 +159,23 @@ export default class CodeBubble extends LitElement {
             >
               ${this.componentConfig.showCodeButtonLabel}
             </button>
-            <button
-              aria-pressed=${this.framework === 'html'}
-              @click=${() => this.handleExampleClick('html')}
-            >
-              ${this.componentConfig.htmlButtonLabel}
-            </button>
-            <button
-              aria-pressed=${this.framework === 'react'}
-              @click=${() => this.handleExampleClick('react')}
-            >
-              ${this.componentConfig.reactButtonLabel}
-            </button>
+            ${this.htmlCode && this.reactCode
+              ? html`
+                  <button
+                    aria-pressed=${this.framework === 'html'}
+                    @click=${() => this.handleExampleClick('html')}
+                  >
+                    ${this.componentConfig.htmlButtonLabel}
+                  </button>
+                  <button
+                    aria-pressed=${this.framework === 'react'}
+                    @click=${() => this.handleExampleClick('react')}
+                  >
+                    ${this.componentConfig.reactButtonLabel}
+                  </button>
+                `
+              : ''}
+
             <button
               aria-pressed=${this.showRTL}
               @click=${() => (this.showRTL = !this.showRTL)}
