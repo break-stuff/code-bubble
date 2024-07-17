@@ -36,6 +36,7 @@ export type ProjectConfig<T extends CodePen | StackBlitz> = {
 
 export type ExampleTemplateConfig = {
   /** Indicates which code block has the template */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   fileName: 'html' | 'css' | 'js' | (string & {});
   /** Template function that returns the code block with the example in it */
   template: string;

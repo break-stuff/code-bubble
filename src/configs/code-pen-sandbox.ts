@@ -1,8 +1,4 @@
-import { mergeDeep } from '../utilities/deep-merge';
-import { formatCode } from '../utilities/format-code';
-import { componentConfig, ComponentConfig } from './component-config';
 import { CodePen, FrameworkConfig } from './sandbox-configs.js';
-
 
 export const codePenDefaultConfig: FrameworkConfig<CodePen> = {
   html: {
