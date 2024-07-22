@@ -104,7 +104,6 @@ export default class CodeBubble extends LitElement {
   firstUpdated(): void {
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
-    console.log(this.htmlCode, this.reactCode);
     preview.innerHTML = this.htmlCode || this.reactCode || '';
     this.appendChild(preview);
   }
