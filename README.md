@@ -41,15 +41,11 @@ If you are using it markdown, be sure to include new lines between the markdown 
 
 ````html
 <code-bubble>
-
-```html
-<my-button appearance="accent">Accent</my-button>
-``` 
-
-```jsx
-<MyButton appearance="accent">Accent</MyButton>
-```
-
+  ```html
+  <my-button appearance="accent">Accent</my-button>
+  ``` ```jsx
+  <MyButton appearance="accent">Accent</MyButton>
+  ```
 </code-bubble>
 ````
 
@@ -253,3 +249,66 @@ const config: FrameworkConfig<StackBlitz> = {
   },
 };
 ```
+
+## Styling
+
+The following CSS custom properties and parts are available to customize the appearance of the component.
+
+### CSS Custom Properties
+
+| CSS Property                                  | Description                                                            |
+| --------------------------------------------- | ---------------------------------------------------------------------- |
+| --code-bubble-border-color                    | The border color of the component and the controls                     |
+| --code-bubble-border-radius                   | The border radius of the component and the controls                    |
+| --code-bubble-border-width                    | The border width of the component and the controls                     |
+| --code-bubble-preview-padding                 | The padding of the rendered code example                               |
+| --code-bubble-snippet-padding                 | The padding for the example code                                       |
+| --code-bubble-button-font-weight              | The font weight for the controls                                       |
+| --code-bubble-button-icon-gap                 | The gap between the button text and icon                               |
+| --code-bubble-button-padding-x                | The horizontal padding for the controls at the bottom of the component |
+| --code-bubble-button-padding-y                | The vertical padding for the controls at the bottom of the component   |
+| --code-bubble-copy-button-font-weight         | The font weight for the copy code button                               |
+| --code-bubble-copy-button-padding-x           | The horizontal padding for the copy button                             |
+| --code-bubble-copy-button-padding-y           | The vertical padding for the copy button                               |
+| --code-bubble-outline                         | The outline style when elements have keyboard focus                    |
+| --code-bubble-outline-offset                  | The offset of the outline when an element has keyboard focus           |
+| --code-bubble-button-bg-color                 | The background color of the bottom controls                            |
+| --code-bubble-button-border-color             | The border color of the bottom controls                                |
+| --code-bubble-button-fg-color                 | The text color of the bottom controls                                  |
+| --code-bubble-copy-button-bg-color            | The background color of the copy code button                           |
+| --code-bubble-copy-button-border-color        | The border color of the copy code button                               |
+| --code-bubble-copy-button-fg-color            | The text color of the copy code button                                 |
+| --code-bubble-button-hover-bg-color           | The background color of the bottom controls on hover                   |
+| --code-bubble-button-hover-border-color       | The border color of the bottom controls on hover                       |
+| --code-bubble-button-hover-fg-color           | The text color of the bottom controls on hover                         |
+| --code-bubble-copy-button-hover-bg-color      | The background color of the copy code button on hover                  |
+| --code-bubble-copy-button-hover-border-color  | The border color of the copy code button on hover                      |
+| --code-bubble-copy-button-hover-fg-color      | The text color of the copy code button on hover                        |
+| --code-bubble-button-focus-bg-color           | The background color of the bottom controls on focus                   |
+| --code-bubble-button-focus-border-color       | The border color of the bottom controls on hover                       |
+| --code-bubble-button-focus-fg-color           | The text color of the bottom controls on hover                         |
+| --code-bubble-copy-button-focus-bg-color      | The background color of the copy code button on focus                  |
+| --code-bubble-copy-button-focus-border-color  | The border color of the copy code button on focus                      |
+| --code-bubble-copy-button-focus-fg-color      | The text color of the copy code button on focus                        |
+| --code-bubble-button-active-bg-color          | The background color of the bottom controls on active                  |
+| --code-bubble-button-active-border-color      | The border color of the bottom controls on active                      |
+| --code-bubble-button-active-fg-color          | The text color of the bottom controls on active                        |
+| --code-bubble-button-active-font-weight       | The font weight of the bottom controls on active                       |
+| --code-bubble-copy-button-active-bg-color     | The background color of the copy code button on active                 |
+| --code-bubble-copy-button-active-border-color | The border color of the copy code button on active                     |
+| --code-bubble-copy-button-active-fg-color     | The text color of the copy code button on active                       |
+
+### CSS Parts
+
+| CSS Part                | Description                                                        |
+| ----------------------- | ------------------------------------------------------------------ |
+| code-bubble-base        | The base wrapper for the internal component                        |
+| code-bubble-preview     | The element that wraps the rendered example                        |
+| code-bubble-code        | The element that wraps the source code section                     |
+| code-bubble-copy-button | The button used to copy code to the clipboard                      |
+| code-bubble-controls    | The element that wraps the controls at the bottom of the component |
+| code-bubble-control     | The buttons at the bottom of the component                         |
+| code-bubble-show-source | The "show source" button                                           |
+| code-bubble-html        | The "HTML" button                                                  |
+| code-bubble-react       | The "React" button                                                 |
+| code-bubble-rtl         | The "RTL" button                                                   |
