@@ -13,9 +13,9 @@ export type CodeBubbleConfig = {
   /** Configurations for the sandboxes */
   sandboxConfig?: {
     /** CodePen sandbox configuration */
-    codePen: FrameworkConfig<CodePen>;
+    codePen?: FrameworkConfig<CodePen>;
     /** StackBlitz sandbox configuration */
-    stackBlitz: FrameworkConfig<StackBlitz>;
+    stackBlitz?: FrameworkConfig<StackBlitz>;
   };
 };
 
@@ -31,7 +31,7 @@ export type ProjectConfig<T extends CodePen | StackBlitz> = {
   /** Sandbox API configuration */
   project?: T;
   /** Controls how the code is rendered in the example */
-  exampleTemplate: ExampleTemplateConfig;
+  exampleTemplate?: ExampleTemplateConfig;
 };
 
 export type ExampleTemplateConfig = {
@@ -123,8 +123,8 @@ export function useCodePenSandbox(example = '', exampleType = 'html') {
 
   const sandboxConfig = {
     ...config.project,
-    [config.exampleTemplate.fileName]: formatCode(
-      config.exampleTemplate.template,
+    [config.exampleTemplate!.fileName]: formatCode(
+      config.exampleTemplate!.template,
       example,
     ),
   };
