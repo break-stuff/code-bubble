@@ -41,11 +41,15 @@ If you are using it markdown, be sure to include new lines between the markdown 
 
 ````html
 <code-bubble>
-  ```html
-  <my-button appearance="accent">Accent</my-button>
-  ``` ```jsx
-  <MyButton appearance="accent">Accent</MyButton>
-  ```
+
+```html
+<my-button appearance="accent">Accent</my-button>
+``` 
+
+```jsx
+<MyButton appearance="accent">Accent</MyButton>
+```
+
 </code-bubble>
 ````
 
