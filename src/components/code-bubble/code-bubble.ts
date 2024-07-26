@@ -257,19 +257,19 @@ export default class CodeBubble extends LitElement {
           >
             ${this.componentConfig.reactButtonLabel}
           </button>`}
-          <button
+          ${!this.componentConfig.hideRtlButton && html`<button
             part="code-bubble-control code-bubble-rtl"
             aria-pressed=${this.showRTL}
             @click=${() => (this.showRTL = !this.showRTL)}
           >
             ${this.componentConfig.rtlButtonLabel}
-          </button>
-          <button
+          </button>`}
+          ${!this.componentConfig.hideSandboxButton && html`<button
             part="code-bubble-control code-bubble-sandbox"
             @click=${this.handleSandboxClick}
           >
             ${this.componentConfig.sandboxButtonLabel}
-          </button>
+          </button>`}
         </div>
       </div>
     `;
