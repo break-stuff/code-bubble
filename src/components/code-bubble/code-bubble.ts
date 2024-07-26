@@ -102,6 +102,14 @@ export default class CodeBubble extends LitElement {
   }
 
   firstUpdated(): void {
+    this.createPreview();
+  }
+
+  private createPreview() {
+    if (this.componentConfig.hidePreview) {
+      return;
+    }
+
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
     preview.innerHTML = this.htmlCode || this.reactCode || '';
@@ -198,13 +206,14 @@ export default class CodeBubble extends LitElement {
   render() {
     return html`
       <div class="code-bubble-base" part="code-bubble-base">
-        <div
+        ${!this.componentConfig.hidePreview &&
+        html`<div
           class="preview"
           part="code-bubble-preview"
           dir=${this.showRTL ? 'rtl' : 'auto'}
         >
           <slot name="preview"></slot>
-        </div>
+        </div>`}
         <details
           id="code-bubble"
           class="code-bubble"
@@ -214,23 +223,26 @@ export default class CodeBubble extends LitElement {
           <!-- required to prevent the user-agent summery from displaying -->
           <summary></summary>
           <slot name="${this.framework || 'html'}"></slot>
-          <button
+          ${!this.componentConfig.hideCopyCodeButton &&
+          html`<button
             class="copy-code"
             part="code-bubble-copy-button"
             @click=${this.handleCopyClick}
           >
             ${this.componentConfig.copyCodeButtonLabel}
-          </button>
+          </button>`}
         </details>
         <div class="controls" part="code-bubble-controls">
-          <button
+          ${!this.componentConfig.hideShowCodeButton &&
+          html`<button
             part="code-bubble-control code-bubble-show-source"
             aria-controls="code-bubble"
             aria-expanded=${this.showSource}
             @click=${() => (this.showSource = !this.showSource)}
           >
             ${this.componentConfig.showCodeButtonLabel}
-          </button>
+          </button>`}
+          ${!this.componentConfig.hideFrameworkButtons && html`
           <button
             part="code-bubble-control code-bubble-html"
             aria-pressed=${this.framework === 'html'}
@@ -244,7 +256,7 @@ export default class CodeBubble extends LitElement {
             @click=${() => this.handleExampleClick('react')}
           >
             ${this.componentConfig.reactButtonLabel}
-          </button>
+          </button>`}
           <button
             part="code-bubble-control code-bubble-rtl"
             aria-pressed=${this.showRTL}

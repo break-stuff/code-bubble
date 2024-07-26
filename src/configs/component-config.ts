@@ -11,6 +11,8 @@ export type ComponentConfig = {
   hideSandboxButton?: boolean;
   /** Hides the "show code" button */
   hideShowCodeButton?: boolean;
+  /** Hides the HTMl and React code toggle buttons */
+  hideFrameworkButtons?: boolean;
   /** Hides the preview window where the code is rendered */
   hidePreview?: boolean;
   /** Text displayed in the "show code" button  */
