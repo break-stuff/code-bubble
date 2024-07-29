@@ -1,8 +1,8 @@
 import CodeBubble, { CodeExamples } from './components/code-bubble/code-bubble.js';
-import { CodeBubbleConfig, updateConfig } from './configs/sandbox-configs.js';
+import { CodeBubbleConfig, updateConfig } from './configs/types.js';
 import { syncSandboxes } from './utilities/sandbox-sync.js';
 
-export type { CodeBubbleConfig } from './configs/sandbox-configs.js';
+export type { CodeBubbleConfig } from './configs/types.js';
 
 export function setLanguage(lang: string) {
   document.querySelectorAll<CodeBubble>('[code-bubble]').forEach(y => {

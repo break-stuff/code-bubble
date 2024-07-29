@@ -1,15 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
-import CodeBubble from './code-bubble';
 import { html } from 'lit';
-import { codeBubble } from '../..';
+import { CodeBlock } from '../../configs/index.js';
+import CodeBubble from './code-bubble.js';
 
 const { events, args, argTypes, template } =
   getWcStorybookHelpers('code-bubble');
 
-codeBubble({
+new CodeBlock({
   sandbox: 'stackblitz',
 });
+
+// codeBubble({
+//   sandbox: 'stackblitz',
+// });
 
 const meta: Meta<CodeBubble> = {
   title: 'Components/Code Block',
@@ -51,6 +55,73 @@ export const Default: Story = {
 </code></pre>
       `,
     )}`,
+  args: {},
+};
+
+export const ComponentSync: Story = {
+  render: args =>
+    html` 
+  ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+        <pre><code class="language-jsx">export default () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+      &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+      &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+    &lt;/&gt;
+    );
+};
+</code></pre>
+      `,
+    )}
+    <br />
+  ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+        <pre><code class="language-jsx">export default () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+      &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+      &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+    &lt;/&gt;
+    );
+};
+</code></pre>
+      `,
+    )}
+    <br />
+  ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+        <pre><code class="language-jsx">export default () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+      &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+      &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+    &lt;/&gt;
+    );
+};
+</code></pre>
+      `,
+    )}
+    <br />
+    `,
   args: {},
 };
 

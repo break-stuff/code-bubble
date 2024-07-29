@@ -1,13 +1,12 @@
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
-import { ComponentConfig } from '../../configs/component-config.js';
+import type { CodeBubbleConfig, ComponentConfig } from '../../configs/types.js';
+import { configs } from '../../configs/index.js';
 import {
-  configuration,
   useCodePenSandbox,
   useStackBlitzSandbox,
-} from '../../configs/sandbox-configs.js';
-
+} from '../../utilities/sandbox-helpers.js';
 export type CodeExamples = 'html' | 'react';
 
 /**
@@ -88,10 +87,11 @@ export default class CodeBubble extends LitElement {
 
   private htmlCode?: string;
   private reactCode?: string;
+  private config: CodeBubbleConfig = {};
 
   constructor() {
     super();
-    this.componentConfig = configuration.component!;
+    this.componentConfig = configs[this.tagName.toLowerCase()].component!;
     this.updateConfig();
   }
 
@@ -178,17 +178,30 @@ export default class CodeBubble extends LitElement {
     this.framework = example;
     /** @internal this is used to keep the code blocks in sync */
     this.dispatchEvent(
-      new CustomEvent('example-change', { bubbles: true, detail: example }),
+      new CustomEvent('framework-change', { bubbles: true, detail: example }),
     );
     localStorage.setItem('code_block_example', example);
   }
 
+  private showFrameworkToggles() {
+    return this.htmlCode && this.reactCode && !this.componentConfig.hideFrameworkButtons;
+  } 
+
   private handleSandboxClick() {
+    const config = this.config.sandboxConfig;
     const code = this.framework === 'html' ? this.htmlCode : this.reactCode;
 
-    configuration.sandbox === 'codepen'
-      ? useCodePenSandbox(code, this.framework)
-      : useStackBlitzSandbox(code, this.framework);
+    this.config.sandbox === 'codepen'
+      ? useCodePenSandbox(
+          config!.codePen![this.framework!]!,
+          code,
+          this.framework,
+        )
+      : useStackBlitzSandbox(
+          config!.stackBlitz![this.framework!]!,
+          code,
+          this.framework,
+        );
   }
 
   private handleCopyClick(e: MouseEvent) {
@@ -242,29 +255,31 @@ export default class CodeBubble extends LitElement {
           >
             ${this.componentConfig.showCodeButtonLabel}
           </button>`}
-          ${!this.componentConfig.hideFrameworkButtons && html`
-          <button
-            part="code-bubble-control code-bubble-html"
-            aria-pressed=${this.framework === 'html'}
-            @click=${() => this.handleExampleClick('html')}
-          >
-            ${this.componentConfig.htmlButtonLabel}
-          </button>
-          <button
-            part="code-bubble-control code-bubble-react"
-            aria-pressed=${this.framework === 'react'}
-            @click=${() => this.handleExampleClick('react')}
-          >
-            ${this.componentConfig.reactButtonLabel}
-          </button>`}
-          ${!this.componentConfig.hideRtlButton && html`<button
+          ${this.showFrameworkToggles() &&
+          html` <button
+              part="code-bubble-control code-bubble-html"
+              aria-pressed=${this.framework === 'html'}
+              @click=${() => this.handleExampleClick('html')}
+            >
+              ${this.componentConfig.htmlButtonLabel}
+            </button>
+            <button
+              part="code-bubble-control code-bubble-react"
+              aria-pressed=${this.framework === 'react'}
+              @click=${() => this.handleExampleClick('react')}
+            >
+              ${this.componentConfig.reactButtonLabel}
+            </button>`}
+          ${!this.componentConfig.hideRtlButton &&
+          html`<button
             part="code-bubble-control code-bubble-rtl"
             aria-pressed=${this.showRTL}
             @click=${() => (this.showRTL = !this.showRTL)}
           >
             ${this.componentConfig.rtlButtonLabel}
           </button>`}
-          ${!this.componentConfig.hideSandboxButton && html`<button
+          ${!this.componentConfig.hideSandboxButton &&
+          html`<button
             part="code-bubble-control code-bubble-sandbox"
             @click=${this.handleSandboxClick}
           >

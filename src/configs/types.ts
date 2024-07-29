@@ -1,11 +1,6 @@
-import { mergeDeep } from '../utilities/deep-merge';
-import { formatCode } from '../utilities/format-code';
-import { codePenDefaultConfig } from './code-pen-sandbox.js';
-import { componentConfig, ComponentConfig } from './component-config';
-import sdk from '@stackblitz/sdk';
-import { stackBlitzDefaultConfig } from './stack-blitz-configs.js';
-
 export type CodeBubbleConfig = {
+  /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
+  tagName?: string;
   /** Which sandbox environment your code will open in */
   sandbox?: 'codepen' | 'stackblitz';
   /** Configuration for the component rendered on the site */
@@ -19,6 +14,40 @@ export type CodeBubbleConfig = {
   };
 };
 
+export type ComponentConfig = {
+  /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
+  tagName?: boolean;
+  /** Opens the "show code" section by default */
+  openShowCode?: boolean;
+  /** Indicates which example to show by default */
+  defaultExample?: 'html' | 'react';
+  /** Hides the "copy code" button */
+  hideCopyCodeButton?: boolean;
+  /** Hides the "RTL" button */
+  hideRtlButton?: boolean;
+  /** Hides the "sandbox" button */
+  hideSandboxButton?: boolean;
+  /** Hides the "show code" button */
+  hideShowCodeButton?: boolean;
+  /** Hides the HTMl and React code toggle buttons */
+  hideFrameworkButtons?: boolean;
+  /** Hides the preview window where the code is rendered */
+  hidePreview?: boolean;
+  /** Text displayed in the "show code" button  */
+  showCodeButtonLabel?: string;
+  /** Text displayed in the "copy code" button  */
+  copyCodeButtonLabel?: string;
+  /** Text displayed in the "copy code" button when text has been copied  */
+  copyCodeButtonCopiedLabel?: string;
+  /** Text displayed in the "RTL" button  */
+  rtlButtonLabel?: string;
+  /** Text displayed in the "sandbox" button  */
+  sandboxButtonLabel?: string;
+  /** Text displayed in the "HTML" button  */
+  htmlButtonLabel?: string;
+  /** Text displayed in the "React" button  */
+  reactButtonLabel?: string;
+};
 
 export type FrameworkConfig<T extends CodePen | StackBlitz> = {
   /** CodePen project configuration for HTML examples */
@@ -100,83 +129,3 @@ export type StackBlitz = {
     [name: string]: string;
   };
 };
-
-
-export let configuration: CodeBubbleConfig = {
-  component: componentConfig,
-  sandbox: 'codepen',
-  sandboxConfig: {
-    codePen: codePenDefaultConfig,
-    stackBlitz: stackBlitzDefaultConfig,
-  },
-};
-
-export function updateConfig(userConfig?: CodeBubbleConfig) {
-  configuration = mergeDeep(configuration as never, userConfig as never);
-}
-
-export function useCodePenSandbox(example = '', exampleType = 'html') {
-  const config = configuration.sandboxConfig?.codePen![exampleType as keyof FrameworkConfig<CodePen>];
-  if (!config) {
-    throw new Error(`Invalid example type: ${exampleType}`);
-  }
-
-  const sandboxConfig = {
-    ...config.project,
-    [config.exampleTemplate!.fileName]: formatCode(
-      config.exampleTemplate!.template,
-      example,
-    ),
-  };
-
-  const form = document.createElement('form');
-  form.action = 'https://codepen.io/pen/define';
-  form.method = 'POST';
-  form.target = '_blank';
-
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = 'data';
-  input.value = JSON.stringify(sandboxConfig);
-  form.append(input);
-
-  document.documentElement.append(form);
-  form.submit();
-  form.remove();
-}
-
-export function useStackBlitzSandbox(example = '', exampleType = 'html') {
-  const config = configuration.sandboxConfig?.stackBlitz![exampleType as keyof FrameworkConfig<StackBlitz>];
-  if (!config) {
-    throw new Error(`Invalid example type: ${exampleType}`);
-  }
-
-  const templateFile = config?.exampleTemplate?.fileName || 'index.html';
-
-  sdk.openProject(
-    {
-      title: config.project?.title || 'Example',
-      description:
-        config.project?.description ||
-        'Blank starter project for building ES6 apps.',
-      template: 'node',
-      files: {
-        ...config!.project!.files,
-        [templateFile]: formatCode(
-          config?.exampleTemplate?.template,
-          example,
-        ),
-      },
-      settings: {
-        compile: {
-          trigger: 'auto',
-          clearConsole: true,
-        },
-      },
-    },
-    {
-      newWindow: true,
-      openFile: [templateFile],
-    },
-  );
-}

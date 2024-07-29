@@ -101,8 +101,8 @@ devDependencies:
     specifier: ^5.3.4
     version: 5.3.5
   wc-storybook-helpers:
-    specifier: ^2.0.2
-    version: 2.0.2(lit@3.1.4)(storybook@8.2.2)
+    specifier: ^2.0.3
+    version: 2.0.3(lit@3.1.4)(storybook@8.2.2)
 
 packages:
 
@@ -9292,8 +9292,8 @@ packages:
     resolution: {integrity: sha512-9YlCL/ynK3CTlrSRrDxZvUauLzAswPCrsaCgilqFevUYpeEW0/3ScEjaa3kbW/T0ghhkEr7mv+fpjqn1Y1YuTA==}
     dev: true
 
-  /wc-storybook-helpers@2.0.2(lit@3.1.4)(storybook@8.2.2):
-    resolution: {integrity: sha512-phSSsD3zDonp1uOgwbIqIPGBn1ilKxeeTu/S37M/pPcJ0IYQhUgv1IV2UMX5l5yQHgAVQZX+dwtHuAe0atB9mA==}
+  /wc-storybook-helpers@2.0.3(lit@3.1.4)(storybook@8.2.2):
+    resolution: {integrity: sha512-x+1eqdjF6ohrjdtfoDNCbtz2ZbCOpNoKKkJ+/QqEeeYSPiVz4RAuNju8L1W/SruiYu4zfDDd4KaZdFRcY0wBJA==}
     peerDependencies:
       lit: ^2.0.0 || ^3.0.0
     dependencies:

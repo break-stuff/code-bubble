@@ -22,8 +22,243 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "This component is designed for displaying code examples in a visually appealing and interactive manner.",
           "name": "CodeBubble",
+          "cssProperties": [
+            {
+              "description": "The border color of the component and the controls",
+              "name": "--code-bubble-border-color",
+              "default": "rgb(228, 228, 231)"
+            },
+            {
+              "description": "The border radius of the component and the controls",
+              "name": "--code-bubble-border-radius",
+              "default": "4px"
+            },
+            {
+              "description": "The border width of the component and the controls",
+              "name": "--code-bubble-border-width",
+              "default": "1px"
+            },
+            {
+              "description": "The padding of the rendered code example",
+              "name": "--code-bubble-preview-padding",
+              "default": "1.5rem"
+            },
+            {
+              "description": "The padding for the example code",
+              "name": "--code-bubble-snippet-padding",
+              "default": "1.5rem"
+            },
+            {
+              "description": "The font weight for the controls",
+              "name": "--code-bubble-button-font-weight",
+              "default": "inherit"
+            },
+            {
+              "description": "The gap between the button text and icon",
+              "name": "--code-bubble-button-icon-gap",
+              "default": "0.5rem"
+            },
+            {
+              "description": "The horizontal padding for the controls at the bottom of the component",
+              "name": "--code-bubble-button-padding-x",
+              "default": "1rem"
+            },
+            {
+              "description": "The vertical padding for the controls at the bottom of the component",
+              "name": "--code-bubble-button-padding-y",
+              "default": "1rem"
+            },
+            {
+              "description": "The font weight for the copy code button",
+              "name": "--code-bubble-copy-button-font-weight",
+              "default": "inherit"
+            },
+            {
+              "description": "The horizontal padding for the copy button",
+              "name": "--code-bubble-copy-button-padding-x",
+              "default": "0.5rem"
+            },
+            {
+              "description": "The vertical padding for the copy button",
+              "name": "--code-bubble-copy-button-padding-y",
+              "default": "0.5rem"
+            },
+            {
+              "description": "The outline style when elements have keyboard focus",
+              "name": "--code-bubble-outline",
+              "default": "solid 2px rgb(0, 95, 204)"
+            },
+            {
+              "description": "The offset of the outline when an element has keyboard focus",
+              "name": "--code-bubble-outline-offset",
+              "default": "0"
+            },
+            {
+              "description": "The background color of the bottom controls",
+              "name": "--code-bubble-button-bg-color",
+              "default": "inherit"
+            },
+            {},
+            {
+              "description": "The text color of the bottom controls",
+              "name": "--code-bubble-button-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the copy code button",
+              "name": "--code-bubble-copy-button-bg-color",
+              "default": "inherit"
+            },
+            {},
+            {
+              "description": "The text color of the copy code button",
+              "name": "--code-bubble-copy-button-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the bottom controls on hover",
+              "name": "--code-bubble-button-hover-bg-color",
+              "default": "rgb(237 237 237)"
+            },
+            {
+              "description": "The border color of the bottom controls on hover",
+              "name": "--code-bubble-button-hover-border-color",
+              "default": "rgb(135 135 135)"
+            },
+            {
+              "description": "The text color of the bottom controls on hover",
+              "name": "--code-bubble-button-hover-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the copy code button on hover",
+              "name": "--code-bubble-copy-button-hover-bg-color",
+              "default": "rgb(237 237 237)"
+            },
+            {
+              "description": "The border color of the copy code button on hover",
+              "name": "--code-bubble-copy-button-hover-border-color",
+              "default": "rgb(135 135 135)"
+            },
+            {
+              "description": "The text color of the copy code button on hover",
+              "name": "--code-bubble-copy-button-hover-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the bottom controls on focus",
+              "name": "--code-bubble-button-focus-bg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The border color of the bottom controls on hover",
+              "name": "--code-bubble-button-focus-border-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The text color of the bottom controls on hover",
+              "name": "--code-bubble-button-focus-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the copy code button on focus",
+              "name": "--code-bubble-copy-button-focus-bg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The border color of the copy code button on focus",
+              "name": "--code-bubble-copy-button-focus-border-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The text color of the copy code button on focus",
+              "name": "--code-bubble-copy-button-focus-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The background color of the bottom controls on active",
+              "name": "--code-bubble-button-active-bg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The border color of the bottom controls on active",
+              "name": "--code-bubble-button-active-border-color",
+              "default": "rgb(135 135 135)"
+            },
+            {
+              "description": "The text color of the bottom controls on active",
+              "name": "--code-bubble-button-active-fg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The font weight of the bottom controls on active",
+              "name": "--code-bubble-button-active-font-weight",
+              "default": "bold"
+            },
+            {
+              "description": "The background color of the copy code button on active",
+              "name": "--code-bubble-copy-button-active-bg-color",
+              "default": "inherit"
+            },
+            {
+              "description": "The border color of the copy code button on active",
+              "name": "--code-bubble-copy-button-active-border-color",
+              "default": "rgb(135 135 135)"
+            },
+            {
+              "description": "The text color of the copy code button on active",
+              "name": "--code-bubble-copy-button-active-fg-color",
+              "default": "inherit"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The base wrapper for the internal component",
+              "name": "code-bubble-base"
+            },
+            {
+              "description": "The element that wraps the rendered example",
+              "name": "code-bubble-preview"
+            },
+            {
+              "description": "The element that wraps the source code section",
+              "name": "code-bubble-code"
+            },
+            {
+              "description": "The button used to copy code to the clipboard",
+              "name": "code-bubble-copy-button"
+            },
+            {
+              "description": "The element that wraps the controls at the bottom of the component",
+              "name": "code-bubble-controls"
+            },
+            {
+              "description": "The buttons at the bottom of the component",
+              "name": "code-bubble-control"
+            },
+            {
+              "description": "The \"show source\" button",
+              "name": "code-bubble-show-source"
+            },
+            {
+              "description": "The \"HTML\" button",
+              "name": "code-bubble-html"
+            },
+            {
+              "description": "The \"React\" button",
+              "name": "code-bubble-react"
+            },
+            {
+              "description": "The \"RTL\" button",
+              "name": "code-bubble-rtl"
+            },
+            {
+              "description": "The \"Sandbox\" button",
+              "name": "code-bubble-sandbox"
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -61,7 +296,7 @@
                 "text": "ComponentConfig"
               },
               "privacy": "protected",
-              "default": "configuration.component!"
+              "default": "configs[this.tagName.toLowerCase()].component!"
             },
             {
               "kind": "field",
@@ -85,6 +320,20 @@
               "type": {
                 "text": "string | undefined"
               },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "CodeBubbleConfig"
+              },
+              "privacy": "private",
+              "default": "{}"
+            },
+            {
+              "kind": "method",
+              "name": "createPreview",
               "privacy": "private"
             },
             {
@@ -138,6 +387,11 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "showFrameworkToggles",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -207,6 +461,14 @@
         },
         {
           "kind": "variable",
+          "name": "ComponentSync",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ render: args => html` ${template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, )} <br /> ${template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, )} <br /> ${template( args, html` <pre><code class=\"language-html\">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; </code></pre> <pre><code class=\"language-jsx\">export default () =&gt; { return ( &lt;&gt; &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt; &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt; &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt; &lt;/&gt; ); }; </code></pre> `, )} <br /> `, args: {}, }"
+        },
+        {
+          "kind": "variable",
           "name": "SingleFramework",
           "type": {
             "text": "Story"
@@ -236,6 +498,14 @@
           "name": "Default",
           "declaration": {
             "name": "Default",
+            "module": "src/components/code-bubble/code-bubble.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ComponentSync",
+          "declaration": {
+            "name": "ComponentSync",
             "module": "src/components/code-bubble/code-bubble.stories.ts"
           }
         },

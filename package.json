@@ -55,7 +55,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
     "vite": "^5.3.4",
-    "wc-storybook-helpers": "^2.0.2"
+    "wc-storybook-helpers": "^2.0.3"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
