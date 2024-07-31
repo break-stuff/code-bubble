@@ -11,6 +11,13 @@ new CodeBlock({
   sandbox: 'stackblitz',
 });
 
+new CodeBlock({
+  sandbox: 'codepen',
+  component: {
+    tagName: 'test-bubble',
+  },
+});
+
 // codeBubble({
 //   sandbox: 'stackblitz',
 // });
@@ -59,9 +66,8 @@ export const Default: Story = {
 };
 
 export const ComponentSync: Story = {
-  render: args =>
-    html` 
-  ${template(
+  render: args => html`
+    ${template(
       args,
       html`
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -81,7 +87,7 @@ export const ComponentSync: Story = {
       `,
     )}
     <br />
-  ${template(
+    ${template(
       args,
       html`
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -101,7 +107,7 @@ export const ComponentSync: Story = {
       `,
     )}
     <br />
-  ${template(
+    ${template(
       args,
       html`
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -121,7 +127,7 @@ export const ComponentSync: Story = {
       `,
     )}
     <br />
-    `,
+  `,
   args: {},
 };
 
@@ -167,6 +173,18 @@ export const NoFramework: Story = {
 </code></pre>
       `,
     )}
+  `,
+  args: {},
+};
+
+export const CustomTagName: Story = {
+  render: () => html`
+    <test-bubble>
+      <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+    </test-bubble>
   `,
   args: {},
 };

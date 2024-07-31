@@ -7,6 +7,7 @@ import type {
 } from './types';
 
 const componentConfig: ComponentConfig = {
+  tagName: 'code-bubble',
   openShowCode: false,
   hideShowCodeButton: false,
   showCodeButtonLabel: 'Show Code',
@@ -241,7 +242,6 @@ const stackBlitzDefaultConfig: FrameworkConfig<StackBlitz> = {
 
 export const defaultCodeBubbleConfig: CodeBubbleConfig = {
   component: componentConfig,
-  tagName: 'code-bubble',
   sandbox: 'codepen',
   sandboxConfig: {
     codePen: codePenDefaultConfig,

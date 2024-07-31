@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
 import type { CodeBubbleConfig, ComponentConfig } from '../../configs/types.js';
@@ -184,8 +184,12 @@ export default class CodeBubble extends LitElement {
   }
 
   private showFrameworkToggles() {
-    return this.htmlCode && this.reactCode && !this.componentConfig.hideFrameworkButtons;
-  } 
+    return (
+      this.htmlCode &&
+      this.reactCode &&
+      !this.componentConfig.hideFrameworkButtons
+    );
+  }
 
   private handleSandboxClick() {
     const config = this.config.sandboxConfig;
@@ -246,45 +250,48 @@ export default class CodeBubble extends LitElement {
           </button>`}
         </details>
         <div class="controls" part="code-bubble-controls">
-          ${!this.componentConfig.hideShowCodeButton &&
-          html`<button
-            part="code-bubble-control code-bubble-show-source"
-            aria-controls="code-bubble"
-            aria-expanded=${this.showSource}
-            @click=${() => (this.showSource = !this.showSource)}
-          >
-            ${this.componentConfig.showCodeButtonLabel}
-          </button>`}
-          ${this.showFrameworkToggles() &&
-          html` <button
-              part="code-bubble-control code-bubble-html"
-              aria-pressed=${this.framework === 'html'}
-              @click=${() => this.handleExampleClick('html')}
-            >
-              ${this.componentConfig.htmlButtonLabel}
-            </button>
-            <button
-              part="code-bubble-control code-bubble-react"
-              aria-pressed=${this.framework === 'react'}
-              @click=${() => this.handleExampleClick('react')}
-            >
-              ${this.componentConfig.reactButtonLabel}
-            </button>`}
-          ${!this.componentConfig.hideRtlButton &&
-          html`<button
-            part="code-bubble-control code-bubble-rtl"
-            aria-pressed=${this.showRTL}
-            @click=${() => (this.showRTL = !this.showRTL)}
-          >
-            ${this.componentConfig.rtlButtonLabel}
-          </button>`}
-          ${!this.componentConfig.hideSandboxButton &&
+          ${!this.componentConfig.hideShowCodeButton
+            ? html`<button
+                part="code-bubble-control code-bubble-show-source"
+                aria-controls="code-bubble"
+                aria-expanded=${this.showSource}
+                @click=${() => (this.showSource = !this.showSource)}
+              >
+                ${this.componentConfig.showCodeButtonLabel}
+              </button>`
+            : nothing}
+          ${this.showFrameworkToggles()
+            ? html` <button
+                  part="code-bubble-control code-bubble-html"
+                  aria-pressed=${this.framework === 'html'}
+                  @click=${() => this.handleExampleClick('html')}
+                >
+                  ${this.componentConfig.htmlButtonLabel}
+                </button>
+                <button
+                  part="code-bubble-control code-bubble-react"
+                  aria-pressed=${this.framework === 'react'}
+                  @click=${() => this.handleExampleClick('react')}
+                >
+                  ${this.componentConfig.reactButtonLabel}
+                </button>`
+            : nothing}
+          ${!this.componentConfig.hideRtlButton
+            ? html`<button
+                part="code-bubble-control code-bubble-rtl"
+                aria-pressed=${this.showRTL}
+                @click=${() => (this.showRTL = !this.showRTL)}
+              >
+                ${this.componentConfig.rtlButtonLabel}
+              </button>`
+            : nothing}
+          ${!this.componentConfig.hideSandboxButton ?
           html`<button
             part="code-bubble-control code-bubble-sandbox"
             @click=${this.handleSandboxClick}
           >
             ${this.componentConfig.sandboxButtonLabel}
-          </button>`}
+          </button>` : nothing}
         </div>
       </div>
     `;

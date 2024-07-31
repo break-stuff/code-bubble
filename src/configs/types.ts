@@ -1,6 +1,4 @@
 export type CodeBubbleConfig = {
-  /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
-  tagName?: string;
   /** Which sandbox environment your code will open in */
   sandbox?: 'codepen' | 'stackblitz';
   /** Configuration for the component rendered on the site */
@@ -16,7 +14,7 @@ export type CodeBubbleConfig = {
 
 export type ComponentConfig = {
   /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
-  tagName?: boolean;
+  tagName?: string;
   /** Opens the "show code" section by default */
   openShowCode?: boolean;
   /** Indicates which example to show by default */
