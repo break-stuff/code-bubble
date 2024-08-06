@@ -188,3 +188,29 @@ export const CustomTagName: Story = {
   `,
   args: {},
 };
+
+
+export const PrismJS: Story = {
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><div class="docblock-source sb-unstyled css-12u9f4"><div dir="ltr" scrollbarsize="6" offset="2" class="css-1dnv2kn" style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"><style>[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}</style><div data-radix-scroll-area-viewport="" class="css-uwwqev" style="overflow: scroll;"><div style="min-width: 100%; display: table;"><pre class="prismjs css-4zr3vl"><div class="language-html css-1lwmlsb" style="white-space: pre;"><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">span</span><span class="token tag"> </span><span class="token tag attr-name">slot</span><span class="token tag attr-value punctuation attr-equals">=</span><span class="token tag attr-value punctuation">"</span><span class="token tag attr-value">heading</span><span class="token tag attr-value punctuation">"</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Header 1</span><span class="token tag punctuation">&lt;/</span><span class="token tag">span</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Panel 1</span><span class="token tag punctuation">&lt;/</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">span</span><span class="token tag"> </span><span class="token tag attr-name">slot</span><span class="token tag attr-value punctuation attr-equals">=</span><span class="token tag attr-value punctuation">"</span><span class="token tag attr-value">heading</span><span class="token tag attr-value punctuation">"</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Header 2</span><span class="token tag punctuation">&lt;/</span><span class="token tag">span</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Panel 2</span><span class="token tag punctuation">&lt;/</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">span</span><span class="token tag"> </span><span class="token tag attr-name">slot</span><span class="token tag attr-value punctuation attr-equals">=</span><span class="token tag attr-value punctuation">"</span><span class="token tag attr-value">heading</span><span class="token tag attr-value punctuation">"</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Header 3</span><span class="token tag punctuation">&lt;/</span><span class="token tag">span</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Panel 3</span><span class="token tag punctuation">&lt;/</span><span class="token tag">div</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class="">  </span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
+</span><span class=""></span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion</span><span class="token tag punctuation">&gt;</span></div></pre></div></div></div><div class="css-11xgcgt"><button class="css-1fdphfk">Copy</button></div></div></pre>
+      `,
+    )}
+  `,
+  args: {},
+};
