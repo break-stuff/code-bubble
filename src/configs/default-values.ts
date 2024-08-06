@@ -14,13 +14,11 @@ const componentConfig: ComponentConfig = {
   hideCopyCodeButton: false,
   copyCodeButtonLabel: 'Copy',
   copyCodeButtonCopiedLabel: 'Copied',
-  defaultExample: 'html',
   hideRtlButton: false,
   rtlButtonLabel: 'RTL',
   hideSandboxButton: false,
   sandboxButtonLabel: 'Sandbox',
-  htmlButtonLabel: 'HTML',
-  reactButtonLabel: 'React',
+  frameworkButtonLabel: (framework) => framework,
 };
 
 const codePenDefaultConfig: FrameworkConfig<CodePen> = {

@@ -9,6 +9,12 @@ const { events, args, argTypes, template } =
 
 new CodeBlock({
   sandbox: 'stackblitz',
+  component: {
+    frameworkButtonLabel: (framework) => ({
+      html: 'HTML',
+      jsx: 'React',
+    }[framework] || framework),
+  },
 });
 
 new CodeBlock({
@@ -57,7 +63,7 @@ export const Default: Story = {
       &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
       &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
     &lt;/&gt;
-    );
+  );
 };
 </code></pre>
       `,

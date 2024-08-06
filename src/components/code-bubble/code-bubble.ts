@@ -7,7 +7,6 @@ import {
   useCodePenSandbox,
   useStackBlitzSandbox,
 } from '../../utilities/sandbox-helpers.js';
-export type CodeExamples = 'html' | 'react';
 
 type CodeBlock = { [key: string]: string };
 
@@ -74,7 +73,7 @@ export default class CodeBubble extends LitElement {
 
   /** Indicates which example should be displayed */
   @property({ attribute: false })
-  framework?: CodeExamples;
+  framework?: string;
 
   @state()
   protected showSource = false;
@@ -90,13 +89,12 @@ export default class CodeBubble extends LitElement {
   protected openSandbox: (example?: string, exampleType?: string) => void =
     () => {};
 
-  // private htmlCode?: string | null;
-  // private reactCode?: string | null;
   private config: CodeBubbleConfig = {};
 
   constructor() {
     super();
-    this.componentConfig = configs[this.tagName.toLowerCase()].component!;
+    this.componentConfig =
+      configs[this.tagName?.toLowerCase() || ''].component!;
     this.updateConfig();
   }
 
@@ -115,10 +113,12 @@ export default class CodeBubble extends LitElement {
       return;
     }
 
+    console.log(this.codeBlocks);
+
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
-    console.log("CODE", this.framework, this.codeBlocks);
-    preview.innerHTML = this.codeBlocks[this.framework!];
+    preview.innerHTML =
+      this.codeBlocks[this.framework! || Object.keys(this.codeBlocks)[0]];
     this.appendChild(preview);
   }
 
@@ -126,37 +126,16 @@ export default class CodeBubble extends LitElement {
     this.updateComplete.then(() => {
       this.showSource = this.componentConfig.openShowCode!;
       this.framework =
-        (localStorage.getItem('code_block_example') as CodeExamples) ||
-        this.componentConfig.defaultExample!;
+        (localStorage.getItem(this.tagName)) ||
+        this.componentConfig.defaultExample! ||
+        Object.keys(this.codeBlocks)[0];
     });
   }
 
   private getCode() {
-    // this.getReactCode();
-    // this.getHtmlCode();
     this.setCodeContent();
     this.setFallbackFramework();
   }
-
-  // private getHtmlCode() {
-  //   let htmlCodeBubble = this.getCodeContent('html');
-  //   if (
-  //     !htmlCodeBubble &&
-  //     !this.reactCode &&
-  //     this.componentConfig.defaultExample === 'html'
-  //   ) {
-  //     htmlCodeBubble = this.getCodeContent();
-  //   }
-
-  //   htmlCodeBubble?.setAttribute('slot', 'html');
-  //   this.htmlCode = htmlCodeBubble?.querySelector('code')?.textContent;
-  // }
-
-  // private getReactCode() {
-  //   const reactCodeBubble = this.getCodeContent('jsx');
-  //   reactCodeBubble?.setAttribute('slot', 'react');
-  //   this.reactCode = reactCodeBubble?.querySelector('code')?.textContent;
-  // }
 
   private setCodeContent() {
     const blocks = [...this.querySelectorAll('pre')];
@@ -173,32 +152,23 @@ export default class CodeBubble extends LitElement {
         i.toString();
 
       block.setAttribute('slot', language);
-      this.codeBlocks[language] = codeContent?.textContent || '';
+      this.codeBlocks[language] = block?.textContent || '';
     });
-
-    // return !language
-    //   ? this.querySelector('pre')
-    //   : this.querySelector(`pre.language-${language}`) ||
-    //       this.querySelector(`pre:has(code.language-${language})`) ||
-    //       this.querySelector(`pre[data-language="${language}"]`) ||
-    //       this.querySelector(`.language-${language} pre`) ||
-    //       this.querySelector(`[data-language="${language}"] pre`);
   }
 
   private async setFallbackFramework() {
     await this.updateComplete;
-    this.framework =
-      this.componentConfig.defaultExample! || Object.keys(this.codeBlocks)[0];
+    this.framework = this.getFramework();
     this.requestUpdate();
   }
 
-  private handleExampleClick(example: 'html' | 'react') {
+  private handleExampleClick(example: string) {
     this.framework = example;
     /** @internal this is used to keep the code blocks in sync */
     this.dispatchEvent(
       new CustomEvent('framework-change', { bubbles: true, detail: example }),
     );
-    localStorage.setItem('code_block_example', example);
+    localStorage.setItem(this.tagName.toLowerCase(), example);
   }
 
   private showFrameworkToggles() {
@@ -227,13 +197,19 @@ export default class CodeBubble extends LitElement {
 
   private handleCopyClick(e: MouseEvent) {
     const button = e.target as HTMLButtonElement;
-    navigator.clipboard.writeText(
-      this.codeBlocks[this.framework!] || '',
-    );
+    navigator.clipboard.writeText(this.codeBlocks[this.framework!] || '');
     button.innerText = this.componentConfig.copyCodeButtonCopiedLabel!;
     setTimeout(
       () => (button.innerText = this.componentConfig.copyCodeButtonLabel!),
       1_000,
+    );
+  }
+
+  private getFramework() {
+    return (
+      this.framework ||
+      this.componentConfig.defaultExample! ||
+      Object.keys(this.codeBlocks)[0]
     );
   }
 
@@ -255,8 +231,8 @@ export default class CodeBubble extends LitElement {
           ?open=${this.showSource}
         >
           <!-- required to prevent the user-agent summery from displaying -->
-          <summary></summary>
-          <slot name="${this.framework || 'html'}"></slot>
+          <summary>${this.getFramework()}"</summary>
+          <slot name="${this.getFramework()}"></slot>
           ${!this.componentConfig.hideCopyCodeButton &&
           html`<button
             class="copy-code"
@@ -278,20 +254,16 @@ export default class CodeBubble extends LitElement {
               </button>`
             : nothing}
           ${this.showFrameworkToggles()
-            ? html` <button
-                  part="code-bubble-control code-bubble-html"
-                  aria-pressed=${this.framework === 'html'}
-                  @click=${() => this.handleExampleClick('html')}
-                >
-                  ${this.componentConfig.htmlButtonLabel}
-                </button>
-                <button
-                  part="code-bubble-control code-bubble-react"
-                  aria-pressed=${this.framework === 'react'}
-                  @click=${() => this.handleExampleClick('react')}
-                >
-                  ${this.componentConfig.reactButtonLabel}
-                </button>`
+            ? Object.keys(this.codeBlocks).map(
+                x =>
+                  html` <button
+                    part="code-bubble-control code-bubble-html"
+                    aria-pressed=${this.framework === x}
+                    @click=${() => this.handleExampleClick(x)}
+                  >
+                    ${this.componentConfig.frameworkButtonLabel!(x)}
+                  </button>`,
+              )
             : nothing}
           ${!this.componentConfig.hideRtlButton
             ? html`<button

@@ -42,16 +42,12 @@ export type ComponentConfig = {
   /** Text displayed in the "sandbox" button  */
   sandboxButtonLabel?: string;
   /** Text displayed in the "HTML" button  */
-  htmlButtonLabel?: string;
-  /** Text displayed in the "React" button  */
-  reactButtonLabel?: string;
+  frameworkButtonLabel?: (framework: string) => string;
 };
 
 export type FrameworkConfig<T extends CodePen | StackBlitz> = {
-  /** CodePen project configuration for HTML examples */
-  html?: ProjectConfig<T>;
-  /** CodePen project configuration for React examples */
-  react?: ProjectConfig<T>;
+  /** CodePen project configuration for language examples */
+  [key: string]: ProjectConfig<T>;
 };
 
 export type ProjectConfig<T extends CodePen | StackBlitz> = {

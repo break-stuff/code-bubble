@@ -13,14 +13,19 @@ export class CodeBlock {
 
   constructor(config?: CodeBubbleConfig) {
     this.updateConfig(config);
-    console.log(this.config.component!.tagName!, customElements.get(this.config.component!.tagName!));
     try {
       customElements.define(this.config.component!.tagName!, class extends CodeBubble {});
     } catch (error) {
       console.error('Error defining custom element', error);
-      
     }
     syncSandboxes();
+  }
+
+  setLanguage(lang: string) {
+    document.querySelectorAll<CodeBubble>(this.config.component!.tagName!).forEach(y => {
+      y.framework = lang;
+    });
+    localStorage.setItem(this.config.component!.tagName!.toLowerCase(), lang);
   }
 
   private updateConfig(userConfig?: CodeBubbleConfig) {

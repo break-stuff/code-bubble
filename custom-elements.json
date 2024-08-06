@@ -264,12 +264,9 @@
               "kind": "field",
               "name": "framework",
               "type": {
-                "text": "CodeExamples | undefined"
+                "text": "string | undefined"
               },
-              "description": "Indicates which example should be displayed",
-              "expandedType": {
-                "text": "'html' | 'react' | undefined"
-              }
+              "description": "Indicates which example should be displayed"
             },
             {
               "kind": "field",
@@ -305,7 +302,7 @@
                 "text": "ComponentConfig"
               },
               "privacy": "protected",
-              "default": "configs[this.tagName.toLowerCase()].component!"
+              "default": "configs[this.tagName?.toLowerCase() || ''].component!"
             },
             {
               "kind": "field",
@@ -357,7 +354,7 @@
                 {
                   "name": "example",
                   "type": {
-                    "text": "'html' | 'react'"
+                    "text": "string"
                   }
                 }
               ]
@@ -384,6 +381,11 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "getFramework",
+              "privacy": "private"
             }
           ],
           "superclass": {
