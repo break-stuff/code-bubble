@@ -9,6 +9,8 @@ import {
 } from '../../utilities/sandbox-helpers.js';
 export type CodeExamples = 'html' | 'react';
 
+type CodeBlock = { [key: string]: string };
+
 /**
  * This component is designed for displaying code examples in a visually appealing and interactive manner.
  *
@@ -80,13 +82,16 @@ export default class CodeBubble extends LitElement {
   @state()
   protected showRTL = false;
 
+  @state()
+  protected codeBlocks: CodeBlock = {};
+
   protected componentConfig: ComponentConfig = {};
 
   protected openSandbox: (example?: string, exampleType?: string) => void =
     () => {};
 
-  private htmlCode?: string;
-  private reactCode?: string;
+  // private htmlCode?: string | null;
+  // private reactCode?: string | null;
   private config: CodeBubbleConfig = {};
 
   constructor() {
@@ -112,7 +117,8 @@ export default class CodeBubble extends LitElement {
 
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
-    preview.innerHTML = this.htmlCode || this.reactCode || '';
+    console.log("CODE", this.framework, this.codeBlocks);
+    preview.innerHTML = this.codeBlocks[this.framework!];
     this.appendChild(preview);
   }
 
@@ -126,51 +132,63 @@ export default class CodeBubble extends LitElement {
   }
 
   private getCode() {
-    this.getReactCode();
-    this.getHtmlCode();
+    // this.getReactCode();
+    // this.getHtmlCode();
+    this.setCodeContent();
     this.setFallbackFramework();
   }
 
-  private getHtmlCode() {
-    let htmlCodeBubble = this.getCodeBubble('html');
-    if (
-      !htmlCodeBubble &&
-      !this.reactCode &&
-      this.componentConfig.defaultExample === 'html'
-    ) {
-      htmlCodeBubble = this.getCodeBubble();
-    }
+  // private getHtmlCode() {
+  //   let htmlCodeBubble = this.getCodeContent('html');
+  //   if (
+  //     !htmlCodeBubble &&
+  //     !this.reactCode &&
+  //     this.componentConfig.defaultExample === 'html'
+  //   ) {
+  //     htmlCodeBubble = this.getCodeContent();
+  //   }
 
-    htmlCodeBubble?.setAttribute('slot', 'html');
-    this.htmlCode = htmlCodeBubble?.querySelector('code')?.innerText;
-  }
+  //   htmlCodeBubble?.setAttribute('slot', 'html');
+  //   this.htmlCode = htmlCodeBubble?.querySelector('code')?.textContent;
+  // }
 
-  private getReactCode() {
-    const reactCodeBubble = this.getCodeBubble('jsx');
-    reactCodeBubble?.setAttribute('slot', 'react');
-    this.reactCode = reactCodeBubble?.querySelector('code')?.innerText;
-  }
+  // private getReactCode() {
+  //   const reactCodeBubble = this.getCodeContent('jsx');
+  //   reactCodeBubble?.setAttribute('slot', 'react');
+  //   this.reactCode = reactCodeBubble?.querySelector('code')?.textContent;
+  // }
 
-  private getCodeBubble(language?: 'html' | 'jsx') {
-    return !language
-      ? this.querySelector('pre')
-      : this.querySelector(`pre.language-${language}`) ||
-          this.querySelector(`pre:has(code.language-${language})`) ||
-          this.querySelector(`pre[data-language="${language}"]`) ||
-          this.querySelector(`.language-${language} pre`) ||
-          this.querySelector(`[data-language="${language}"] pre`);
+  private setCodeContent() {
+    const blocks = [...this.querySelectorAll('pre')];
+    blocks.forEach((block, i) => {
+      const codeContent =
+        block.querySelector('[class^="language-"]') ||
+        block.querySelector('[data-language]');
+      const language =
+        codeContent?.className
+          ?.split(' ')
+          .find(x => x.startsWith('language-'))
+          ?.replace('language-', '') ||
+        codeContent?.getAttribute('data-language') ||
+        i.toString();
+
+      block.setAttribute('slot', language);
+      this.codeBlocks[language] = codeContent?.textContent || '';
+    });
+
+    // return !language
+    //   ? this.querySelector('pre')
+    //   : this.querySelector(`pre.language-${language}`) ||
+    //       this.querySelector(`pre:has(code.language-${language})`) ||
+    //       this.querySelector(`pre[data-language="${language}"]`) ||
+    //       this.querySelector(`.language-${language} pre`) ||
+    //       this.querySelector(`[data-language="${language}"] pre`);
   }
 
   private async setFallbackFramework() {
     await this.updateComplete;
-    if (this.htmlCode && !this.reactCode) {
-      this.framework = 'html';
-    } else if (!this.htmlCode && this.reactCode) {
-      this.framework = 'react';
-    } else {
-      this.framework = this.componentConfig.defaultExample!;
-    }
-
+    this.framework =
+      this.componentConfig.defaultExample! || Object.keys(this.codeBlocks)[0];
     this.requestUpdate();
   }
 
@@ -185,25 +203,24 @@ export default class CodeBubble extends LitElement {
 
   private showFrameworkToggles() {
     return (
-      this.htmlCode &&
-      this.reactCode &&
+      Object.keys(this.codeBlocks).length > 1 &&
       !this.componentConfig.hideFrameworkButtons
     );
   }
 
   private handleSandboxClick() {
     const config = this.config.sandboxConfig;
-    const code = this.framework === 'html' ? this.htmlCode : this.reactCode;
+    const code = this.codeBlocks[this.framework!] || '';
 
     this.config.sandbox === 'codepen'
       ? useCodePenSandbox(
           config!.codePen![this.framework!]!,
-          code,
+          code ?? '',
           this.framework,
         )
       : useStackBlitzSandbox(
           config!.stackBlitz![this.framework!]!,
-          code,
+          code ?? '',
           this.framework,
         );
   }
@@ -211,7 +228,7 @@ export default class CodeBubble extends LitElement {
   private handleCopyClick(e: MouseEvent) {
     const button = e.target as HTMLButtonElement;
     navigator.clipboard.writeText(
-      (this.framework === 'html' ? this.htmlCode : this.reactCode) || '',
+      this.codeBlocks[this.framework!] || '',
     );
     button.innerText = this.componentConfig.copyCodeButtonCopiedLabel!;
     setTimeout(
@@ -285,13 +302,14 @@ export default class CodeBubble extends LitElement {
                 ${this.componentConfig.rtlButtonLabel}
               </button>`
             : nothing}
-          ${!this.componentConfig.hideSandboxButton ?
-          html`<button
-            part="code-bubble-control code-bubble-sandbox"
-            @click=${this.handleSandboxClick}
-          >
-            ${this.componentConfig.sandboxButtonLabel}
-          </button>` : nothing}
+          ${!this.componentConfig.hideSandboxButton
+            ? html`<button
+                part="code-bubble-control code-bubble-sandbox"
+                @click=${this.handleSandboxClick}
+              >
+                ${this.componentConfig.sandboxButtonLabel}
+              </button>`
+            : nothing}
         </div>
       </div>
     `;
