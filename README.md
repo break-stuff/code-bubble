@@ -9,14 +9,16 @@ This is a platform agnostic web component designed to showcase code examples and
 Features:
 
 - ✅ Global configuration
+- ✅ Create multiple instances of the bubble with unique configurations
 - ✅ Code preview
-- ✅ Multiple framework (currently HTML and React examples)
+- ✅ Multiple frameworks ~~(currently only HTML and React examples)~~
 - ✅ Example code toggle
 - ✅ RTL toggle
 - ✅ Open in Sandbox (currently supports [CodePen](https://codepen.io/) and [StackBlitz](https://stackblitz.com/))
 - ✅ Copy code button
 - ✅ Framework example selection sync across instances
 - ✅ Persist selected option
+- ✅ Custom labels
 - ❌ Preview resize (coming soon)
 
 ## Usage
@@ -24,13 +26,13 @@ Features:
 Import the desired sandbox configuration at the root of your project:
 
 ```ts
-import { codeBubble, CodeBubbleConfig } from 'code-bubble';
+import { CodeBubble, CodeBubbleConfig } from 'code-bubble';
 
 const options: CodeBubbleConfig {
   /* configuration options */
 };
 
-codeBubble(options);
+new CodeBubble(options);
 ```
 
 ### Use the Components
@@ -101,33 +103,68 @@ The component configuration is the same for each of the sandbox environments. Th
 
 ```ts
 type ComponentConfig = {
+  /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
+  tagName?: string;
   /** Opens the "show code" section by default */
   openShowCode?: boolean;
-  /** Hides the "show code" button */
-  hideShowCodeButton?: boolean;
-  /** Text displayed in the "show code" button  */
-  showCodeButtonLabel?: string;
+  /** Indicates which example to show by default */
+  defaultExample?: 'html' | 'react';
   /** Hides the "copy code" button */
   hideCopyCodeButton?: boolean;
+  /** Hides the "RTL" button */
+  hideRtlButton?: boolean;
+  /** Hides the "sandbox" button */
+  hideSandboxButton?: boolean;
+  /** Hides the "show code" button */
+  hideShowCodeButton?: boolean;
+  /** Hides the HTMl and React code toggle buttons */
+  hideFrameworkButtons?: boolean;
+  /** Hides the preview window where the code is rendered */
+  hidePreview?: boolean;
+  /** Text displayed in the "show code" button  */
+  showCodeButtonLabel?: string;
   /** Text displayed in the "copy code" button  */
   copyCodeButtonLabel?: string;
   /** Text displayed in the "copy code" button when text has been copied  */
   copyCodeButtonCopiedLabel?: string;
-  /** Indicates which example to show by default */
-  defaultExample?: 'html' | 'react';
-  /** Hides the "RTL" button */
-  hideRtlButton?: boolean;
   /** Text displayed in the "RTL" button  */
   rtlButtonLabel?: string;
-  /** Hides the "sandbox" button */
-  hideSandboxButton?: boolean;
   /** Text displayed in the "sandbox" button  */
   sandboxButtonLabel?: string;
   /** Text displayed in the "HTML" button  */
-  htmlButtonLabel?: string;
-  /** Text displayed in the "React" button  */
-  reactButtonLabel?: string;
+  frameworkButtonLabel?: (framework: string) => string;
 };
+```
+
+#### Defining Framework Labels
+
+When specifying a code block, developers can specify a framework label.
+
+````html
+
+```html
+```
+
+```jsx
+```
+
+```ruby
+```
+
+````
+
+These labels will be used by default for the framework toggle buttons at the bottom of the code bubble. These may not be as useful as you would like them to be for your users (or you may need to provide translations), so you can map new labels for them.
+
+```tsx
+new CodeBlock({
+  component: {
+    frameworkButtonLabel: (framework) => ({
+      html: 'HTML',
+      jsx: 'React',
+      ruby: 'Ruby'
+    }[framework] || framework),
+  },
+});
 ```
 
 ### Sandbox Configuration
@@ -136,10 +173,8 @@ Each sandbox supports an HTML and a React variation.
 
 ```ts
 type FrameworkConfig<T extends CodePen | StackBlitz> = {
-  /** CodePen project configuration for HTML examples */
-  html?: ProjectConfig<T>;
-  /** CodePen project configuration for React examples */
-  react?: ProjectConfig<T>;
+  /** CodePen project configuration for language examples */
+  [key: string]: ProjectConfig<T>;
 };
 
 type ProjectConfig<T extends CodePen | StackBlitz> = {
@@ -252,6 +287,61 @@ const config: FrameworkConfig<StackBlitz> = {
     },
   },
 };
+```
+
+## Creating Different Code Bubble Types
+
+You may need to be able to create code bubbles with different configurations. To do that, you create a new instance of the `CodeBubble` _with a custom tag name_.
+
+```tsx
+new CodeBubble({
+  /* <code-bubble> - default code bubble config */
+});
+
+new CodeBubble({
+  /* <ts-bubble> - code bubble config for TypeScript examples */
+  component: {
+    tagName: 'ts-bubble'
+  }
+});
+```
+
+You will now have an alternative custom element for your TypeScript examples.
+
+````html
+<code-bubble>
+
+```html
+```
+
+```jsx
+```
+
+</code-bubble>
+````
+
+````html
+<ts-bubble>
+
+```ts
+```
+
+```js
+```
+
+</ts-bubble>
+````
+
+## Globally Setting Framework
+
+If you need to globally set the set the selected framework, the `CodeBubble` instance has a `setLanguage(lang: string)` method that can be used to globally set the components associated to that instance's selected framework. 
+
+```ts
+const bubble = new CodeBubble({
+  /* code bubble config */
+});
+
+bubble.setLanguage('ruby');
 ```
 
 ## Styling

@@ -1,6 +1,6 @@
 {
   "name": "code-bubble",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.14",
   "description": "Reusable components for displaying code examples and providing links to a sandbox environment.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -55,7 +55,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
     "vite": "^5.3.4",
-    "wc-storybook-helpers": "^2.0.2"
+    "wc-storybook-helpers": "^2.0.3"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
