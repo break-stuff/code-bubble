@@ -52,6 +52,11 @@ export default css`
     --code-bubble-copy-button-active-fg-color: inherit;
 
     display: block;
+    opacity: 0;
+  }
+  
+  :host([code-bubble]) {
+    opacity: 1;
   }
 
   *,

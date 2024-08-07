@@ -113,8 +113,6 @@ export default class CodeBubble extends LitElement {
       return;
     }
 
-    console.log(this.codeBlocks);
-
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
     preview.innerHTML =
