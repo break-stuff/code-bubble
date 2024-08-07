@@ -1,3 +1,11 @@
+<center>
+
+![code bubble logo](https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true)
+
+
+</center>
+
+
 # Code Bubble
 
 This is a platform agnostic web component designed to showcase code examples and generate sandbox environments in [CodePen](https://codepen.io/) or [StackBlitz](https://stackblitz.com/).
