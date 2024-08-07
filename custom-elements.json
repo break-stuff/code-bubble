@@ -305,7 +305,7 @@
                 "text": "CodeBubbleConfig"
               },
               "privacy": "private",
-              "default": "{}"
+              "default": "configs[this.tagName?.toLowerCase() || '']"
             },
             {
               "kind": "method",

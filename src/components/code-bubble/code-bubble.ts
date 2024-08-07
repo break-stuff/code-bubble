@@ -93,6 +93,7 @@ export default class CodeBubble extends LitElement {
 
   constructor() {
     super();
+    this.config = configs[this.tagName?.toLowerCase() || ''];
     this.componentConfig =
       configs[this.tagName?.toLowerCase() || ''].component!;
     this.updateConfig();
