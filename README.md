@@ -1,10 +1,6 @@
-<center>
-
-![code bubble logo](https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true)
-
-
-</center>
-
+<div style="max-width: 200px; margin: auto;">
+  <img src="https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true" alt="code bubble logo" />
+</div>
 
 # Code Bubble
 
