@@ -67,7 +67,9 @@ export const Default: Story = {
 };
 </code></pre>
       `,
-    )}`,
+    )}
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et magna non neque elementum dignissim. Sed dictum enim a quam eleifend eleifend. Sed blandit felis vel ipsum efficitur, eu placerat ligula convallis. Nam dictum accumsan libero. Cras eu viverra metus. Pellentesque ornare massa ex, ut mattis velit rutrum sed. Sed id lectus in purus suscipit convallis eu vehicula leo. Nullam quis iaculis magna.</p>
+    `,
   args: {},
 };
 
