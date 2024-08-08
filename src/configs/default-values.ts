@@ -42,7 +42,7 @@ const codePenDefaultConfig: FrameworkConfig<CodePen> = {
       template: '',
     },
   },
-  react: {
+  jsx: {
     project: {
       title: 'React Example',
       description: 'Example of using the code in React.',
@@ -167,7 +167,7 @@ render(<App />, rootElement);
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Harmony + React</title>
+    <title>React code example</title>
   </head>
   <body>
     <div id="root"></div>
@@ -235,7 +235,7 @@ export default defineConfig({
 
 const stackBlitzDefaultConfig: FrameworkConfig<StackBlitz> = {
   html: defaultHTMLConfig,
-  react: defaultReactConfig,
+  jsx: defaultReactConfig,
 };
 
 export const defaultCodeBubbleConfig: CodeBubbleConfig = {

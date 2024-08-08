@@ -112,7 +112,7 @@ type ComponentConfig = {
   /** Opens the "show code" section by default */
   openShowCode?: boolean;
   /** Indicates which example to show by default */
-  defaultExample?: 'html' | 'react';
+  defaultExample?: string;
   /** Hides the "copy code" button */
   hideCopyCodeButton?: boolean;
   /** Hides the "RTL" button */
@@ -121,7 +121,7 @@ type ComponentConfig = {
   hideSandboxButton?: boolean;
   /** Hides the "show code" button */
   hideShowCodeButton?: boolean;
-  /** Hides the HTMl and React code toggle buttons */
+  /** Hides the framework code toggle buttons */
   hideFrameworkButtons?: boolean;
   /** Hides the preview window where the code is rendered */
   hidePreview?: boolean;
@@ -173,7 +173,7 @@ new CodeBlock({
 
 ### Sandbox Configuration
 
-Each sandbox supports an HTML and a React variation.
+Each sandbox supports any framework variation.
 
 ```ts
 type FrameworkConfig<T extends CodePen | StackBlitz> = {
@@ -407,6 +407,5 @@ The following CSS custom properties and parts are available to customize the app
 | code-bubble-controls    | The element that wraps the controls at the bottom of the component |
 | code-bubble-control     | The buttons at the bottom of the component                         |
 | code-bubble-show-source | The "show source" button                                           |
-| code-bubble-html        | The "HTML" button                                                  |
-| code-bubble-react       | The "React" button                                                 |
+| code-bubble-framework   | The framework toggle buttons                                       |
 | code-bubble-rtl         | The "RTL" button                                                   |
