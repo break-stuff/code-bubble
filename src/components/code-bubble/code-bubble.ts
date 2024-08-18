@@ -1,4 +1,4 @@
-import { LitElement, PropertyValues, html, nothing } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
 import type {
