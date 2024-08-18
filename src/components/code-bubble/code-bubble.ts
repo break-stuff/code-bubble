@@ -1,4 +1,4 @@
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, PropertyValues, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
 import type {
@@ -76,10 +76,21 @@ type CodeBlock = { [key: string]: string };
  */
 export default class CodeBubble extends LitElement {
   static styles = [styles];
+  private _config: CodeBubbleConfig = {};
 
-  /** Indicates which example should be displayed */
+  /** @internal Indicates which example should be displayed */
   @property({ attribute: false })
   framework?: string;
+
+  /** @internal The configuration object for the component */
+  @property({ attribute: false })
+  public get config(): CodeBubbleConfig {
+    return this._config;
+  }
+
+  public set config(value: CodeBubbleConfig) {
+    this._config = value;
+  }
 
   @state()
   protected showSource = false;
@@ -90,14 +101,16 @@ export default class CodeBubble extends LitElement {
   @state()
   protected codeBlocks: CodeBlock = {};
 
+  @state()
   protected componentConfig: ComponentConfig = {};
 
+  @state()
   protected sandboxConfig: FrameworkConfig<CodePen | StackBlitz> = {};
-
-  private config: CodeBubbleConfig = {};
 
   constructor() {
     super();
+    /** @internal */
+    this.config = configs[this.tagName?.toLowerCase() || ''];
     this.initProperties();
     this.updateConfig();
   }
@@ -110,6 +123,14 @@ export default class CodeBubble extends LitElement {
 
   firstUpdated(): void {
     this.createPreview();
+  }
+
+  protected willUpdate(_changedProperties: PropertyValues): void {
+    super.willUpdate(_changedProperties);
+    if (_changedProperties.has('config')) {
+      this.initProperties();
+      this.updateConfig();
+    }
   }
 
   private createPreview() {
@@ -135,13 +156,11 @@ export default class CodeBubble extends LitElement {
   }
 
   private initProperties() {
-    this.config = configs[this.tagName?.toLowerCase() || ''];
-    this.componentConfig =
-      configs[this.tagName?.toLowerCase() || ''].component!;
+    this.componentConfig = this.config.component!;
     this.sandboxConfig =
       this.config.sandbox === 'codepen'
-        ? this.config.sandboxConfig!['codePen']!
-        : this.config.sandboxConfig!['stackBlitz']!;
+        ? this.config.sandboxConfig!.codePen!
+        : this.config.sandboxConfig!.stackBlitz!;
   }
 
   private getCode() {

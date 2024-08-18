@@ -248,11 +248,12 @@
           "members": [
             {
               "kind": "field",
-              "name": "framework",
+              "name": "_config",
               "type": {
-                "text": "string | undefined"
+                "text": "CodeBubbleConfig"
               },
-              "description": "Indicates which example should be displayed"
+              "privacy": "private",
+              "default": "{}"
             },
             {
               "kind": "field",
@@ -297,23 +298,6 @@
                 "text": "FrameworkConfig<CodePen | StackBlitz>"
               },
               "privacy": "protected",
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "openSandbox",
-              "type": {
-                "text": "(example?: string, exampleType?: string) => void"
-              },
-              "privacy": "protected"
-            },
-            {
-              "kind": "field",
-              "name": "config",
-              "type": {
-                "text": "CodeBubbleConfig"
-              },
-              "privacy": "private",
               "default": "{}"
             },
             {
