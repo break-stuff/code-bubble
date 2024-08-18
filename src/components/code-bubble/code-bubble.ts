@@ -1,7 +1,13 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
-import type { CodeBubbleConfig, ComponentConfig } from '../../configs/types.js';
+import type {
+  CodeBubbleConfig,
+  CodePen,
+  ComponentConfig,
+  FrameworkConfig,
+  StackBlitz,
+} from '../../configs/types.js';
 import { configs } from '../../configs/index.js';
 import {
   useCodePenSandbox,
@@ -86,6 +92,8 @@ export default class CodeBubble extends LitElement {
 
   protected componentConfig: ComponentConfig = {};
 
+  protected sandboxConfig: FrameworkConfig<CodePen | StackBlitz> = {};
+
   protected openSandbox: (example?: string, exampleType?: string) => void =
     () => {};
 
@@ -93,9 +101,7 @@ export default class CodeBubble extends LitElement {
 
   constructor() {
     super();
-    this.config = configs[this.tagName?.toLowerCase() || ''];
-    this.componentConfig =
-      configs[this.tagName?.toLowerCase() || ''].component!;
+    this.initProperties();
     this.updateConfig();
   }
 
@@ -121,14 +127,24 @@ export default class CodeBubble extends LitElement {
     this.appendChild(preview);
   }
 
-  protected updateConfig() {
+  private updateConfig() {
     this.updateComplete.then(() => {
       this.showSource = this.componentConfig.openShowCode!;
       this.framework =
-        (localStorage.getItem(this.tagName)) ||
+        localStorage.getItem(this.tagName) ||
         this.componentConfig.defaultExample! ||
         Object.keys(this.codeBlocks)[0];
     });
+  }
+
+  private initProperties() {
+    this.config = configs[this.tagName?.toLowerCase() || ''];
+    this.componentConfig =
+      configs[this.tagName?.toLowerCase() || ''].component!;
+    this.sandboxConfig =
+      this.config.sandbox === 'codepen'
+        ? this.config.sandboxConfig!['codePen']!
+        : this.config.sandboxConfig!['stackBlitz']!;
   }
 
   private getCode() {
@@ -178,20 +194,19 @@ export default class CodeBubble extends LitElement {
   }
 
   private handleSandboxClick() {
-    const config = this.config.sandboxConfig;
-    const code = this.codeBlocks[this.framework!] || '';
+    const code = this.codeBlocks[this.framework!] ?? '';
+    const framework = !isNaN(Number(this.framework))
+      ? Object.keys(this.sandboxConfig)[parseInt(this.framework!)]
+      : this.framework;
+    const config = this.sandboxConfig[framework!];
+
+    if (!config) {
+      throw new Error(`Invalid example type: ${framework}`);
+    }
 
     this.config.sandbox === 'codepen'
-      ? useCodePenSandbox(
-          config!.codePen![this.framework!]!,
-          code ?? '',
-          this.framework,
-        )
-      : useStackBlitzSandbox(
-          config!.stackBlitz![this.framework!]!,
-          code ?? '',
-          this.framework,
-        );
+      ? useCodePenSandbox(config, code)
+      : useStackBlitzSandbox(config, code);
   }
 
   private handleCopyClick(e: MouseEvent) {

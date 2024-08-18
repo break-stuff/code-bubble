@@ -288,7 +288,16 @@
                 "text": "ComponentConfig"
               },
               "privacy": "protected",
-              "default": "configs[this.tagName?.toLowerCase() || ''].component!"
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "sandboxConfig",
+              "type": {
+                "text": "FrameworkConfig<CodePen | StackBlitz>"
+              },
+              "privacy": "protected",
+              "default": "{}"
             },
             {
               "kind": "field",
@@ -305,7 +314,7 @@
                 "text": "CodeBubbleConfig"
               },
               "privacy": "private",
-              "default": "configs[this.tagName?.toLowerCase() || '']"
+              "default": "{}"
             },
             {
               "kind": "method",
@@ -315,7 +324,12 @@
             {
               "kind": "method",
               "name": "updateConfig",
-              "privacy": "protected"
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "initProperties",
+              "privacy": "private"
             },
             {
               "kind": "method",

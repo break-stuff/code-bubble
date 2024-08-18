@@ -2,11 +2,7 @@ import sdk from '@stackblitz/sdk';
 import { formatCode } from "./format-code";
 import type { CodePen, ProjectConfig, StackBlitz } from "../configs/types";
 
-export function useCodePenSandbox(config: ProjectConfig<CodePen>, example = '', exampleType = 'html') {
-  if (!config) {
-    throw new Error(`Invalid example type: ${exampleType}`);
-  }
-
+export function useCodePenSandbox(config: ProjectConfig<CodePen>, example = '') {
   const sandboxConfig = {
     ...config.project,
     [config.exampleTemplate!.fileName]: formatCode(
@@ -31,11 +27,7 @@ export function useCodePenSandbox(config: ProjectConfig<CodePen>, example = '', 
   form.remove();
 }
 
-export function useStackBlitzSandbox(config: ProjectConfig<StackBlitz>, example = '', exampleType = 'html') {
-  if (!config) {
-    throw new Error(`Invalid example type: ${exampleType}`);
-  }
-
+export function useStackBlitzSandbox(config: ProjectConfig<StackBlitz>, example = '') {
   const templateFile = config?.exampleTemplate?.fileName || 'index.html';
 
   sdk.openProject(

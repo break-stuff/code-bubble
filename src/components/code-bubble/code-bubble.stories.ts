@@ -7,13 +7,16 @@ import CodeBubble from './code-bubble.js';
 const { events, args, argTypes, template } =
   getWcStorybookHelpers('code-bubble');
 
+let theme = 'light';
+
 new CodeBlock({
   sandbox: 'stackblitz',
   component: {
-    frameworkButtonLabel: (framework) => ({
-      html: 'HTML',
-      jsx: 'React',
-    }[framework] || framework),
+    frameworkButtonLabel: framework =>
+      ({
+        html: 'HTML',
+        jsx: 'React',
+      })[framework] || framework,
   },
 });
 
@@ -24,9 +27,21 @@ new CodeBlock({
   },
 });
 
-// codeBubble({
-//   sandbox: 'stackblitz',
-// });
+new CodeBlock({
+  sandbox: 'codepen',
+  component: {
+    tagName: 'theme-bubble',
+  },
+  sandboxConfig: {
+    codePen: {
+      html: {
+        project: {
+          html_classes: theme,
+        },
+      },
+    },
+  },
+});
 
 const meta: Meta<CodeBubble> = {
   title: 'Components/Code Block',
@@ -48,8 +63,8 @@ export default meta;
 type Story = StoryObj<CodeBubble & typeof args>;
 
 export const Default: Story = {
-  render: args =>
-    html` ${template(
+  render: args => html`
+    ${template(
       args,
       html`
         <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
@@ -68,8 +83,15 @@ export const Default: Story = {
 </code></pre>
       `,
     )}
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et magna non neque elementum dignissim. Sed dictum enim a quam eleifend eleifend. Sed blandit felis vel ipsum efficitur, eu placerat ligula convallis. Nam dictum accumsan libero. Cras eu viverra metus. Pellentesque ornare massa ex, ut mattis velit rutrum sed. Sed id lectus in purus suscipit convallis eu vehicula leo. Nullam quis iaculis magna.</p>
-    `,
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et
+      magna non neque elementum dignissim. Sed dictum enim a quam eleifend
+      eleifend. Sed blandit felis vel ipsum efficitur, eu placerat ligula
+      convallis. Nam dictum accumsan libero. Cras eu viverra metus. Pellentesque
+      ornare massa ex, ut mattis velit rutrum sed. Sed id lectus in purus
+      suscipit convallis eu vehicula leo. Nullam quis iaculis magna.
+    </p>
+  `,
   args: {},
 };
 
@@ -197,7 +219,6 @@ export const CustomTagName: Story = {
   args: {},
 };
 
-
 export const PrismJS: Story = {
   render: args => html`
     ${template(
@@ -220,5 +241,20 @@ export const PrismJS: Story = {
       `,
     )}
   `,
+  args: {},
+};
+
+export const ThemeExample: Story = {
+  render: () => {
+    theme = 'dark';
+    return html`
+      <theme-bubble>
+        <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+      </theme-bubble>
+    `;
+  },
   args: {},
 };
