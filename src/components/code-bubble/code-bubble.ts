@@ -90,6 +90,8 @@ export default class CodeBubble extends LitElement {
 
   public set config(value: CodeBubbleConfig) {
     this._config = value;
+    this.initProperties();
+    this.updateConfig();
   }
 
   @state()
@@ -123,14 +125,6 @@ export default class CodeBubble extends LitElement {
 
   firstUpdated(): void {
     this.createPreview();
-  }
-
-  protected willUpdate(_changedProperties: PropertyValues): void {
-    super.willUpdate(_changedProperties);
-    if (_changedProperties.has('config')) {
-      this.initProperties();
-      this.updateConfig();
-    }
   }
 
   private createPreview() {
