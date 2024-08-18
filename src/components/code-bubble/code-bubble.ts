@@ -94,9 +94,6 @@ export default class CodeBubble extends LitElement {
 
   protected sandboxConfig: FrameworkConfig<CodePen | StackBlitz> = {};
 
-  protected openSandbox: (example?: string, exampleType?: string) => void =
-    () => {};
-
   private config: CodeBubbleConfig = {};
 
   constructor() {
