@@ -20,7 +20,7 @@ export function mergeDeep(target: never, source: never) {
 
   for (const key in source as object) {
     if (isObject(source[key])) {
-      Object.assign(target, { [key]: mergeDeep(target[key], source[key]) });
+      Object.assign(target, { [key]: mergeDeep(target[key] || { [key]: {} }, source[key]) });
     } else {
       Object.assign(target, { [key]: source[key] });
     }

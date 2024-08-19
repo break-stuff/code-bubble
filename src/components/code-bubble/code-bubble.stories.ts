@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 import { html } from 'lit';
-import { CodeBlock } from '../../configs/index.js';
+import { CodeBlock, CodePen, ProjectConfig } from '../../configs/index.js';
 import CodeBubble from './code-bubble.js';
 
 const { events, args, argTypes, template } =
   getWcStorybookHelpers('code-bubble');
-
-let theme = 'light';
 
 new CodeBlock({
   sandbox: 'stackblitz',
@@ -36,9 +34,17 @@ new CodeBlock({
     codePen: {
       html: {
         project: {
-          html_classes: theme,
+          html_classes: '',
         },
       },
+    },
+  },
+  hooks: {
+    onSandboxOpen: (config: ProjectConfig<CodePen>) => {
+      config.project!.html_classes =
+        document.documentElement.classList.contains('theme-dark')
+          ? 'theme-dark'
+          : 'theme-light';
     },
   },
 });
@@ -246,7 +252,6 @@ export const PrismJS: Story = {
 
 export const ThemeExample: Story = {
   render: () => {
-    theme = 'dark';
     return html`
       <theme-bubble>
         <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;

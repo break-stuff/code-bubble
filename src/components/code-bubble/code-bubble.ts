@@ -214,6 +214,10 @@ export default class CodeBubble extends LitElement {
       throw new Error(`Invalid example type: ${framework}`);
     }
 
+    if(typeof this.config.hooks?.onSandboxOpen === 'function') {
+      this.config.hooks.onSandboxOpen(config);
+    }
+
     this.config.sandbox === 'codepen'
       ? useCodePenSandbox(config, code)
       : useStackBlitzSandbox(config, code);

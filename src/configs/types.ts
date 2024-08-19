@@ -10,6 +10,18 @@ export type CodeBubbleConfig = {
     /** StackBlitz sandbox configuration */
     stackBlitz?: FrameworkConfig<StackBlitz>;
   };
+  hooks?: {
+    /** Callback function that runs when the code is copied */
+    onCopy?: () => void;
+    /** Callback function when the RTL button is toggled */
+    onRtl?: (isRtl: boolean) => void;
+    /** Callback function that runs when a sandbox is opened */
+    onSandboxOpen?: (config: ProjectConfig<CodePen | StackBlitz>) => void;
+    /** Callback function that runs when the code is shown */
+    onShowCode?: (isShowCode: boolean) => void;
+    /** Callback function that runs when a language is selected */
+    onLanguageChange?: (language: string) => void;
+  };
 };
 
 export type ComponentConfig = {

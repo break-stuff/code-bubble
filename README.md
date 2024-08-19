@@ -1,6 +1,6 @@
-<center>
-  <img src="https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true" alt="code bubble logo" width="300px" />
-</center>
+<div style="text-align: center;">
+  <img src="https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true" alt="code bubble logo" width="250px" />
+</div>
 
 # Code Bubble
 
@@ -97,6 +97,18 @@ type CodeBubbleConfig = {
     codePen: FrameworkConfig<CodePen>;
     /** StackBlitz sandbox configuration */
     stackBlitz: FrameworkConfig<StackBlitz>;
+  };
+  hooks?: {
+    /** Callback function that runs when the code is copied */
+    onCopy?: () => void;
+    /** Callback function when the RTL button is toggled */
+    onRtl?: (isRtl: boolean) => void;
+    /** Callback function that runs when a sandbox is opened */
+    onSandboxOpen?: () => void;
+    /** Callback function that runs when the code section is toggled */
+    onShowCode?: (isShowCode: boolean) => void;
+    /** Callback function that runs when a language is selected */
+    onLanguageChange: (language: string) => void;
   };
 };
 ```
