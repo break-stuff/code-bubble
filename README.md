@@ -23,6 +23,7 @@ Features:
 - ✅ Framework example selection sync across instances
 - ✅ Persist selected option
 - ✅ Custom labels
+- ✅ Event hooks
 - ❌ Preview resize (coming soon)
 
 ## Usage
@@ -359,6 +360,45 @@ const bubble = new CodeBubble({
 
 bubble.setLanguage('ruby');
 ```
+
+## Hooks
+
+These hooks are designed to allow you to tap into component interactions to create custom behaviors within your application.
+
+```ts
+{
+  /** Callback function that runs when the code is copied */
+  onCopy?: () => void;
+  /** Callback function when the RTL button is toggled */
+  onRtl?: (isRtl: boolean) => void;
+  /** Callback function that runs when a sandbox is opened */
+  onSandboxOpen?: (config: ProjectConfig<CodePen | StackBlitz>) => void;
+  /** Callback function that runs when the code section is toggled */
+  onShowCode?: (isShowCode: boolean) => void;
+  /** Callback function that runs when a language is selected */
+  onLanguageChange: (language: string) => void;
+}
+```
+
+### `onCopy`
+
+This is called when the "copy code" button is clicked within the example.
+
+### `onRtl`
+
+This is called when the "RTL" button is toggled, after the `isRtl` value is updated.
+
+### `onSandboxOpen`
+
+This will be called before the standbox is opened and the `config` parameter gives you access to the sandbox configuration so you can update any values to capture any real-time contextual information like the selected theme or light/dark mode settings.
+
+### `onShowCode`
+
+This is called when the example code window is toggled after the `isShowCode` value is updated.
+
+### `onLanguageChange`
+
+This is called when the language example is changed and the `language` value has been updated.
 
 ## Styling
 

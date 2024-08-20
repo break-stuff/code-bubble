@@ -40,7 +40,7 @@ new CodeBlock({
     },
   },
   hooks: {
-    onSandboxOpen: (config: ProjectConfig<CodePen>) => {
+    onSandboxOpen(config: ProjectConfig<CodePen>) {
       config.project!.html_classes =
         document.documentElement.classList.contains('theme-dark')
           ? 'theme-dark'
