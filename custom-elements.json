@@ -332,6 +332,11 @@
             },
             {
               "kind": "method",
+              "name": "handleShowSourceClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
               "name": "handleExampleClick",
               "privacy": "private",
               "parameters": [
@@ -346,6 +351,11 @@
             {
               "kind": "method",
               "name": "showFrameworkToggles",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleRtlClick",
               "privacy": "private"
             },
             {

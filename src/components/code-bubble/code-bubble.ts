@@ -187,6 +187,14 @@ export default class CodeBubble extends LitElement {
     this.requestUpdate();
   }
 
+  private handleShowSourceClick() {
+    this.showSource = !this.showSource;
+
+    if (typeof this.config.hooks?.onShowCode === 'function') {
+      this.config.hooks.onShowCode(this.showSource);
+    }
+  }
+
   private handleExampleClick(example: string) {
     this.framework = example;
     /** @internal this is used to keep the code blocks in sync */
@@ -194,6 +202,10 @@ export default class CodeBubble extends LitElement {
       new CustomEvent('framework-change', { bubbles: true, detail: example }),
     );
     localStorage.setItem(this.tagName.toLowerCase(), example);
+
+    if (typeof this.config.hooks?.onLanguageChange === 'function') {
+      this.config.hooks.onLanguageChange(example);
+    }
   }
 
   private showFrameworkToggles() {
@@ -201,6 +213,14 @@ export default class CodeBubble extends LitElement {
       Object.keys(this.codeBlocks).length > 1 &&
       !this.componentConfig.hideFrameworkButtons
     );
+  }
+
+  private handleRtlClick() {
+    this.showRTL = !this.showRTL;
+
+    if (typeof this.config.hooks?.onRtl === 'function') {
+      this.config.hooks.onRtl(this.showRTL);
+    }
   }
 
   private handleSandboxClick() {
@@ -214,7 +234,7 @@ export default class CodeBubble extends LitElement {
       throw new Error(`Invalid example type: ${framework}`);
     }
 
-    if(typeof this.config.hooks?.onSandboxOpen === 'function') {
+    if (typeof this.config.hooks?.onSandboxOpen === 'function') {
       this.config.hooks.onSandboxOpen(config);
     }
 
@@ -231,6 +251,10 @@ export default class CodeBubble extends LitElement {
       () => (button.innerText = this.componentConfig.copyCodeButtonLabel!),
       1_000,
     );
+
+    if (typeof this.config.hooks?.onCopy === 'function') {
+      this.config.hooks.onCopy();
+    }
   }
 
   private getFramework() {
@@ -276,7 +300,7 @@ export default class CodeBubble extends LitElement {
                 part="code-bubble-control code-bubble-show-source"
                 aria-controls="code-bubble"
                 aria-expanded=${this.showSource}
-                @click=${() => (this.showSource = !this.showSource)}
+                @click=${() => this.handleShowSourceClick}
               >
                 ${this.componentConfig.showCodeButtonLabel}
               </button>`
@@ -297,7 +321,7 @@ export default class CodeBubble extends LitElement {
             ? html`<button
                 part="code-bubble-control code-bubble-rtl"
                 aria-pressed=${this.showRTL}
-                @click=${() => (this.showRTL = !this.showRTL)}
+                @click=${() => this.handleRtlClick}
               >
                 ${this.componentConfig.rtlButtonLabel}
               </button>`

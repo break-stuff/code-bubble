@@ -77,6 +77,8 @@ export default css`
   .preview {
     padding: var(--code-bubble-preview-padding);
     border: solid var(--code-bubble-border-width) var(--code-bubble-border-color);
+    border-top-left-radius: var(--code-bubble-border-radius);
+    border-top-right-radius: var(--code-bubble-border-radius);
   }
 
   .code-bubble {
