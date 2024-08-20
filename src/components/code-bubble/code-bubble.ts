@@ -189,6 +189,7 @@ export default class CodeBubble extends LitElement {
 
   private handleShowSourceClick() {
     this.showSource = !this.showSource;
+    console.log(this.showSource);
 
     if (typeof this.config.hooks?.onShowCode === 'function') {
       this.config.hooks.onShowCode(this.showSource);
@@ -300,7 +301,7 @@ export default class CodeBubble extends LitElement {
                 part="code-bubble-control code-bubble-show-source"
                 aria-controls="code-bubble"
                 aria-expanded=${this.showSource}
-                @click=${() => this.handleShowSourceClick}
+                @click=${this.handleShowSourceClick}
               >
                 ${this.componentConfig.showCodeButtonLabel}
               </button>`
@@ -321,7 +322,7 @@ export default class CodeBubble extends LitElement {
             ? html`<button
                 part="code-bubble-control code-bubble-rtl"
                 aria-pressed=${this.showRTL}
-                @click=${() => this.handleRtlClick}
+                @click=${this.handleRtlClick}
               >
                 ${this.componentConfig.rtlButtonLabel}
               </button>`
