@@ -6,20 +6,17 @@ import type { CodeBubbleConfig } from './types.js';
 
 export * from './types.js';
 
-export const configs: { [key: string]: CodeBubbleConfig } = {};
+export const configs: Map<string, CodeBubbleConfig> = new Map();
 
 export class CodeBlock {
   tagName = '';
-  config = defaultCodeBubbleConfig;
+  config = { ...defaultCodeBubbleConfig };
 
   constructor(config?: CodeBubbleConfig) {
-    this.setConfig(config);
     this.tagName = config?.component?.tagName || 'code-bubble';
+    this.setConfig(config);
     try {
-      customElements.define(
-        this.config.component!.tagName!,
-        class extends CodeBubble {},
-      );
+      customElements.define(this.tagName, class extends CodeBubble {});
     } catch (error) {
       console.error('Error defining custom element', error);
     }
@@ -42,7 +39,8 @@ export class CodeBlock {
 
   private setConfig(userConfig?: CodeBubbleConfig) {
     this.config = mergeDeep(this.config as never, userConfig as never);
-    configs[this.config.component!.tagName!] = this.config;
+    configs.set(this.tagName, this.config);
+    console.log('configs', configs);
   }
 
   private updateComponentConfig() {
