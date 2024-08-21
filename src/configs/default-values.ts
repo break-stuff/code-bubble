@@ -162,7 +162,7 @@ render(<App />, rootElement);
 }
         `,
       'index.html': `<!DOCTYPE html>
-<html lang="en" class="he-theme-light">
+<html>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
