@@ -207,7 +207,6 @@ export default class CodeBubble extends LitElement {
 
   private handleShowSourceClick() {
     this.showSource = !this.showSource;
-    console.log(this.showSource);
 
     if (typeof this.config.hooks?.onShowCode === 'function') {
       this.config.hooks.onShowCode(this.showSource);

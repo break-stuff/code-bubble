@@ -40,7 +40,6 @@ export class CodeBlock {
   private setConfig(userConfig?: CodeBubbleConfig) {
     this.config = mergeDeep(this.config as never, userConfig as never);
     configs.set(this.tagName, this.config);
-    console.log('configs', configs);
   }
 
   private updateComponentConfig() {
