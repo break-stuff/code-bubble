@@ -137,6 +137,24 @@ export default class CodeBubble extends LitElement {
     preview.innerHTML =
       this.codeBlocks[this.framework! || Object.keys(this.codeBlocks)[0]];
     this.appendChild(preview);
+    this.loadScripts(preview);
+  }
+
+  private loadScripts(preview: HTMLDivElement) {
+    const scripts = [...preview.getElementsByTagName('script')];
+
+    scripts.forEach(script => {
+      const newScript = document.createElement('script');
+      if (script.src) {
+        newScript.src = script.src;
+      } else if (script.textContent) {
+        newScript.textContent = script.textContent;
+      } else if (script.innerText) {
+        newScript.innerText = script.innerText;
+      }
+
+      document.body.appendChild(newScript);
+    });
   }
 
   private updateConfig() {
