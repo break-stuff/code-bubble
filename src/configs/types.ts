@@ -1,3 +1,4 @@
+/** Global configuration for a code bubble instance */
 export type CodeBubbleConfig = {
   /** Which sandbox environment your code will open in */
   sandbox?: 'codepen' | 'stackblitz';
@@ -10,6 +11,7 @@ export type CodeBubbleConfig = {
     /** StackBlitz sandbox configuration */
     stackBlitz?: FrameworkConfig<StackBlitz>;
   };
+  /** Callback functions for the code bubble component */
   hooks?: {
     /** Callback function that runs when the code is copied */
     onCopy?: () => void;
@@ -24,6 +26,7 @@ export type CodeBubbleConfig = {
   };
 };
 
+/** Configuration for the component rendered on the site */
 export type ComponentConfig = {
   /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
   tagName?: string;
@@ -57,11 +60,13 @@ export type ComponentConfig = {
   frameworkButtonLabel?: (framework: string) => string;
 };
 
+/** Configuration for the sandbox environments using the language tag as the key (`html`, `jsx`, `ts`, etc.) */
 export type FrameworkConfig<T extends CodePen | StackBlitz> = {
   /** CodePen project configuration for language examples */
   [key: string]: ProjectConfig<T>;
 };
 
+/** Configuration for the sandbox project */
 export type ProjectConfig<T extends CodePen | StackBlitz> = {
   /** Sandbox API configuration */
   project?: T;
@@ -69,6 +74,7 @@ export type ProjectConfig<T extends CodePen | StackBlitz> = {
   exampleTemplate?: ExampleTemplateConfig;
 };
 
+/** Configuration for the code block that's rendered in the sandbox environment */
 export type ExampleTemplateConfig = {
   /** Indicates which code block has the template */
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -77,6 +83,7 @@ export type ExampleTemplateConfig = {
   template: string;
 };
 
+/** CodePen project configuration */
 export type CodePen = {
   /** Pen title */
   title?: string;
@@ -123,6 +130,7 @@ export type CodePen = {
   js_external?: string;
 };
 
+/** StackBlitz project configuration */
 export type StackBlitz = {
   title?: string;
   description?: string;
