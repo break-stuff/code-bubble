@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 import { html } from 'lit';
-import { CodeBlock, CodePen, ProjectConfig } from '../../configs/index.js';
+import { CodeBlock, ProjectConfig, StackBlitz } from '../../configs/index.js';
 import CodeBubble from './code-bubble.js';
 
 const { events, args, argTypes, template } =
   getWcStorybookHelpers('code-bubble');
+
+let selectedLang = 'html';
 
 new CodeBlock({
   sandbox: 'stackblitz',
@@ -26,26 +28,54 @@ new CodeBlock({
 });
 
 new CodeBlock({
-  sandbox: 'codepen',
+  sandbox: 'stackblitz',
   component: {
     tagName: 'theme-bubble',
   },
-  sandboxConfig: {
-    codePen: {
-      html: {
-        project: {
-          html_classes: '',
-        },
-      },
-    },
-  },
   hooks: {
-    onSandboxOpen(config: ProjectConfig<CodePen>) {
-      config.project!.html_classes =
-        document.documentElement.classList.contains('theme-dark')
-          ? 'theme-dark'
-          : 'theme-light';
+    onLanguageChange(language) {
+      selectedLang = language;
     },
+    onSandboxOpen(config: ProjectConfig<StackBlitz>) {
+      const theme = 'light-theme';
+      if (selectedLang === 'html') {
+        config.exampleTemplate = {
+          fileName: 'index.html',
+          template: `<!doctype html>
+<html lang="en" class="${theme}">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vite App</title>
+</head>
+<body>
+<div id="app">
+<button appearance="accent">Accent</button>
+<button appearance="neutral">Neutral</button>
+<button appearance="lightweight">Lightweight</button>
+
+</div>
+<script type="module" src="/main.js"></script>
+</body>
+</html>`,
+        };
+      } else {
+        config.project!.files!['index.html'] = `<!DOCTYPE html>
+<html class="${theme}">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>React code example</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/index.tsx"></script>
+</body>
+</html>`;
+      }
+},
   },
 });
 
@@ -288,7 +318,7 @@ export const StorybookDocBlock: Story = {
     ${template(
       args,
       html`
-<pre><div class="docblock-source sb-unstyled css-12u9f4"><div dir="ltr" scrollbarsize="6" offset="2" class="css-1dnv2kn" style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"><style>[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}</style><div data-radix-scroll-area-viewport="" class="css-uwwqev" style="overflow: scroll;"><div style="min-width: 100%; display: table;"><pre class="prismjs css-4zr3vl" slot="html"><div class="language-html css-zye6j" style="white-space: pre;"><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion</span><span class="token tag punctuation">&gt;</span><span class="">
+        <pre><div class="docblock-source sb-unstyled css-12u9f4"><div dir="ltr" scrollbarsize="6" offset="2" class="css-1dnv2kn" style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"><style>[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}</style><div data-radix-scroll-area-viewport="" class="css-uwwqev" style="overflow: scroll;"><div style="min-width: 100%; display: table;"><pre class="prismjs css-4zr3vl" slot="html"><div class="language-html css-zye6j" style="white-space: pre;"><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion</span><span class="token tag punctuation">&gt;</span><span class="">
 </span><span class="">  </span><span class="token tag punctuation">&lt;</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
 </span><span class="">    </span><span class="token tag punctuation">&lt;</span><span class="token tag">span</span><span class="token tag"> </span><span class="token tag attr-name">slot</span><span class="token tag attr-value punctuation attr-equals">=</span><span class="token tag attr-value punctuation">"</span><span class="token tag attr-value">heading</span><span class="token tag attr-value punctuation">"</span><span class="token tag punctuation">&gt;</span><span class="">Accordion Header 1</span><span class="token tag punctuation">&lt;/</span><span class="token tag">span</span><span class="token tag punctuation">&gt;</span><span class="">
 </span>    Accordion Panel 1
@@ -302,7 +332,7 @@ export const StorybookDocBlock: Story = {
 </span>    Accordion Panel 3
 <span class="">  </span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion-item</span><span class="token tag punctuation">&gt;</span><span class="">
 </span><span class=""></span><span class="token tag punctuation">&lt;/</span><span class="token tag">fui-accordion</span><span class="token tag punctuation">&gt;</span></div></pre></div></div></div><div class="css-11xgcgt"><button class="css-1fdphfk">Copy</button></div></div></pre>
-<pre><div class="docblock-source sb-unstyled css-12u9f4"><div dir="ltr" scrollbarsize="6" offset="2" class="css-1dnv2kn" style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"><style>[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}</style><div data-radix-scroll-area-viewport="" class="css-uwwqev" style="overflow: scroll;"><div style="min-width: 100%; display: table;"><pre class="prismjs css-4zr3vl" slot="jsx"><div class="language-jsx css-zye6j" style="white-space: pre;"><span class="token keyword module">import</span><span class=""> </span><span class="token imports punctuation">{</span><span class="token imports"> </span><span class="token imports maybe-class-name">FluentAccordion</span><span class="token imports punctuation">,</span><span class="token imports"> </span><span class="token imports maybe-class-name">FluentAccordionItem</span><span class="token imports"> </span><span class="token imports punctuation">}</span><span class=""> </span><span class="token keyword module">from</span><span class=""> </span><span class="token string">'@charm/fui/react'</span><span class="token punctuation">;</span><span class="">
+        <pre><div class="docblock-source sb-unstyled css-12u9f4"><div dir="ltr" scrollbarsize="6" offset="2" class="css-1dnv2kn" style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"><style>[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}</style><div data-radix-scroll-area-viewport="" class="css-uwwqev" style="overflow: scroll;"><div style="min-width: 100%; display: table;"><pre class="prismjs css-4zr3vl" slot="jsx"><div class="language-jsx css-zye6j" style="white-space: pre;"><span class="token keyword module">import</span><span class=""> </span><span class="token imports punctuation">{</span><span class="token imports"> </span><span class="token imports maybe-class-name">FluentAccordion</span><span class="token imports punctuation">,</span><span class="token imports"> </span><span class="token imports maybe-class-name">FluentAccordionItem</span><span class="token imports"> </span><span class="token imports punctuation">}</span><span class=""> </span><span class="token keyword module">from</span><span class=""> </span><span class="token string">'@charm/fui/react'</span><span class="token punctuation">;</span><span class="">
 </span>
 <span class=""></span><span class="token keyword module">export</span><span class=""> </span><span class="token keyword module">default</span><span class=""> </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class=""> </span><span class="token arrow operator">=&gt;</span><span class=""> </span><span class="token punctuation">{</span><span class="">
 </span><span class="">  </span><span class="token keyword control-flow">return</span><span class=""> </span><span class="token punctuation">(</span><span class="">
@@ -324,8 +354,32 @@ export const StorybookDocBlock: Story = {
 </span><span class="token plain-text">    </span><span class="token tag punctuation">&lt;/</span><span class="token tag punctuation">&gt;</span><span class="">
 </span><span class="">  </span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="">
 </span><span class=""></span><span class="token punctuation">}</span><span class="token punctuation">;</span></div></pre></div></div></div><div class="css-11xgcgt"><button class="css-1fdphfk">Copy</button></div></div></pre>
-`,
+      `,
     )}
   `,
+  args: {},
+};
+
+export const Hooks: Story = {
+  render: () => {
+    return html`
+      <theme-bubble>
+      <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+        <pre><code class="language-jsx">export default () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+      &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+      &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+    &lt;/&gt;
+  );
+};
+</code></pre>
+      </theme-bubble>
+    `;
+  },
   args: {},
 };
