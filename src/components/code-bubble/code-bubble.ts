@@ -246,7 +246,7 @@ export default class CodeBubble extends LitElement {
     const framework = !isNaN(Number(this.framework))
       ? Object.keys(this.sandboxConfig)[parseInt(this.framework!)]
       : this.framework;
-    const config = this.sandboxConfig[framework!];
+    const config = structuredClone(this.sandboxConfig[framework!]);
 
     if (!config) {
       throw new Error(`Invalid example type: ${framework}`);
