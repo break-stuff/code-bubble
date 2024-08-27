@@ -51,7 +51,7 @@ export class CodeBlock {
    * NOTE: If your environment uses DOM caching, you may need to refresh the page to see the changes.
    */
   updateConfig(userConfig: CodeBubbleConfig) {
-    if (userConfig.component?.tagName !== this.tagName) {
+    if (userConfig.component?.tagName && userConfig.component.tagName !== this.tagName) {
       console.error(
         `The component tag name cannot be changed after the component has been created. If you need a component with a new tag name, please create a new instance of the CodeBubble class.`,
       );
