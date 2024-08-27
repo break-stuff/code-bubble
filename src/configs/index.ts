@@ -22,6 +22,7 @@ export class CodeBlock {
       console.error(
         `A component with the tag name ${this.tagName} already exists. Please specify a new component tag name.`,
       );
+      return;
     }
 
     this.setConfig(config);
@@ -43,13 +44,13 @@ export class CodeBlock {
     localStorage.setItem(this.config.component!.tagName!.toLowerCase(), lang);
   }
 
-  /** 
-   * This updates the configuration for all existing and new instances of this component. 
+  /**
+   * This updates the configuration for all existing and new instances of this component.
    * _The component tag name cannot be changed after the component has been created._
    * NOTE: If your environment uses DOM caching, you may need to refresh the page to see the changes.
    */
   updateConfig(userConfig: CodeBubbleConfig) {
-    if(userConfig.component?.tagName !== this.tagName) {
+    if (userConfig.component?.tagName !== this.tagName) {
       console.error(
         `The component tag name cannot be changed after the component has been created. If you need a component with a new tag name, please create a new instance of the CodeBubble class.`,
       );
