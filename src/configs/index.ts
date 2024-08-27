@@ -14,7 +14,7 @@ export const configs: Map<string, CodeBubbleConfig> = new Map();
  */
 export class CodeBlock {
   tagName = '';
-  config = { ...defaultCodeBubbleConfig };
+  config: CodeBubbleConfig = { ...defaultCodeBubbleConfig };
 
   constructor(config?: CodeBubbleConfig) {
     this.tagName = config?.component?.tagName || 'code-bubble';
@@ -42,6 +42,7 @@ export class CodeBlock {
         y.framework = lang;
       });
     localStorage.setItem(this.config.component!.tagName!.toLowerCase(), lang);
+    this.config.hooks?.onLanguageChange?.(lang);
   }
 
   /**
