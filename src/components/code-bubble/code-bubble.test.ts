@@ -21,20 +21,44 @@ async function getCodeBubble(config?: CodeBubbleConfig) {
   return { codeBlock, codeBubble };
 }
 
+describe('CodeBlock', () => {
+  it('should set the language', async () => {
+    const { codeBlock, codeBubble } = await getCodeBubble();
+    codeBlock.setLanguage('html');
+    expect(codeBubble.framework).to.equal('html');
+  });
+});
+
 describe('CodeBubble', () => {
-  describe('CodeBlock', () => {
-    it('should set the language', async () => {
-      const { codeBlock, codeBubble } = await getCodeBubble();
-      codeBlock.setLanguage('html');
-      expect(codeBubble.framework).to.equal('html');
+  it('should render the code block', async () => {
+    const { codeBubble } = await getCodeBubble();
+
+    await expect(codeBubble).to.be.accessible();
+  });
+
+  describe('tag name', () => {
+    it('should create custom element with the tag name "test-bubble"', async () => {
+      await getCodeBubble({
+        component: { tagName: 'test-bubble' },
+      });
+
+      expect(customElements.get('test-bubble')).to.not.be.undefined;
     });
   });
 
-  describe('CodeBubble', () => {
-    it('should render the code block', async () => {
-      const { codeBubble } = await getCodeBubble();
+  describe('show code button', () => {
+    // it('should hide the show code button', async () => {
+    //   const { codeBubble } = await getCodeBubble({
+    //     component: { hideShowCodeButton: true },
+    //   });
 
-      expect(codeBubble).to.be.accessible();
-    });
+    //   expect(codeBubble.showCodeButton).to.be.false;
+    // });
+
+    // it('should show the show code button', async () => {
+    //   const { codeBubble } = await getCodeBubble();
+
+    //   expect(codeBubble.showCodeButton).to.be.true;
+    // });
   });
 });
