@@ -92,7 +92,7 @@ export default css`
     display: none;
   }
 
-  .copy-code {
+  .copy-code-button {
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;

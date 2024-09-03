@@ -4,13 +4,14 @@ import type {
   CodePen,
   FrameworkConfig,
   StackBlitz,
-} from './types';
+} from './types.js';
 
 const componentConfig: ComponentConfig = {
   tagName: 'code-bubble',
   openShowCode: false,
   hideShowCodeButton: false,
   showCodeButtonLabel: 'Show Code',
+  hideCodeButtonLabel: 'Hide Code',
   hideCopyCodeButton: false,
   copyCodeButtonLabel: 'Copy',
   copyCodeButtonCopiedLabel: 'Copied',
@@ -18,7 +19,7 @@ const componentConfig: ComponentConfig = {
   rtlButtonLabel: 'RTL',
   hideSandboxButton: false,
   sandboxButtonLabel: 'Sandbox',
-  frameworkButtonLabel: (framework) => framework,
+  frameworkButtonLabel: (framework: string) => framework,
 };
 
 const codePenDefaultConfig: FrameworkConfig<CodePen> = {

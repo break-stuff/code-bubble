@@ -33,7 +33,7 @@ export type ComponentConfig = {
   /** Opens the "show code" section by default */
   openShowCode?: boolean;
   /** Indicates which example to show by default */
-  defaultExample?: 'html' | 'react';
+  defaultExample?: string;
   /** Hides the "copy code" button */
   hideCopyCodeButton?: boolean;
   /** Hides the "RTL" button */
@@ -46,8 +46,10 @@ export type ComponentConfig = {
   hideFrameworkButtons?: boolean;
   /** Hides the preview window where the code is rendered */
   hidePreview?: boolean;
-  /** Text displayed in the "show code" button  */
+  /** Text displayed in the "show code" button when it is collapsed  */
   showCodeButtonLabel?: string;
+  /** Text displayed in the "show code" button when it is expanded  */
+  hideCodeButtonLabel?: string;
   /** Text displayed in the "copy code" button  */
   copyCodeButtonLabel?: string;
   /** Text displayed in the "copy code" button when text has been copied  */
