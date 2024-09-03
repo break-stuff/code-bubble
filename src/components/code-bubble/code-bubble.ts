@@ -305,7 +305,7 @@ export default class CodeBubble extends LitElement {
           <slot name="${this.getFramework()}"></slot>
           ${!this.componentConfig.hideCopyCodeButton &&
           html`<button
-            class="copy-code"
+            class="copy-code-button"
             part="code-bubble-copy-button"
             @click=${this.handleCopyClick}
           >
@@ -315,18 +315,22 @@ export default class CodeBubble extends LitElement {
         <div class="controls" part="code-bubble-controls">
           ${!this.componentConfig.hideShowCodeButton
             ? html`<button
+                class="show-code-button"
                 part="code-bubble-control code-bubble-show-source"
                 aria-controls="code-bubble"
                 aria-expanded=${this.showSource}
                 @click=${this.handleShowSourceClick}
               >
-                ${this.componentConfig.showCodeButtonLabel}
+                ${this.showSource
+                  ? this.componentConfig.hideCodeButtonLabel
+                  : this.componentConfig.showCodeButtonLabel}
               </button>`
             : nothing}
           ${this.showFrameworkToggles()
             ? Object.keys(this.codeBlocks).map(
                 x =>
                   html` <button
+                    class="framework-button"
                     part="code-bubble-control code-bubble-html"
                     aria-pressed=${this.framework === x}
                     @click=${() => this.handleExampleClick(x)}
@@ -337,6 +341,7 @@ export default class CodeBubble extends LitElement {
             : nothing}
           ${!this.componentConfig.hideRtlButton
             ? html`<button
+                class="rtl-button"
                 part="code-bubble-control code-bubble-rtl"
                 aria-pressed=${this.showRTL}
                 @click=${this.handleRtlClick}
@@ -346,6 +351,7 @@ export default class CodeBubble extends LitElement {
             : nothing}
           ${!this.componentConfig.hideSandboxButton
             ? html`<button
+                class="sandbox-button"
                 part="code-bubble-control code-bubble-sandbox"
                 @click=${this.handleSandboxClick}
               >
