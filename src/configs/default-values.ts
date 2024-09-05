@@ -9,17 +9,24 @@ import type {
 const componentConfig: ComponentConfig = {
   tagName: 'code-bubble',
   openShowCode: false,
-  hideShowCodeButton: false,
-  showCodeButtonLabel: 'Show Code',
-  hideCodeButtonLabel: 'Hide Code',
-  hideCopyCodeButton: false,
-  copyCodeButtonLabel: 'Copy',
-  copyCodeButtonCopiedLabel: 'Copied',
-  hideRtlButton: false,
-  rtlButtonLabel: 'RTL',
-  hideSandboxButton: false,
-  sandboxButtonLabel: 'Sandbox',
-  frameworkButtonLabel: (framework: string) => framework,
+  showCodeButton: {
+    openLabel: 'Show Code',
+    closeLabel: 'Hide Code',
+    hide: false,
+  },
+  copyCodeButton: {
+    label: 'Copy Code',
+    copiedLabel: 'Copied',
+  },
+  rtlButton: {
+    label: 'RTL',
+  },
+  sandboxButton: {
+    label: 'Sandbox',
+  },
+  frameworkButtons: {
+    label: (framework: string) => framework,
+  },
 };
 
 const codePenDefaultConfig: FrameworkConfig<CodePen> = {

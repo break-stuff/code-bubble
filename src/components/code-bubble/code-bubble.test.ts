@@ -75,26 +75,38 @@ describe('CodeBubble', () => {
     it('should hide the show code button', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hideShowCodeButton: true } });
+      codeBlock.updateConfig({ component: { showCodeButton: { hide: true } } });
       const showCodeButton =
         codeBubble.shadowRoot?.querySelector('.show-code-button');
 
       expect(showCodeButton).to.be.null;
-      codeBlock.updateConfig({ component: { hideShowCodeButton: false } });
+      codeBlock.updateConfig({
+        component: { showCodeButton: { hide: false } },
+      });
     });
 
     it('should update the "show code button" label', async () => {
       const codeBubble = await getCodeBubble();
 
       codeBlock.updateConfig({
-        component: { showCodeButtonLabel: 'Test Label' },
+        component: {
+          showCodeButton: {
+            openLabel: 'Display Code',
+            closeLabel: 'Hide Code',
+          },
+        },
       });
       const showCodeButton =
         codeBubble.shadowRoot?.querySelector<HTMLButtonElement>(
           '.show-code-button',
         );
 
-      expect(showCodeButton?.innerText).to.equal('Test Label');
+      expect(showCodeButton?.innerText).to.equal('Display Code');
+
+      showCodeButton?.click();
+      await elementUpdated(codeBubble);
+
+      expect(showCodeButton?.innerText).to.equal('Hide Code');
     });
 
     it('should execute the "onShowCode" callback', async () => {
@@ -142,19 +154,21 @@ describe('CodeBubble', () => {
     it('should hide the copy code button', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hideCopyCodeButton: true } });
+      codeBlock.updateConfig({ component: { copyCodeButton: { hide: true } } });
       const copyCodeButton =
         codeBubble.shadowRoot?.querySelector('.copy-code-button');
 
       expect(copyCodeButton).to.be.null;
-      codeBlock.updateConfig({ component: { hideCopyCodeButton: false } });
+      codeBlock.updateConfig({
+        component: { copyCodeButton: { hide: false } },
+      });
     });
 
     it.skip('should update the "copy code button" label', async () => {
       const codeBubble = await getCodeBubble();
 
       codeBlock.updateConfig({
-        component: { copyCodeButtonLabel: 'Test Label' },
+        component: { copyCodeButton: { label: 'Test Label' } },
       });
       await elementUpdated(codeBubble);
       const copyCodeButton =
@@ -172,7 +186,7 @@ describe('CodeBubble', () => {
       const codeBubble = await getCodeBubble();
 
       codeBlock.updateConfig({
-        component: { copyCodeButtonCopiedLabel: 'Test Copied Label' },
+        component: { copyCodeButton: { copiedLabel: 'Test Copied Label' } },
       });
       const copyCodeButton =
         codeBubble.shadowRoot?.querySelector<HTMLButtonElement>(
@@ -210,18 +224,18 @@ describe('CodeBubble', () => {
     it('should hide the RTL button', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hideRtlButton: true } });
+      codeBlock.updateConfig({ component: { rtlButton: { hide: true } } });
       const rtlButton = codeBubble.shadowRoot?.querySelector('.rtl-button');
 
       expect(rtlButton).to.be.null;
-      codeBlock.updateConfig({ component: { hideRtlButton: false } });
+      codeBlock.updateConfig({ component: { rtlButton: { hide: false } } });
     });
 
     it('should update the "RTL button" label', async () => {
       const codeBubble = await getCodeBubble();
 
       codeBlock.updateConfig({
-        component: { rtlButtonLabel: 'Test Label' },
+        component: { rtlButton: { label: 'Test Label' } },
       });
       const rtlButton =
         codeBubble.shadowRoot?.querySelector<HTMLButtonElement>('.rtl-button');
@@ -253,19 +267,19 @@ describe('CodeBubble', () => {
     it('should hide the sandbox button', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hideSandboxButton: true } });
+      codeBlock.updateConfig({ component: { sandboxButton: { hide: true } } });
       const sandboxButton =
         codeBubble.shadowRoot?.querySelector('.sandbox-button');
 
       expect(sandboxButton).to.be.null;
-      codeBlock.updateConfig({ component: { hideSandboxButton: false } });
+      codeBlock.updateConfig({ component: { sandboxButton: { hide: false } } });
     });
 
     it('should update the "sandbox button" label', async () => {
       const codeBubble = await getCodeBubble();
 
       codeBlock.updateConfig({
-        component: { sandboxButtonLabel: 'Test Label' },
+        component: { sandboxButton: { label: 'Test Label' } },
       });
       const sandboxButton =
         codeBubble.shadowRoot?.querySelector<HTMLButtonElement>(
@@ -301,12 +315,16 @@ describe('CodeBubble', () => {
     it('should hide the framework buttons', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hideFrameworkButtons: true } });
+      codeBlock.updateConfig({
+        component: { frameworkButtons: { hide: true } },
+      });
       const frameworkButtons =
         codeBubble.shadowRoot?.querySelector('.framework-button');
 
       expect(frameworkButtons).to.be.null;
-      codeBlock.updateConfig({ component: { hideFrameworkButtons: false } });
+      codeBlock.updateConfig({
+        component: { frameworkButtons: { hide: false } },
+      });
     });
 
     it('should hide the framework buttons when only one example is provided', async () => {
@@ -330,8 +348,9 @@ describe('CodeBubble', () => {
 
       codeBlock.updateConfig({
         component: {
-          frameworkButtonLabel: (framework: string) =>
-            `Test Label ${framework}`,
+          frameworkButtons: {
+            label: (framework: string) => `Test Label ${framework}`,
+          },
         },
       });
       const frameworkButtons =
@@ -342,7 +361,9 @@ describe('CodeBubble', () => {
       expect(frameworkButtons?.innerText).to.equal('Test Label html');
       codeBlock.updateConfig({
         component: {
-          frameworkButtonLabel: (framework: string) => framework,
+          frameworkButtons: {
+            label: (framework: string) => framework,
+          },
         },
       });
     });
@@ -375,11 +396,11 @@ describe('CodeBubble', () => {
     it('should hide the preview', async () => {
       const codeBubble = await getCodeBubble();
 
-      codeBlock.updateConfig({ component: { hidePreview: true } });
+      codeBlock.updateConfig({ component: { preview: { hide: true } } });
       const preview = codeBubble.shadowRoot?.querySelector('.preview');
 
       expect(preview).to.be.null;
-      codeBlock.updateConfig({ component: { hidePreview: false } });
+      codeBlock.updateConfig({ component: { preview: { hide: false } } });
     });
   });
 

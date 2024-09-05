@@ -22,6 +22,7 @@ export default css`
     --code-bubble-button-bg-color: inherit;
     --code-bubble-button-border-color: var(--code-bubble-border-color);
     --code-bubble-button-fg-color: inherit;
+    --code-bubble-button-label-gap: 0.5rem;
     --code-bubble-copy-button-bg-color: inherit;
     --code-bubble-copy-button-border-color: var(--code-bubble-border-color);
     --code-bubble-copy-button-fg-color: inherit;
@@ -54,7 +55,7 @@ export default css`
     display: block;
     opacity: 0;
   }
-  
+
   :host([code-bubble]) {
     opacity: 1;
   }
@@ -76,7 +77,8 @@ export default css`
 
   .preview {
     padding: var(--code-bubble-preview-padding);
-    border: solid var(--code-bubble-border-width) var(--code-bubble-border-color);
+    border: solid var(--code-bubble-border-width)
+      var(--code-bubble-border-color);
     border-top-left-radius: var(--code-bubble-border-radius);
     border-top-right-radius: var(--code-bubble-border-radius);
   }
@@ -128,6 +130,12 @@ export default css`
     background-color: var(--code-bubble-button-bg-color);
     color: var(--code-bubble-button-fg-color);
     border: solid 1px var(--code-bubble-button-border-color);
+    display: flex;
+    gap: var(--code-bubble-button-icon-gap);
+  }
+
+  .controls button:has(.visually-hidden) {
+    --code-bubble-button-icon-gap: 0px;
   }
 
   .controls button:focus-visible {
@@ -163,5 +171,15 @@ export default css`
 
   .controls button:not(:first-of-type) {
     margin-inline-start: calc(var(--code-bubble-border-width) * -1);
+  }
+
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 `;
