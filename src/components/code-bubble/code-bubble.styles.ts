@@ -12,6 +12,7 @@ export default css`
     --code-bubble-button-icon-gap: 0.5rem;
     --code-bubble-button-padding-x: 1rem;
     --code-bubble-button-padding-y: 1rem;
+    --code-bubble-button-label-gap: 0.5rem;
     --code-bubble-copy-button-font-weight: inherit;
     --code-bubble-copy-button-padding-x: 0.5rem;
     --code-bubble-copy-button-padding-y: 0.5rem;
@@ -22,7 +23,6 @@ export default css`
     --code-bubble-button-bg-color: inherit;
     --code-bubble-button-border-color: var(--code-bubble-border-color);
     --code-bubble-button-fg-color: inherit;
-    --code-bubble-button-label-gap: 0.5rem;
     --code-bubble-copy-button-bg-color: inherit;
     --code-bubble-copy-button-border-color: var(--code-bubble-border-color);
     --code-bubble-copy-button-fg-color: inherit;

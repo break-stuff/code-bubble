@@ -62,13 +62,13 @@ describe('CodeBubble', () => {
         codeBubble.shadowRoot?.querySelector<HTMLDetailsElement>(
           '.code-bubble',
         );
-      expect(showCodeButton?.innerText).to.equal('Show Code');
+      expect(showCodeButton?.innerText.replace('\n', '')).to.equal('Show Code');
 
       showCodeButton?.click();
       await elementUpdated(codeBubble);
 
       expect(codeBlock?.open).to.be.true;
-      expect(showCodeButton?.innerText).to.equal('Hide Code');
+      expect(showCodeButton?.innerText.replace('\n', '')).to.equal('Hide Code');
       await expect(codeBubble).to.be.accessible();
     });
 
@@ -91,8 +91,8 @@ describe('CodeBubble', () => {
       codeBlock.updateConfig({
         component: {
           showCodeButton: {
-            openLabel: 'Display Code',
-            closeLabel: 'Hide Code',
+            openedLabel: 'Hide Code',
+            closedLabel: 'Display Code',
           },
         },
       });
@@ -101,12 +101,12 @@ describe('CodeBubble', () => {
           '.show-code-button',
         );
 
-      expect(showCodeButton?.innerText).to.equal('Display Code');
+      expect(showCodeButton?.innerText.replace('\n', '')).to.equal('Display Code');
 
       showCodeButton?.click();
       await elementUpdated(codeBubble);
 
-      expect(showCodeButton?.innerText).to.equal('Hide Code');
+      expect(showCodeButton?.innerText.replace('\n', '')).to.equal('Hide Code');
     });
 
     it('should execute the "onShowCode" callback', async () => {
@@ -240,7 +240,7 @@ describe('CodeBubble', () => {
       const rtlButton =
         codeBubble.shadowRoot?.querySelector<HTMLButtonElement>('.rtl-button');
 
-      expect(rtlButton?.innerText).to.equal('Test Label');
+      expect(rtlButton?.innerText.replace('\n', '')).to.equal('Test Label');
     });
 
     it('should execute the "onRtl" callback', async () => {
@@ -358,7 +358,7 @@ describe('CodeBubble', () => {
           '.framework-button',
         );
 
-      expect(frameworkButtons?.innerText).to.equal('Test Label html');
+      expect(frameworkButtons?.innerText.replace('\n', '')).to.equal('Test Label html');
       codeBlock.updateConfig({
         component: {
           frameworkButtons: {
@@ -414,7 +414,7 @@ describe('CodeBubble', () => {
           '.framework-button[aria-pressed="true"]',
         );
 
-      expect(frameworkButton?.innerText).to.equal('jsx');
+      expect(frameworkButton?.innerText.replace('\n', '')).to.equal('jsx');
       codeBlock.updateConfig({ component: { defaultExample: 'html' } });
     });
   });

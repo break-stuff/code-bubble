@@ -338,14 +338,14 @@ export default class CodeBubble extends LitElement {
                     : ''}"
                 >
                   ${this.showSource
-                    ? this.componentConfig.showCodeButton?.closeLabel
-                    : this.componentConfig.showCodeButton?.openLabel}
+                    ? this.componentConfig.showCodeButton?.openedLabel
+                    : this.componentConfig.showCodeButton?.closedLabel}
                 </span>
-                ${this.showSource && this.componentConfig.showCodeButton?.icon
-                  ? unsafeSVG(this.componentConfig.showCodeButton?.icon)
+                ${this.showSource && this.componentConfig.showCodeButton?.openedIcon
+                  ? unsafeSVG(this.componentConfig.showCodeButton?.openedIcon)
                   : ''}
-                ${!this.showSource && this.componentConfig.showCodeButton?.icon
-                  ? unsafeSVG(this.componentConfig.showCodeButton?.icon)
+                ${!this.showSource && this.componentConfig.showCodeButton?.closedIcon
+                  ? unsafeSVG(this.componentConfig.showCodeButton?.closedIcon)
                   : ''}
               </button>`
             : nothing}

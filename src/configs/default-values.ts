@@ -10,8 +10,8 @@ const componentConfig: ComponentConfig = {
   tagName: 'code-bubble',
   openShowCode: false,
   showCodeButton: {
-    openLabel: 'Show Code',
-    closeLabel: 'Hide Code',
+    closedLabel: 'Show Code',
+    openedLabel: 'Hide Code',
     hide: false,
   },
   copyCodeButton: {

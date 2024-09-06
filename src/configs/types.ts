@@ -87,14 +87,16 @@ export type ComponentConfig = {
   };
   /** Configuration for the "show code" toggle button */
   showCodeButton?: {
-    /** Text displayed when it is collapsed  */
-    openLabel?: string;
-    /** Text displayed when it is expanded  */
-    closeLabel?: string;
+    /** Text displayed when example code is opened  */
+    openedLabel?: string;
+    /** Text displayed when example code is closed  */
+    closedLabel?: string;
+    /** Icon displayed in the button when closed - SVG string */
+    openedIcon?: string;
+    /** Icon displayed in the button when opened - SVG string */
+    closedIcon?: string;
     /** Hides the "show code" button */
     hide?: boolean;
-    /** Icon displayed in the button - SVG string */
-    icon?: string;
     /** Visually hides the label text */
     hideLabel?: boolean;
   };
