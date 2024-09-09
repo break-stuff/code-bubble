@@ -34,32 +34,72 @@ export type ComponentConfig = {
   openShowCode?: boolean;
   /** Indicates which example to show by default */
   defaultExample?: string;
-  /** Hides the "copy code" button */
-  hideCopyCodeButton?: boolean;
-  /** Hides the "RTL" button */
-  hideRtlButton?: boolean;
-  /** Hides the "sandbox" button */
-  hideSandboxButton?: boolean;
-  /** Hides the "show code" button */
-  hideShowCodeButton?: boolean;
-  /** Hides the HTMl and React code toggle buttons */
-  hideFrameworkButtons?: boolean;
-  /** Hides the preview window where the code is rendered */
-  hidePreview?: boolean;
-  /** Text displayed in the "show code" button when it is collapsed  */
-  showCodeButtonLabel?: string;
-  /** Text displayed in the "show code" button when it is expanded  */
-  hideCodeButtonLabel?: string;
-  /** Text displayed in the "copy code" button  */
-  copyCodeButtonLabel?: string;
-  /** Text displayed in the "copy code" button when text has been copied  */
-  copyCodeButtonCopiedLabel?: string;
-  /** Text displayed in the "RTL" button  */
-  rtlButtonLabel?: string;
-  /** Text displayed in the "sandbox" button  */
-  sandboxButtonLabel?: string;
-  /** Text displayed in the "HTML" button  */
-  frameworkButtonLabel?: (framework: string) => string;
+  /** Configuration for the code preview */
+  preview?: {
+    /** Hides the preview window where the code is rendered */
+    hide?: boolean;
+  };
+  /** Configuration for the copy code button */
+  copyCodeButton?: {
+    /** Text displayed in the "copy code" button */
+    label?: string;
+    /** Text displayed in the "copy code" button when the code has been copied */
+    copiedLabel?: string;
+    /** Hides the "copy code" button */
+    hide?: boolean;
+    /** Icon displayed in the "copy code" button - SVG string */
+    icon?: string;
+    /** Visually hides the label text */
+    hideLabel?: boolean;
+  };
+  /** Configuration for the RTL button */
+  rtlButton?: {
+    /** Text displayed in the "RTL" button */
+    label?: string;
+    /** Hides the "RTL" button */
+    hide?: boolean;
+    /** Icon displayed in the "RTL" button - SVG string */
+    icon?: string;
+    /** Visually hides the label text */
+    hideLabel?: boolean;
+  };
+  /** Configuration for the sandbox button */
+  sandboxButton?: {
+    /** Text displayed in the "sandbox" button */
+    label?: string;
+    /** Hides the "sandbox" button */
+    hide?: boolean;
+    /** Icon displayed in the "sandbox" button - SVG string */
+    icon?: string;
+    /** Visually hides the label text */
+    hideLabel?: boolean;
+  };
+  /** Configuration for the framework toggle buttons */
+  frameworkButtons?: {
+    /** Hides the HTML and React code toggle buttons */
+    hide?: boolean;
+    /** Text displayed in the framework buttons  */
+    label?: (framework: string) => string;
+    /** Icon displayed in the framework buttons - SVG string */
+    icon?: (framework: string) => string;
+    /** Visually hides the label text */
+    hideLabel?: boolean;
+  };
+  /** Configuration for the "show code" toggle button */
+  showCodeButton?: {
+    /** Text displayed when example code is opened  */
+    openedLabel?: string;
+    /** Text displayed when example code is closed  */
+    closedLabel?: string;
+    /** Icon displayed in the button when closed - SVG string */
+    openedIcon?: string;
+    /** Icon displayed in the button when opened - SVG string */
+    closedIcon?: string;
+    /** Hides the "show code" button */
+    hide?: boolean;
+    /** Visually hides the label text */
+    hideLabel?: boolean;
+  };
 };
 
 /** Configuration for the sandbox environments using the language tag as the key (`html`, `jsx`, `ts`, etc.) */

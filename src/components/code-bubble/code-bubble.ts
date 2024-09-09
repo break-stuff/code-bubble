@@ -13,6 +13,7 @@ import {
   useCodePenSandbox,
   useStackBlitzSandbox,
 } from '../../utilities/sandbox-helpers.js';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
 type CodeBlock = { [key: string]: string };
 
@@ -27,7 +28,7 @@ type CodeBlock = { [key: string]: string };
  * @cssprop [--code-bubble-preview-padding=1.5rem] The padding of the rendered code example
  * @cssprop [--code-bubble-snippet-padding=1.5rem] The padding for the example code
  * @cssprop [--code-bubble-button-font-weight=inherit] The font weight for the controls
- * @cssprop [--code-bubble-button-icon-gap=0.5rem] The gap between the button text and icon
+ * @cssprop [--code-bubble-button-icon-gap=0.25rem] The gap between the button text and icon
  * @cssprop [--code-bubble-button-padding-x=1rem] The horizontal padding for the controls at the bottom of the component
  * @cssprop [--code-bubble-button-padding-y=1rem] The vertical padding for the controls at the bottom of the component
  * @cssprop [--code-bubble-copy-button-font-weight=inherit] The font weight for the copy code button
@@ -128,7 +129,7 @@ export default class CodeBubble extends LitElement {
   }
 
   private createPreview() {
-    if (this.componentConfig.hidePreview) {
+    if (this.componentConfig.preview?.hide) {
       return;
     }
 
@@ -229,7 +230,7 @@ export default class CodeBubble extends LitElement {
   private showFrameworkToggles() {
     return (
       Object.keys(this.codeBlocks).length > 1 &&
-      !this.componentConfig.hideFrameworkButtons
+      !this.componentConfig.frameworkButtons?.hide
     );
   }
 
@@ -264,9 +265,10 @@ export default class CodeBubble extends LitElement {
   private handleCopyClick(e: MouseEvent) {
     const button = e.target as HTMLButtonElement;
     navigator.clipboard.writeText(this.codeBlocks[this.framework!] || '');
-    button.innerText = this.componentConfig.copyCodeButtonCopiedLabel!;
+    button.innerText = this.componentConfig.copyCodeButton?.copiedLabel || '';
     setTimeout(
-      () => (button.innerText = this.componentConfig.copyCodeButtonLabel!),
+      () =>
+        (button.innerText = this.componentConfig.copyCodeButton?.label || ''),
       1_000,
     );
 
@@ -286,7 +288,7 @@ export default class CodeBubble extends LitElement {
   render() {
     return html`
       <div class="code-bubble-base" part="code-bubble-base">
-        ${!this.componentConfig.hidePreview &&
+        ${!this.componentConfig.preview?.hide &&
         html`<div
           class="preview"
           part="code-bubble-preview"
@@ -303,17 +305,26 @@ export default class CodeBubble extends LitElement {
           <!-- required to prevent the user-agent summery from displaying -->
           <summary>${this.getFramework()}"</summary>
           <slot name="${this.getFramework()}"></slot>
-          ${!this.componentConfig.hideCopyCodeButton &&
+          ${!this.componentConfig.copyCodeButton?.hide &&
           html`<button
             class="copy-code-button"
             part="code-bubble-copy-button"
             @click=${this.handleCopyClick}
           >
-            ${this.componentConfig.copyCodeButtonLabel}
+            <span
+              class="${this.componentConfig.copyCodeButton?.hideLabel
+                ? 'visually-hidden'
+                : ''}"
+            >
+              ${this.componentConfig.copyCodeButton?.label}
+            </span>
+            ${this.componentConfig.copyCodeButton?.icon
+              ? unsafeSVG(this.componentConfig.copyCodeButton?.icon)
+              : ''}
           </button>`}
         </details>
         <div class="controls" part="code-bubble-controls">
-          ${!this.componentConfig.hideShowCodeButton
+          ${!this.componentConfig.showCodeButton?.hide
             ? html`<button
                 class="show-code-button"
                 part="code-bubble-control code-bubble-show-source"
@@ -321,9 +332,19 @@ export default class CodeBubble extends LitElement {
                 aria-expanded=${this.showSource}
                 @click=${this.handleShowSourceClick}
               >
-                ${this.showSource
-                  ? this.componentConfig.hideCodeButtonLabel
-                  : this.componentConfig.showCodeButtonLabel}
+                <span
+                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                    ? 'visually-hidden'
+                    : ''}"
+                >
+                  ${this.showSource
+                    ? this.componentConfig.showCodeButton?.openedLabel
+                    : this.componentConfig.showCodeButton?.closedLabel}
+                </span>
+                ${this.showSource &&
+                this.componentConfig.showCodeButton?.openedIcon
+                  ? unsafeSVG(this.componentConfig.showCodeButton?.openedIcon)
+                  : unsafeSVG(this.componentConfig.showCodeButton?.closedIcon)}
               </button>`
             : nothing}
           ${this.showFrameworkToggles()
@@ -335,27 +356,56 @@ export default class CodeBubble extends LitElement {
                     aria-pressed=${this.framework === x}
                     @click=${() => this.handleExampleClick(x)}
                   >
-                    ${this.componentConfig.frameworkButtonLabel!(x)}
+                    <span
+                      class="${this.componentConfig.copyCodeButton?.hideLabel
+                        ? 'visually-hidden'
+                        : ''}"
+                    >
+                      ${this.componentConfig.frameworkButtons?.label!(x)}
+                    </span>
+                    ${this.componentConfig.frameworkButtons?.icon
+                      ? unsafeSVG(
+                          this.componentConfig.frameworkButtons?.icon(x),
+                        )
+                      : ''}
                   </button>`,
               )
             : nothing}
-          ${!this.componentConfig.hideRtlButton
+          ${!this.componentConfig.rtlButton?.hide
             ? html`<button
                 class="rtl-button"
                 part="code-bubble-control code-bubble-rtl"
                 aria-pressed=${this.showRTL}
                 @click=${this.handleRtlClick}
               >
-                ${this.componentConfig.rtlButtonLabel}
+                <span
+                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                    ? 'visually-hidden'
+                    : ''}"
+                >
+                  ${this.componentConfig.rtlButton?.label}
+                </span>
+                ${this.componentConfig.rtlButton?.icon
+                  ? unsafeSVG(this.componentConfig.rtlButton?.icon)
+                  : ''}
               </button>`
             : nothing}
-          ${!this.componentConfig.hideSandboxButton
+          ${!this.componentConfig.sandboxButton?.hide
             ? html`<button
                 class="sandbox-button"
                 part="code-bubble-control code-bubble-sandbox"
                 @click=${this.handleSandboxClick}
               >
-                ${this.componentConfig.sandboxButtonLabel}
+                <span
+                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                    ? 'visually-hidden'
+                    : ''}"
+                >
+                  ${this.componentConfig.sandboxButton?.label}
+                </span>
+                ${this.componentConfig.sandboxButton?.icon
+                  ? unsafeSVG(this.componentConfig.sandboxButton?.icon)
+                  : ''}
               </button>`
             : nothing}
         </div>
