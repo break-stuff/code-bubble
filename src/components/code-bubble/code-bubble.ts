@@ -160,7 +160,7 @@ export default class CodeBubble extends LitElement {
 
   private updateConfig() {
     this.updateComplete.then(() => {
-      this.showSource = this.componentConfig.openShowCode!;
+      this.showSource = this.componentConfig.showCode!;
       this.framework =
         localStorage.getItem(this.tagName) ||
         this.componentConfig.defaultExample! ||

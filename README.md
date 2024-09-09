@@ -125,7 +125,7 @@ type ComponentConfig = {
   /** Code bubble component tag name - must contain a dash, start with a letter and be lower-case */
   tagName?: string;
   /** Opens the "show code" section by default */
-  openShowCode?: boolean;
+  showCode?: boolean;
   /** Indicates which example to show by default */
   defaultExample?: string;
   /** Configuration for the code preview */

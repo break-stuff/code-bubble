@@ -8,7 +8,7 @@ import type {
 
 const componentConfig: ComponentConfig = {
   tagName: 'code-bubble',
-  openShowCode: false,
+  showCode: false,
   showCodeButton: {
     closedLabel: 'Show Code',
     openedLabel: 'Hide Code',
