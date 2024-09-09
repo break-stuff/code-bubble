@@ -341,12 +341,10 @@ export default class CodeBubble extends LitElement {
                     ? this.componentConfig.showCodeButton?.openedLabel
                     : this.componentConfig.showCodeButton?.closedLabel}
                 </span>
-                ${this.showSource && this.componentConfig.showCodeButton?.openedIcon
+                ${this.showSource &&
+                this.componentConfig.showCodeButton?.openedIcon
                   ? unsafeSVG(this.componentConfig.showCodeButton?.openedIcon)
-                  : ''}
-                ${!this.showSource && this.componentConfig.showCodeButton?.closedIcon
-                  ? unsafeSVG(this.componentConfig.showCodeButton?.closedIcon)
-                  : ''}
+                  : unsafeSVG(this.componentConfig.showCodeButton?.closedIcon)}
               </button>`
             : nothing}
           ${this.showFrameworkToggles()
