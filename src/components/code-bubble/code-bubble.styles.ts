@@ -9,10 +9,9 @@ export default css`
     --code-bubble-snippet-padding: 1.5rem;
 
     --code-bubble-button-font-weight: inherit;
-    --code-bubble-button-icon-gap: 0.5rem;
+    --code-bubble-button-icon-gap: 0.25rem;
     --code-bubble-button-padding-x: 1rem;
     --code-bubble-button-padding-y: 1rem;
-    --code-bubble-button-label-gap: 0.5rem;
     --code-bubble-copy-button-font-weight: inherit;
     --code-bubble-copy-button-padding-x: 0.5rem;
     --code-bubble-copy-button-padding-y: 0.5rem;
@@ -132,6 +131,13 @@ export default css`
     border: solid 1px var(--code-bubble-button-border-color);
     display: flex;
     gap: var(--code-bubble-button-icon-gap);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .controls button svg {
+    height: 1em;
+    width: 1em;
   }
 
   .controls button:has(.visually-hidden) {
