@@ -15,7 +15,7 @@ Features:
 - ✅ Global configuration
 - ✅ Create multiple instances of the bubble with unique configurations
 - ✅ Code preview
-- ✅ Multiple frameworks ~~(currently only HTML and React examples)~~
+- ✅ Supports examples from multiple languages
 - ✅ Example code toggle
 - ✅ RTL toggle
 - ✅ Open in Sandbox (currently supports [CodePen](https://codepen.io/) and [StackBlitz](https://stackblitz.com/))
@@ -23,6 +23,7 @@ Features:
 - ✅ Framework example selection sync across instances
 - ✅ Persist selected option
 - ✅ Custom labels
+- ✅ Custom icons
 - ✅ Event hooks
 - ❌ Preview resize (coming soon)
 
