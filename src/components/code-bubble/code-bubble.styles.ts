@@ -82,7 +82,7 @@ export default css`
     position: relative;
   }
 
-  .resizable {
+  .resize-container {
     padding: var(--code-bubble-preview-padding);
     position: relative;
     border-bottom: none;
@@ -91,6 +91,7 @@ export default css`
     min-width: 10rem;
     max-width: 100%;
     padding: 1.5rem 3.25rem 1.5rem 1.5rem;
+    margin-inline-end: calc(var(--code-bubble-border-width) / 2);
   }
 
   .resize-handle {
@@ -105,7 +106,8 @@ export default css`
     font-size: 20px;
     cursor: grab;
     border: none;
-    border-inline: solid var(--code-bubble-border-width) var(--code-bubble-border-color);
+    border-inline: solid var(--code-bubble-border-width)
+      var(--code-bubble-border-color);
     border-start-end-radius: var(--code-bubble-border-radius);
     background-color: var(--code-bubble-button-bg-color);
     margin-inline-end: calc(var(--code-bubble-border-width) * -1);
@@ -167,7 +169,7 @@ export default css`
     border-bottom-left-radius: var(--code-bubble-border-radius);
     border-bottom-right-radius: var(--code-bubble-border-radius);
     display: flex;
-    margin-top: calc(var(--code-bubble-border-width) * -1);
+    margin-top: calc(var(--code-bubble-border-width) * -0.5);
   }
 
   .controls button {

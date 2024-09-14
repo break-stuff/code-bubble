@@ -74,6 +74,15 @@ export type ComponentConfig = {
     /** Visually hides the label text */
     hideLabel?: boolean;
   };
+  /** Configuration for the resize button */
+  resizeButton?: {
+    /** Text displayed in the "sandbox" button */
+    label?: string;
+    /** Hides the "sandbox" button */
+    hide?: boolean;
+    /** Icon displayed in the "sandbox" button - SVG string */
+    icon?: string;
+  };
   /** Configuration for the framework toggle buttons */
   frameworkButtons?: {
     /** Hides the HTML and React code toggle buttons */
