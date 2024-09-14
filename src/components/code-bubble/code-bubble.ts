@@ -1,5 +1,5 @@
 import { LitElement, html, nothing } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import styles from './code-bubble.styles.js';
 import type {
   CodeBubbleConfig,
@@ -109,6 +109,12 @@ export default class CodeBubble extends LitElement {
 
   @state()
   protected sandboxConfig: FrameworkConfig<CodePen | StackBlitz> = {};
+
+  @query('.resize-handle')
+  private resizeHandle!: HTMLButtonElement;
+
+  @query('.resizable')
+  private preview!: HTMLDivElement;
 
   constructor() {
     super();
@@ -262,7 +268,7 @@ export default class CodeBubble extends LitElement {
       : useStackBlitzSandbox(config, code);
   }
 
-  private handleCopyClick(e: MouseEvent) {
+  private handleCopyClick(e: MouseEvent | TouchEvent) {
     const button = e.target as HTMLButtonElement;
     navigator.clipboard.writeText(this.codeBlocks[this.framework!] || '');
     button.innerText = this.componentConfig.copyCodeButton?.copiedLabel || '';
@@ -285,6 +291,44 @@ export default class CodeBubble extends LitElement {
     );
   }
 
+  @eventOptions({ passive: true })
+  private handleDrag(e: TouchEvent) {
+    const startX = e.changedTouches
+      ? e.changedTouches[0].pageX
+      : (e as unknown as MouseEvent).clientX;
+    const startWidth = document.defaultView
+      ? parseInt(document.defaultView.getComputedStyle(this.preview).width, 10)
+      : 0;
+    const preview = this.preview;
+    this.preview.style.maxWidth = `calc(${this.offsetWidth - this.resizeHandle.offsetWidth * 2.5}px - var(--code-bubble-border-width) * 3)`;
+
+    e.preventDefault();
+    this.preview.classList.add('dragging');
+    document.documentElement.addEventListener('mousemove', dragMove);
+    document.documentElement.addEventListener('touchmove', dragMove);
+    document.documentElement.addEventListener('mouseup', dragStop);
+    document.documentElement.addEventListener('touchend', dragStop);
+
+    function dragMove(e: TouchEvent | MouseEvent) {
+      const width =
+        startWidth +
+        ((e as unknown as TouchEvent).changedTouches
+          ? (e as unknown as TouchEvent).changedTouches[0].pageX
+          : (e as unknown as MouseEvent).pageX) -
+        startX;
+
+      preview.style.width = `${width}px`;
+    }
+
+    function dragStop() {
+      preview.classList.remove('dragging');
+      document.documentElement.removeEventListener('mousemove', dragMove);
+      document.documentElement.removeEventListener('touchmove', dragMove);
+      document.documentElement.removeEventListener('mouseup', dragStop);
+      document.documentElement.removeEventListener('touchend', dragStop);
+    }
+  }
+
   render() {
     return html`
       <div class="code-bubble-base" part="code-bubble-base">
@@ -294,7 +338,26 @@ export default class CodeBubble extends LitElement {
           part="code-bubble-preview"
           dir=${this.showRTL ? 'rtl' : 'auto'}
         >
-          <slot name="preview"></slot>
+          <div class="resizable">
+            <slot name="preview"></slot>
+            <button
+              class="resize-handle"
+              @mousedown=${this.handleDrag}
+              @touchstart=${this.handleDrag}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M5.5 5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m0 4.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5 3a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0M10.5 5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3M12 8a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m-1.5 6a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3"
+                />
+              </svg>
+            </button>
+          </div>
         </div>`}
         <details
           id="code-bubble"

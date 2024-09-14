@@ -75,11 +75,59 @@ export default css`
   }
 
   .preview {
-    padding: var(--code-bubble-preview-padding);
     border: solid var(--code-bubble-border-width)
       var(--code-bubble-border-color);
     border-top-left-radius: var(--code-bubble-border-radius);
     border-top-right-radius: var(--code-bubble-border-radius);
+    position: relative;
+  }
+
+  .resizable {
+    padding: var(--code-bubble-preview-padding);
+    position: relative;
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    min-width: 10rem;
+    max-width: 100%;
+    padding: 1.5rem 3.25rem 1.5rem 1.5rem;
+  }
+
+  .resize-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1rem;
+    font-size: 20px;
+    cursor: grab;
+    border: none;
+    border-inline: solid var(--code-bubble-border-width) var(--code-bubble-border-color);
+    border-start-end-radius: var(--code-bubble-border-radius);
+    background-color: var(--code-bubble-button-bg-color);
+    margin-inline-end: calc(var(--code-bubble-border-width) * -1);
+  }
+
+  .resize-handle:hover {
+    background-color: var(--code-bubble-button-hover-bg-color);
+  }
+
+  .resize-handle:active {
+    background-color: var(--code-bubble-button-active-bg-color);
+  }
+
+  .dragging:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: grabbing;
   }
 
   .code-bubble {
