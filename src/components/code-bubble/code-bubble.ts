@@ -299,12 +299,10 @@ export default class CodeBubble extends LitElement {
     const startX = e.changedTouches
       ? e.changedTouches[0].pageX
       : (e as unknown as MouseEvent).clientX;
-    const startWidth = document.defaultView
-      ? parseInt(
-          document.defaultView.getComputedStyle(this.resizeContainer).width,
-          10,
-        )
-      : 0;
+    const startWidth = parseInt(
+      getComputedStyle(this.resizeContainer).width,
+      10,
+    );
     const preview = this.preview;
     const resizeContainer = this.resizeContainer;
     const resizeHandle = this.resizeHandle;
