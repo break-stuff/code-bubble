@@ -12,11 +12,13 @@ let selectedLang = 'html';
 new CodeBlock({
   sandbox: 'stackblitz',
   component: {
-    frameworkButtonLabel: framework =>
-      ({
-        html: 'HTML',
-        jsx: 'React',
-      })[framework] || framework,
+    frameworkButtons: {
+      label: framework =>
+        ({
+          html: 'HTML',
+          jsx: 'React',
+        })[framework] || framework,
+    },
   },
 });
 
@@ -75,7 +77,7 @@ new CodeBlock({
 </body>
 </html>`;
       }
-},
+    },
   },
 });
 
@@ -127,6 +129,21 @@ export const Default: Story = {
       ornare massa ex, ut mattis velit rutrum sed. Sed id lectus in purus
       suscipit convallis eu vehicula leo. Nullam quis iaculis magna.
     </p>
+  `,
+  args: {},
+};
+
+export const Overflow: Story = {
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;button style=&quot;width:500px&quot; appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+</code></pre>
+      `,
+    )}
   `,
   args: {},
 };
@@ -364,7 +381,7 @@ export const Hooks: Story = {
   render: () => {
     return html`
       <theme-bubble>
-      <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+        <pre><code class="language-html">&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
 &lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 </code></pre>

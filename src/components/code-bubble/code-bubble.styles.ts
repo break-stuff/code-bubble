@@ -7,6 +7,8 @@ export default css`
     --code-bubble-border-width: 1px;
     --code-bubble-preview-padding: 1.5rem;
     --code-bubble-snippet-padding: 1.5rem;
+    --code-bubble-preview-bg-color: white;
+    --code-bubble-bg-color: rgb(249, 249, 249);
 
     --code-bubble-button-font-weight: inherit;
     --code-bubble-button-icon-gap: 0.25rem;
@@ -75,6 +77,7 @@ export default css`
   }
 
   .preview {
+    background-color: var(--code-bubble-bg-color);
     border: solid var(--code-bubble-border-width)
       var(--code-bubble-border-color);
     border-top-left-radius: var(--code-bubble-border-radius);
@@ -82,7 +85,12 @@ export default css`
     position: relative;
   }
 
+  .preview ::slotted(*) {
+    overflow: hidden;
+  }
+
   .resize-container {
+    background-color: var(--code-bubble-preview-bg-color);
     padding: var(--code-bubble-preview-padding);
     position: relative;
     border-bottom: none;
@@ -102,7 +110,7 @@ export default css`
     top: 0;
     right: 0;
     bottom: 0;
-    font-size: 20px;
+    font-size: 1rem;
     cursor: grab;
     border: none;
     border-inline: solid var(--code-bubble-border-width)
@@ -164,7 +172,7 @@ export default css`
   *::slotted(pre) {
     margin: 0;
     padding: var(--code-bubble-snippet-padding);
-    background-color: rgb(249, 249, 249);
+    background-color: var(--code-bubble-bg-color);
   }
 
   .controls {
