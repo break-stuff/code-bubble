@@ -102,7 +102,6 @@ export default css`
     top: 0;
     right: 0;
     bottom: 0;
-    width: 1rem;
     font-size: 20px;
     cursor: grab;
     border: none;
@@ -119,6 +118,11 @@ export default css`
 
   .resize-handle:active {
     background-color: var(--code-bubble-button-active-bg-color);
+  }
+
+  .resize-handle svg {
+    width: 1em;
+    height: 1em;
   }
 
   .dragging:after {

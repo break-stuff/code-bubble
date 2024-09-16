@@ -16,16 +16,16 @@ Features:
 - ✅ Create multiple instances of the bubble with unique configurations
 - ✅ Code preview
 - ✅ Supports examples from multiple languages
-- ✅ Example code toggle
+- ✅ Language code toggle
 - ✅ RTL toggle
 - ✅ Open in Sandbox (currently supports [CodePen](https://codepen.io/) and [StackBlitz](https://stackblitz.com/))
 - ✅ Copy code button
 - ✅ Framework example selection sync across instances
-- ✅ Persist selected option
+- ✅ Persist selected language
 - ✅ Custom labels
 - ✅ Custom icons
 - ✅ Event hooks
-- ❌ Preview resize (coming soon)
+- ✅ Preview resize
 
 ## Usage
 
