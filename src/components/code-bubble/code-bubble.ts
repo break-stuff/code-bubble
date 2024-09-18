@@ -158,9 +158,9 @@ export default class CodeBubble extends LitElement {
       if (script.src) {
         newScript.src = script.src;
       } else if (script.textContent) {
-        newScript.textContent = script.textContent;
+        newScript.textContent = `(() => {${script.textContent}})()`;
       } else if (script.innerText) {
-        newScript.innerText = script.innerText;
+        newScript.innerText = `(() => {${script.innerText}})()`;
       }
 
       document.body.appendChild(newScript);

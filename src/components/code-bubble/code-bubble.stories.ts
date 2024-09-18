@@ -270,7 +270,45 @@ export const ExecuteJS: Story = {
 &lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
 
 &lt;script&gt;
+  const test = 'test 1';
+  console.log(test);
   alert('Hello, World!');
+&lt;/script&gt;
+</code></pre>
+      `,
+    )}
+  `,
+  args: {},
+};
+
+// This tests to ensure that variables in the scripts are scoped to the example
+export const ScopeJS: Story = {
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+
+&lt;script&gt;
+  const test = 'test 1';
+  console.log(test);
+&lt;/script&gt;
+</code></pre>
+      `,
+    )}
+    <br />
+    ${template(
+      args,
+      html`
+        <pre><code>&lt;button appearance=&quot;accent&quot;&gt;Accent&lt;/button&gt;
+&lt;button appearance=&quot;neutral&quot;&gt;Neutral&lt;/button&gt;
+&lt;button appearance=&quot;lightweight&quot;&gt;Lightweight&lt;/button&gt;
+
+&lt;script&gt;
+  const test = 'test 2';
+  console.log(test);
 &lt;/script&gt;
 </code></pre>
       `,
