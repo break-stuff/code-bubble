@@ -151,6 +151,10 @@ export default css`
     position: relative;
   }
 
+  .code-bubble[open] {
+    min-height: 4.5rem;
+  }
+
   .code-bubble summary {
     display: none;
   }
@@ -181,7 +185,7 @@ export default css`
     border-bottom-left-radius: var(--code-bubble-border-radius);
     border-bottom-right-radius: var(--code-bubble-border-radius);
     display: flex;
-    margin-top: calc(var(--code-bubble-border-width) * -0.5);
+    margin-top: calc(var(--code-bubble-border-width) * -1);
   }
 
   .controls button {
