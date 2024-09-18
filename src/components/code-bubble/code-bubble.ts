@@ -356,6 +356,7 @@ export default class CodeBubble extends LitElement {
                   @mousedown=${this.handleDrag}
                   @touchstart=${this.handleDrag}
                 >
+                  <span class="visually-hidden">${this.componentConfig.resizeButton?.label}</span>
                   ${unsafeSVG(this.componentConfig.resizeButton?.icon)}
                 </button>`
               : nothing}
