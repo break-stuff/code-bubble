@@ -79,9 +79,41 @@ export default class CodeBubble extends LitElement {
   static styles = [styles];
   private _config: CodeBubbleConfig = {};
 
-  /** @internal Indicates which example should be displayed */
-  @property({ attribute: false })
+  /** Indicates which example should be displayed */
+  @property()
   framework?: string;
+
+  /** Hides the preview display */
+  @property({ attribute: 'hide-preview', type: Boolean })
+  hidePreview?: boolean;
+
+  /** Hides the preview button */
+  @property({ attribute: 'hide-copy-code', type: Boolean })
+  hideCopyCode?: boolean;
+
+  /** Hides the RTL button */
+  @property({ attribute: 'hide-copy-code', type: Boolean })
+  hideRtl?: boolean;
+
+  /** Hides the sandbox button */
+  @property({ attribute: 'hide-sandbox', type: Boolean })
+  hideSandbox?: boolean;
+
+  /** Hides the resize button */
+  @property({ attribute: 'hide-resize', type: Boolean })
+  hideResize?: boolean;
+
+  /** Hides the framework buttons */
+  @property({ attribute: 'hide-frameworks', type: Boolean })
+  hideFrameworks?: boolean;
+
+  /** Hides the show code button */
+  @property({ attribute: 'hide-show-code', type: Boolean })
+  hideShowCode?: boolean;
+
+  /** Opens the show code button */
+  @property({ attribute: 'open-show-code', type: Boolean })
+  openShowCode?: boolean;
 
   /** @internal The configuration object for the component */
   @property({ attribute: false })
@@ -131,6 +163,9 @@ export default class CodeBubble extends LitElement {
     super.connectedCallback();
     this.getCode();
     this.setAttribute('code-bubble', '');
+    if(this.hasAttribute('framework')) {
+      this.framework = this.getAttribute('framework') as string;
+    }
   }
 
   firstUpdated(): void {
