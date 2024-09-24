@@ -86,7 +86,7 @@ export default css`
   }
 
   .preview ::slotted(*) {
-    overflow: hidden;
+    overflow-x: auto;
   }
 
   .resize-container {
