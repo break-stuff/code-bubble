@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^0.11.0
     version: 0.11.0
   cem-plugin-expanded-types:
-    specifier: ^1.3.1
-    version: 1.3.1
+    specifier: ^1.3.3
+    version: 1.3.3
   eslint:
     specifier: ^9.6.0
     version: 9.7.0
@@ -4409,8 +4409,8 @@ packages:
     resolution: {integrity: sha512-Phv5thgl67bHYo1TtMY/MurjkHhV4EDaCosezRXgZ8jzA/Ub+wjxAvbGvjoFENStinwi5kCyOYV3mi5tOGykwA==}
     dev: true
 
-  /cem-plugin-expanded-types@1.3.1:
-    resolution: {integrity: sha512-+9uY/0zkf9v4McTBoaL0K6dOIC/LnJcNdukH9rMJ/cDfsn2YH0HB3fjkZwwVn3uRDF4CybAodWtY/CYuHDfpmw==}
+  /cem-plugin-expanded-types@1.3.3:
+    resolution: {integrity: sha512-l6bcMuMA1Nf7kucgYL3Ot8rS0UzJYt6eYu822GkllZEjdlsdxkbNcZxzGQW+NLtn/h+OiwoQOHRsqaxWWTtIrw==}
     dev: true
 
   /chai-a11y-axe@1.5.0:

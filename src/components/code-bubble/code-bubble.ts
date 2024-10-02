@@ -93,7 +93,7 @@ export default class CodeBubble extends LitElement {
   hideCopyCode?: boolean;
 
   /** Hides the RTL button */
-  @property({ attribute: 'hide-copy-code', type: Boolean })
+  @property({ attribute: 'hide-rtl', type: Boolean })
   hideRtl?: boolean;
 
   /** Hides the sandbox button */
