@@ -78,10 +78,50 @@ type CodeBlock = { [key: string]: string };
 export default class CodeBubble extends LitElement {
   static styles = [styles];
   private _config: CodeBubbleConfig = {};
+  private _openShowCode = false;
 
-  /** @internal Indicates which example should be displayed */
-  @property({ attribute: false })
+  /** Indicates which example should be displayed */
+  @property()
   framework?: string;
+
+  /** Hides the preview display */
+  @property({ attribute: 'hide-preview', type: Boolean })
+  hidePreview?: boolean;
+
+  /** Hides the preview button */
+  @property({ attribute: 'hide-copy-code', type: Boolean })
+  hideCopyCode?: boolean;
+
+  /** Hides the RTL button */
+  @property({ attribute: 'hide-rtl', type: Boolean })
+  hideRtl?: boolean;
+
+  /** Hides the sandbox button */
+  @property({ attribute: 'hide-sandbox', type: Boolean })
+  hideSandbox?: boolean;
+
+  /** Hides the resize button */
+  @property({ attribute: 'hide-resize', type: Boolean })
+  hideResize?: boolean;
+
+  /** Hides the framework buttons */
+  @property({ attribute: 'hide-frameworks', type: Boolean })
+  hideFrameworks?: boolean;
+
+  /** Hides the show code button */
+  @property({ attribute: 'hide-show-code', type: Boolean })
+  hideShowCode?: boolean;
+
+  /** Opens the show code button */
+  @property({ attribute: 'open-show-code', type: Boolean })
+  get openShowCode(): boolean {
+    return this._openShowCode || this.showSource;
+  }
+
+  set openShowCode(value: boolean) {
+    this._openShowCode = value;
+    this.showSource = value;
+  }
 
   /** @internal The configuration object for the component */
   @property({ attribute: false })
@@ -131,6 +171,9 @@ export default class CodeBubble extends LitElement {
     super.connectedCallback();
     this.getCode();
     this.setAttribute('code-bubble', '');
+    if (this.hasAttribute('framework')) {
+      this.framework = this.getAttribute('framework') as string;
+    }
   }
 
   firstUpdated(): void {
@@ -216,10 +259,10 @@ export default class CodeBubble extends LitElement {
   }
 
   private handleShowSourceClick() {
-    this.showSource = !this.showSource;
+    this.openShowCode = !this.openShowCode;
 
     if (typeof this.config.hooks?.onShowCode === 'function') {
-      this.config.hooks.onShowCode(this.showSource);
+      this.config.hooks.onShowCode(this.openShowCode);
     }
   }
 
@@ -239,7 +282,8 @@ export default class CodeBubble extends LitElement {
   private showFrameworkToggles() {
     return (
       Object.keys(this.codeBlocks).length > 1 &&
-      !this.componentConfig.frameworkButtons?.hide
+      !this.componentConfig.frameworkButtons?.hide &&
+      !this.hideFrameworks
     );
   }
 
@@ -342,55 +386,59 @@ export default class CodeBubble extends LitElement {
   render() {
     return html`
       <div class="code-bubble-base" part="code-bubble-base">
-        ${!this.componentConfig.preview?.hide &&
-        html`<div
-          class="preview"
-          part="code-bubble-preview"
-          dir=${this.showRTL ? 'rtl' : 'auto'}
-        >
-          <div class="resize-container">
-            <slot name="preview"></slot>
-            ${!this.componentConfig.resizeButton?.hide
-              ? html`<button
-                  class="resize-handle"
-                  @mousedown=${this.handleDrag}
-                  @touchstart=${this.handleDrag}
-                >
-                  <span class="visually-hidden">${this.componentConfig.resizeButton?.label}</span>
-                  ${unsafeSVG(this.componentConfig.resizeButton?.icon)}
-                </button>`
-              : nothing}
-          </div>
-        </div>`}
+        ${!this.hidePreview && !this.componentConfig.preview?.hide
+          ? html`<div
+              class="preview"
+              part="code-bubble-preview"
+              dir=${this.showRTL ? 'rtl' : 'auto'}
+            >
+              <div class="resize-container">
+                <slot name="preview"></slot>
+                ${!this.hideResize && !this.componentConfig.resizeButton?.hide
+                  ? html`<button
+                      class="resize-handle"
+                      @mousedown=${this.handleDrag}
+                      @touchstart=${this.handleDrag}
+                    >
+                      <span class="visually-hidden"
+                        >${this.componentConfig.resizeButton?.label}</span
+                      >
+                      ${unsafeSVG(this.componentConfig.resizeButton?.icon)}
+                    </button>`
+                  : nothing}
+              </div>
+            </div>`
+          : ''}
         <details
           id="code-bubble"
           class="code-bubble"
           part="code-bubble-code"
-          ?open=${this.showSource}
+          ?open=${this.openShowCode}
         >
           <!-- required to prevent the user-agent summery from displaying -->
           <summary>${this.getFramework()}"</summary>
           <slot name="${this.getFramework()}"></slot>
-          ${!this.componentConfig.copyCodeButton?.hide &&
-          html`<button
-            class="copy-code-button"
-            part="code-bubble-copy-button"
-            @click=${this.handleCopyClick}
-          >
-            <span
-              class="${this.componentConfig.copyCodeButton?.hideLabel
-                ? 'visually-hidden'
-                : ''}"
-            >
-              ${this.componentConfig.copyCodeButton?.label}
-            </span>
-            ${this.componentConfig.copyCodeButton?.icon
-              ? unsafeSVG(this.componentConfig.copyCodeButton?.icon)
-              : ''}
-          </button>`}
+          ${!this.hideCopyCode && !this.componentConfig.copyCodeButton?.hide
+            ? html`<button
+                class="copy-code-button"
+                part="code-bubble-copy-button"
+                @click=${this.handleCopyClick}
+              >
+                <span
+                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                    ? 'visually-hidden'
+                    : ''}"
+                >
+                  ${this.componentConfig.copyCodeButton?.label}
+                </span>
+                ${this.componentConfig.copyCodeButton?.icon
+                  ? unsafeSVG(this.componentConfig.copyCodeButton?.icon)
+                  : ''}
+              </button>`
+            : ''}
         </details>
         <div class="controls" part="code-bubble-controls">
-          ${!this.componentConfig.showCodeButton?.hide
+          ${!this.hideShowCode && !this.componentConfig.showCodeButton?.hide
             ? html`<button
                 class="show-code-button"
                 part="code-bubble-control code-bubble-show-source"
@@ -437,7 +485,7 @@ export default class CodeBubble extends LitElement {
                   </button>`,
               )
             : nothing}
-          ${!this.componentConfig.rtlButton?.hide
+          ${!this.hideRtl && !this.componentConfig.rtlButton?.hide
             ? html`<button
                 class="rtl-button"
                 part="code-bubble-control code-bubble-rtl"
@@ -445,7 +493,7 @@ export default class CodeBubble extends LitElement {
                 @click=${this.handleRtlClick}
               >
                 <span
-                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                  class="${this.componentConfig.rtlButton?.hideLabel
                     ? 'visually-hidden'
                     : ''}"
                 >
@@ -456,14 +504,14 @@ export default class CodeBubble extends LitElement {
                   : ''}
               </button>`
             : nothing}
-          ${!this.componentConfig.sandboxButton?.hide
+          ${!this.hideSandbox && !this.componentConfig.sandboxButton?.hide
             ? html`<button
                 class="sandbox-button"
                 part="code-bubble-control code-bubble-sandbox"
                 @click=${this.handleSandboxClick}
               >
                 <span
-                  class="${this.componentConfig.copyCodeButton?.hideLabel
+                  class="${this.componentConfig.sandboxButton?.hideLabel
                     ? 'visually-hidden'
                     : ''}"
                 >
