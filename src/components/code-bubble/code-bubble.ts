@@ -88,7 +88,7 @@ export default class CodeBubble extends LitElement {
   @property({ attribute: 'hide-preview', type: Boolean })
   hidePreview?: boolean;
 
-  /** Hides the preview button */
+  /** Hides the copy code button */
   @property({ attribute: 'hide-copy-code', type: Boolean })
   hideCopyCode?: boolean;
 
@@ -182,6 +182,10 @@ export default class CodeBubble extends LitElement {
 
   private createPreview() {
     if (this.componentConfig.preview?.hide) {
+      return;
+    }
+
+    if(this.querySelector('[slot="preview"]')) {
       return;
     }
 
