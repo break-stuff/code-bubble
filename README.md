@@ -403,6 +403,24 @@ const bubble = new CodeBubble({
 bubble.setLanguage('ruby');
 ```
 
+## Setting Custom Preview
+
+The preview will be generated based on the HTML example provided. If the preview needs to be rendered by a framework or templating language, you can slot in a preview and allow the code to be executed so it can be rendered correctly.
+
+````html
+<code-bubble>
+
+<div slot="preview">
+  <MyButton>Button Content</MyButton>
+</div>
+
+```vue
+<MyButton>Button Content</MyButton>
+```
+
+</code-bubble>
+````
+
 ## Hooks
 
 These hooks are designed to allow you to tap into component interactions to create custom behaviors within your application.
@@ -441,6 +459,35 @@ This is called when the example code window is toggled after the `isShowCode` va
 ### `onLanguageChange`
 
 This is called when the language example is changed and the `language` value has been updated.
+
+## Component-level Overrides
+
+Code bubble is managed using a global configuration, but there may be times where specific instances need to behave differently. The following attributes can be added to the component to modify the behavior.
+
+| Attribute | Description |
+| --------- | ----------- |
+| `hide-preview` | Hides the preview display |
+| `hide-copy-code` | Hides the copy code button |
+| `hide-rtl` | Hides the RTL button |
+| `hide-sandbox` | Hides the sandbox button |
+| `hide-resize` | Hides the resize button |
+| `hide-frameworks` | Hides the framework buttons |
+| `hide-show-code` | Hides the show code button |
+| `open-show-code` | Opens the show code button |
+
+```html
+<code-bubble 
+  hide-preview 
+  hide-copy-code 
+  hide-rtl 
+  hide-sandbox
+  hide-resize
+  hide-frameworks
+  hide-show-code
+  open-show-code
+  >
+</code-bubble>
+```
 
 ## Styling
 
