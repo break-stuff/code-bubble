@@ -1,6 +1,7 @@
-<div style="text-align: center;">
-  <img src="https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true" alt="code bubble logo" width="250px" />
+<div dir="auto" style="text-align: center;">
+  <a target="_blank" rel="noopener noreferrer" href="https://github.com/break-stuff/code-bubble/blob/main/img/logo.png?raw=true"><img src="https://github.com/break-stuff/code-bubble/raw/main/img/logo.png?raw=true" alt="code bubble logo" width="250px" style="max-width: 100%;"></a>
 </div>
+
 
 # Code Bubble
 
