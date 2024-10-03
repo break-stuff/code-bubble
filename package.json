@@ -77,12 +77,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/break-stuff/code-blox.git"
+    "url": "git+https://github.com/break-stuff/code-bubble.git"
   },
   "bugs": {
-    "url": "https://github.com/break-stuff/code-blox/issues"
+    "url": "https://github.com/break-stuff/code-bubble/issues"
   },
-  "homepage": "https://github.com/break-stuff/code-blox#readme",
+  "homepage": "https://github.com/break-stuff/code-bubble#readme",
   "files": [
     "cdn",
     "dist",
