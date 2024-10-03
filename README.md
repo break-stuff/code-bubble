@@ -32,6 +32,10 @@ Features:
 - ✅ Event hooks
 - ✅ Preview resize
 
+<br>
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/stackblitz-starters-tnmjhu?file=index.html)
+
 ## Usage
 
 Import the desired sandbox configuration at the root of your project:
@@ -93,6 +97,7 @@ The `<code>` element should contain escaped characters for the tags to properly 
 The components are pre-configured and should work without any custom configuration, but if you would like to customize the implementation, each sandbox has it's own options.
 
 ```ts
+/** Global configuration for a code bubble instance */
 type CodeBubbleConfig = {
   /** Which sandbox environment your code will open in */
   sandbox?: 'codepen' | 'stackblitz';
@@ -101,21 +106,22 @@ type CodeBubbleConfig = {
   /** Configurations for the sandboxes */
   sandboxConfig?: {
     /** CodePen sandbox configuration */
-    codePen: FrameworkConfig<CodePen>;
+    codePen?: FrameworkConfig<CodePen>;
     /** StackBlitz sandbox configuration */
-    stackBlitz: FrameworkConfig<StackBlitz>;
+    stackBlitz?: FrameworkConfig<StackBlitz>;
   };
+  /** Callback functions for the code bubble component */
   hooks?: {
     /** Callback function that runs when the code is copied */
     onCopy?: () => void;
     /** Callback function when the RTL button is toggled */
     onRtl?: (isRtl: boolean) => void;
     /** Callback function that runs when a sandbox is opened */
-    onSandboxOpen?: () => void;
-    /** Callback function that runs when the code section is toggled */
+    onSandboxOpen?: (config: ProjectConfig<CodePen | StackBlitz>) => void;
+    /** Callback function that runs when the code is shown */
     onShowCode?: (isShowCode: boolean) => void;
     /** Callback function that runs when a language is selected */
-    onLanguageChange: (language: string) => void;
+    onLanguageChange?: (language: string) => void;
   };
 };
 ```
@@ -134,12 +140,12 @@ type ComponentConfig = {
   /** Indicates which example to show by default */
   defaultExample?: string;
   /** Configuration for the code preview */
-  preview: {
+  preview?: {
     /** Hides the preview window where the code is rendered */
     hide?: boolean;
   };
   /** Configuration for the copy code button */
-  copyCodeButton: {
+  copyCodeButton?: {
     /** Text displayed in the "copy code" button */
     label?: string;
     /** Text displayed in the "copy code" button when the code has been copied */
@@ -152,7 +158,7 @@ type ComponentConfig = {
     hideLabel?: boolean;
   };
   /** Configuration for the RTL button */
-  rtlButton: {
+  rtlButton?: {
     /** Text displayed in the "RTL" button */
     label?: string;
     /** Hides the "RTL" button */
@@ -163,7 +169,7 @@ type ComponentConfig = {
     hideLabel?: boolean;
   };
   /** Configuration for the sandbox button */
-  sandboxButton: {
+  sandboxButton?: {
     /** Text displayed in the "sandbox" button */
     label?: string;
     /** Hides the "sandbox" button */
@@ -173,8 +179,17 @@ type ComponentConfig = {
     /** Visually hides the label text */
     hideLabel?: boolean;
   };
+  /** Configuration for the resize button */
+  resizeButton?: {
+    /** Text displayed in the "sandbox" button */
+    label?: string;
+    /** Hides the "sandbox" button */
+    hide?: boolean;
+    /** Icon displayed in the "sandbox" button - SVG string */
+    icon?: string;
+  };
   /** Configuration for the framework toggle buttons */
-  frameworkButtons: {
+  frameworkButtons?: {
     /** Hides the HTML and React code toggle buttons */
     hide?: boolean;
     /** Text displayed in the framework buttons  */
@@ -185,15 +200,17 @@ type ComponentConfig = {
     hideLabel?: boolean;
   };
   /** Configuration for the "show code" toggle button */
-  showCodeButton: {
-    /** Text displayed when it is collapsed  */
-    openLabel?: string;
-    /** Text displayed when it is expanded  */
-    closeLabel?: string;
+  showCodeButton?: {
+    /** Text displayed when example code is opened  */
+    openedLabel?: string;
+    /** Text displayed when example code is closed  */
+    closedLabel?: string;
+    /** Icon displayed in the button when closed - SVG string */
+    openedIcon?: string;
+    /** Icon displayed in the button when opened - SVG string */
+    closedIcon?: string;
     /** Hides the "show code" button */
     hide?: boolean;
-    /** Icon displayed in the button - SVG string */
-    icon?: string;
     /** Visually hides the label text */
     hideLabel?: boolean;
   };
