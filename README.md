@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/break-stuff/code-bubble/raw/main/img/logo.png?raw=true" alt="code bubble logo" width="250px" style="max-width: 100%;" />
+  <img src="https://github.com/break-stuff/code-bubble/raw/main/img/logo.png?raw=true" alt="code bubble logo" width="200px" style="max-width: 100%;" />
 </div>
 
 
@@ -7,9 +7,13 @@
 
 This is a platform agnostic web component designed to showcase code examples and generate sandbox environments in [CodePen](https://codepen.io/) or [StackBlitz](https://stackblitz.com/).
 
+<div align="center">
+
 ![code bubble example](https://github.com/break-stuff/code-bubble/blob/main/img/code-bubble.png?raw=true)
 
 ![code bubble example with source code open](https://github.com/break-stuff/code-bubble/blob/main/img/code-bubble_open.png?raw=true)
+
+</div>
 
 Features:
 
