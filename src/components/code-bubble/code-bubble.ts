@@ -187,13 +187,6 @@ export default class CodeBubble extends LitElement {
     });
   }
 
-  handleSlotChange(): void {
-    // this.updateComplete.then(() => {
-    //   this.getCode();
-    //   this.updatePreview();
-    // });
-  }
-
   private createPreview() {
     if (this.componentConfig.preview?.hide) {
       return;
@@ -427,11 +420,7 @@ export default class CodeBubble extends LitElement {
 
   render() {
     return html`
-      <div
-        class="code-bubble-base"
-        part="code-bubble-base"
-        @slotchange=${this.handleSlotChange}
-      >
+      <div class="code-bubble-base" part="code-bubble-base">
         ${!this.hidePreview && !this.componentConfig.preview?.hide
           ? html`<div
               class="preview"
