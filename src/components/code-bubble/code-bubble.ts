@@ -169,15 +169,22 @@ export default class CodeBubble extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.getCode();
     this.setAttribute('code-bubble', '');
     if (this.hasAttribute('framework')) {
       this.framework = this.getAttribute('framework') as string;
     }
+
+    this.getCode();
   }
 
   firstUpdated(): void {
     this.createPreview();
+    this.shadowRoot?.addEventListener('slotchange', () => {
+      this.updateComplete.then(() => {
+        this.getCode();
+        this.updatePreview();
+      });
+    });
   }
 
   private createPreview() {
@@ -185,7 +192,7 @@ export default class CodeBubble extends LitElement {
       return;
     }
 
-    if(this.querySelector('[slot="preview"]')) {
+    if (this.querySelector('[slot="preview"]')) {
       return;
     }
 
@@ -195,6 +202,14 @@ export default class CodeBubble extends LitElement {
       this.codeBlocks[this.framework! || Object.keys(this.codeBlocks)[0]];
     this.appendChild(preview);
     this.loadScripts(preview);
+  }
+
+  private updatePreview() {
+    const preview = this.querySelector('[slot="preview"]');
+    if (preview) {
+      preview.innerHTML = this.codeBlocks[this.framework!];
+      this.loadScripts(preview as HTMLDivElement);
+    }
   }
 
   private loadScripts(preview: HTMLDivElement) {
@@ -251,9 +266,25 @@ export default class CodeBubble extends LitElement {
         codeContent?.getAttribute('data-language') ||
         i.toString();
 
-      block.setAttribute('slot', language);
+      this.setLangOnCodeWrapper(block, language);
       this.codeBlocks[language] = block?.textContent || '';
     });
+  }
+
+  private setLangOnCodeWrapper(
+    element?: HTMLElement | null,
+    language: string = 'html',
+  ) {
+    if (!element) {
+      return;
+    }
+
+    if (element?.parentElement?.hasAttribute('code-bubble')) {
+      element.setAttribute('slot', language);
+      return;
+    }
+
+    this.setLangOnCodeWrapper(element?.parentElement);
   }
 
   private async setFallbackFramework() {
