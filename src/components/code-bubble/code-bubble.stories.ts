@@ -456,3 +456,23 @@ export const CustomPreview: Story = {
   `,
   args: {},
 };
+
+export const OverflowContent: Story = {
+  render: args => html`
+    ${template(
+      args,
+      html`
+        <pre><code class="language-html">&lt;sl-select&gt;
+  &lt;sl-option value=&quot;option-1&quot;&gt;Option 1&lt;/sl-option&gt;
+  &lt;sl-option value=&quot;option-2&quot;&gt;Option 2&lt;/sl-option&gt;
+  &lt;sl-option value=&quot;option-3&quot;&gt;Option 3&lt;/sl-option&gt;
+  &lt;sl-option value=&quot;option-4&quot;&gt;Option 4&lt;/sl-option&gt;
+  &lt;sl-option value=&quot;option-5&quot;&gt;Option 5&lt;/sl-option&gt;
+  &lt;sl-option value=&quot;option-6&quot;&gt;Option 6&lt;/sl-option&gt;
+&lt;/sl-select&gt;
+</code></pre>
+      `,
+    )}
+  `,
+  args: {},
+};

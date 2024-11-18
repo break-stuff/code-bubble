@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Fixed with preview content getting cut off or misaligned
+
 ## 1.1.0
 
 - Added feature to assign `slot` attribute to immediate child of the Code Bubble regardless of how the markdown is parsed

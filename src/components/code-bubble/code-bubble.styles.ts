@@ -21,7 +21,7 @@ export default css`
     --code-bubble-outline-offset: 0;
 
     /** Rest */
-    --code-bubble-button-bg-color: inherit;
+    --code-bubble-button-bg-color: var(--code-bubble-preview-bg-color);
     --code-bubble-button-border-color: var(--code-bubble-border-color);
     --code-bubble-button-fg-color: inherit;
     --code-bubble-copy-button-bg-color: inherit;
@@ -45,7 +45,7 @@ export default css`
     --code-bubble-copy-button-focus-fg-color: inherit;
 
     /** Active */
-    --code-bubble-button-active-bg-color: inherit;
+    --code-bubble-button-active-bg-color: var(--code-bubble-preview-bg-color);
     --code-bubble-button-active-border-color: rgb(135 135 135);
     --code-bubble-button-active-fg-color: inherit;
     --code-bubble-button-active-font-weight: bold;
@@ -83,10 +83,6 @@ export default css`
     border-top-left-radius: var(--code-bubble-border-radius);
     border-top-right-radius: var(--code-bubble-border-radius);
     position: relative;
-  }
-
-  .preview ::slotted(*) {
-    overflow-x: auto;
   }
 
   .resize-container {
