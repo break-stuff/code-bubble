@@ -174,32 +174,30 @@ export default class CodeBubble extends LitElement {
       this.framework = this.getAttribute('framework') as string;
     }
 
-    this.getCode();
+    // wait for code formatters to finish executing
+    setTimeout(() => {
+      this.getCode();
+      this.createPreview();
+    }, 10);
   }
 
-  firstUpdated(): void {
-    this.createPreview();
-    this.shadowRoot?.addEventListener('slotchange', () => {
-      this.updateComplete.then(() => {
-        this.getCode();
-        this.updatePreview();
-      });
-    });
+  private handleSlotChange() {
+    this.getCode();
+    this.updatePreview();
   }
 
   private createPreview() {
-    if (this.componentConfig.preview?.hide) {
-      return;
-    }
-
-    if (this.querySelector('[slot="preview"]')) {
+    if (
+      this.componentConfig.preview?.hide ||
+      this.querySelector('[slot="preview"]')
+    ) {
       return;
     }
 
     const preview = document.createElement('div');
     preview.setAttribute('slot', 'preview');
     preview.innerHTML =
-      this.codeBlocks[this.framework! || Object.keys(this.codeBlocks)[0]];
+      this.codeBlocks[this.framework! || Object.keys(this.codeBlocks)[0]] || '';
     this.appendChild(preview);
     this.loadScripts(preview);
   }
@@ -209,6 +207,8 @@ export default class CodeBubble extends LitElement {
     if (preview) {
       preview.innerHTML = this.codeBlocks[this.framework!];
       this.loadScripts(preview as HTMLDivElement);
+    } else {
+      this.createPreview();
     }
   }
 
@@ -253,7 +253,9 @@ export default class CodeBubble extends LitElement {
   }
 
   private setCodeContent() {
-    const blocks = [...this.querySelectorAll('pre')];
+    const blocks = [
+      ...this.querySelectorAll('pre:not([slot]):not(:has(pre))'),
+    ] as HTMLElement[];
     blocks.forEach((block, i) => {
       const codeContent =
         block.querySelector('[class^="language-"]') ||
@@ -267,7 +269,7 @@ export default class CodeBubble extends LitElement {
         i.toString();
 
       this.setLangOnCodeWrapper(block, language);
-      this.codeBlocks[language] = block?.textContent || '';
+      this.codeBlocks[language] = codeContent?.textContent || '';
     });
   }
 
@@ -559,6 +561,7 @@ export default class CodeBubble extends LitElement {
             : nothing}
         </div>
       </div>
+      <slot @slotchange=${this.handleSlotChange} hidden></slot>
     `;
   }
 }
