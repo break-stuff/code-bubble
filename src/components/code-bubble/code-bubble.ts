@@ -253,13 +253,17 @@ export default class CodeBubble extends LitElement {
   }
 
   private setCodeContent() {
+    console.log('setting code content', [...this.querySelectorAll('pre:not([slot]):not(:has(pre))')]);
     const blocks = [
       ...this.querySelectorAll('pre:not([slot]):not(:has(pre))'),
     ] as HTMLElement[];
     blocks.forEach((block, i) => {
       const codeContent =
         block.querySelector('[class^="language-"]') ||
-        block.querySelector('[data-language]');
+        block.querySelector('[data-language]') ||
+        block;
+
+        console.log(codeContent?.textContent);
       const language =
         codeContent?.className
           ?.split(' ')

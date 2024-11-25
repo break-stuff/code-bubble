@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+- Fix issue if no code language is specified.
+
 ## 1.1.2
 
 - Fixed issue where CodeBubble will crash due to infinite loops due to `slotchange` event handling
