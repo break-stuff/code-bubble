@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2
+
+- Fixed issue where CodeBubble will crash due to infinite loops due to `slotchange` event handling
+- Fixed timing issue that occurs when using code formatting libraries like PrismJS.
+
 ## 1.1.1
 
 - Fixed with preview content getting cut off or misaligned
