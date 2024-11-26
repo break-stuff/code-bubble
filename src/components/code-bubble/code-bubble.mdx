@@ -1,6 +1,6 @@
 # Code Bubble
 
-<code-bubble>
+{/* <code-bubble>
 
 ```html
 <button>Test</button>
@@ -8,7 +8,7 @@
 
 </code-bubble>
 
-<br />
+<br /> */}
 
 <code-bubble>
 
@@ -18,8 +18,20 @@
 </sl-tooltip>
 ```
 
+```jsx
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+
+const App = () => (
+  <SlTooltip content="This is a tooltip">
+    <SlButton>Hover Me</SlButton>
+  </SlTooltip>
+);
+```
+
 </code-bubble>
-<br />
+
+{/* <br />
 
 <code-bubble>
 
@@ -51,4 +63,4 @@
   </code>
 </pre>
 
-</code-bubble>
+</code-bubble> */}

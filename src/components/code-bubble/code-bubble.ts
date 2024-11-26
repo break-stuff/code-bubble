@@ -253,7 +253,6 @@ export default class CodeBubble extends LitElement {
   }
 
   private setCodeContent() {
-    console.log('setting code content', [...this.querySelectorAll('pre:not([slot]):not(:has(pre))')]);
     const blocks = [
       ...this.querySelectorAll('pre:not([slot]):not(:has(pre))'),
     ] as HTMLElement[];
@@ -263,7 +262,6 @@ export default class CodeBubble extends LitElement {
         block.querySelector('[data-language]') ||
         block;
 
-        console.log(codeContent?.textContent);
       const language =
         codeContent?.className
           ?.split(' ')
@@ -281,6 +279,8 @@ export default class CodeBubble extends LitElement {
     element?: HTMLElement | null,
     language: string = 'html',
   ) {
+
+    console.log('LANG', language);
     if (!element) {
       return;
     }
@@ -290,7 +290,7 @@ export default class CodeBubble extends LitElement {
       return;
     }
 
-    this.setLangOnCodeWrapper(element?.parentElement);
+    this.setLangOnCodeWrapper(element?.parentElement, language);
   }
 
   private async setFallbackFramework() {

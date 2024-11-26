@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.4
+
+- Fixed bug that was assigning all slots to `html`
+
 ## 1.1.3
 
 - Fix issue if no code language is specified.
