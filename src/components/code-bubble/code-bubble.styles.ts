@@ -98,6 +98,10 @@ export default css`
     margin-inline-end: calc(var(--code-bubble-border-width) / 2);
   }
 
+  .resize-container ::slotted(*) {
+    position: relative;
+  }
+
   .resize-handle {
     display: flex;
     align-items: center;

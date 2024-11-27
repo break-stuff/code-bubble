@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.5
+
+- Fixed issue where preview content is not correctly positioned
+
 ## 1.1.4
 
 - Fixed bug that was assigning all slots to `html`
