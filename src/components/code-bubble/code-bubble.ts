@@ -173,17 +173,32 @@ export default class CodeBubble extends LitElement {
     if (this.hasAttribute('framework')) {
       this.framework = this.getAttribute('framework') as string;
     }
+  }
 
-    // wait for code formatters to finish executing
-    setTimeout(() => {
-      this.getCode();
-      this.createPreview();
-    }, 10);
+  protected firstUpdated() {
+    this.loadCode();
+  }
+
+  private loadCode() {
+    this.getCode();
+    this.createPreview();
+
+    const preview = this.querySelector('[slot="preview"]');
+    if (preview?.textContent) {
+      return;
+    }
+
+    // wait for code formatters to load
+    setTimeout(() => this.reloadCode(), 200);
+  }
+
+  private reloadCode() {
+    this.getCode();
+    this.updatePreview();
   }
 
   private handleSlotChange() {
-    this.getCode();
-    this.updatePreview();
+    this.reloadCode();
   }
 
   private createPreview() {
@@ -279,8 +294,6 @@ export default class CodeBubble extends LitElement {
     element?: HTMLElement | null,
     language: string = 'html',
   ) {
-
-    console.log('LANG', language);
     if (!element) {
       return;
     }
