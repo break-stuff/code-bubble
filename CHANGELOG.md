@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.8
+
+- Fixed code reload when preview content changes
+- Fixed console error when resizing content
+
 ## 1.1.7
 
 - Fixed issue when preview content doesn't load

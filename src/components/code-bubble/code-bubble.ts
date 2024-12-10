@@ -186,7 +186,13 @@ export default class CodeBubble extends LitElement {
   }
 
   private initObserver() {
+    const preview = this.querySelector('[slot="preview"]');
+    if (preview?.textContent) {
+      return;
+    }
+
     const observer = new MutationObserver(() => {
+      this.codeBlocks = {};
       this.reloadCode();
       const preview = this.querySelector('[slot="preview"]');
       if (preview?.textContent) {
@@ -222,9 +228,13 @@ export default class CodeBubble extends LitElement {
   }
 
   private updatePreview() {
+    if (!Object.keys(this.codeBlocks).includes(this.framework || '')) {
+      this.framework = Object.keys(this.codeBlocks)[0];
+    }
+
     const preview = this.querySelector('[slot="preview"]');
     if (preview) {
-      preview.innerHTML = this.codeBlocks[this.framework!];
+      preview.innerHTML = this.codeBlocks[this.framework!] || '';
       this.loadScripts(preview as HTMLDivElement);
     } else {
       this.createPreview();
@@ -410,7 +420,6 @@ export default class CodeBubble extends LitElement {
     const resizeHandle = this.resizeHandle;
     dragStart(e);
 
-    e.preventDefault();
     resizeContainer.classList.add('dragging');
     document.documentElement.addEventListener('mousemove', dragStart);
     document.documentElement.addEventListener('touchmove', dragStart);
