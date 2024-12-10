@@ -177,19 +177,23 @@ export default class CodeBubble extends LitElement {
 
   protected firstUpdated() {
     this.loadCode();
+    this.initObserver();
   }
 
   private loadCode() {
     this.getCode();
     this.createPreview();
+  }
 
-    const preview = this.querySelector('[slot="preview"]');
-    if (preview?.textContent) {
-      return;
-    }
-
-    // wait for code formatters to load
-    setTimeout(() => this.reloadCode(), 200);
+  private initObserver() {
+    const observer = new MutationObserver(() => {
+      this.reloadCode();
+      const preview = this.querySelector('[slot="preview"]');
+      if (preview?.textContent) {
+        observer.disconnect();
+      }
+    });
+    observer.observe(this, { childList: true, subtree: true });
   }
 
   private reloadCode() {

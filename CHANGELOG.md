@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.7
+
+- Fixed issue when preview content doesn't load
+
 ## 1.1.6
 
 - Fixed timing issues with delayed code formatters
