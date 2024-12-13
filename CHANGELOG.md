@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.9
+
+- Fixed timeout issue with reloaded code
+- Removed redundant `slotchange` handler
+
 ## 1.1.8
 
 - Fixed code reload when preview content changes
