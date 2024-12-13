@@ -192,12 +192,14 @@ export default class CodeBubble extends LitElement {
     }
 
     const observer = new MutationObserver(() => {
+      if(Object.values(this.codeBlocks)[0]) {
+        this.updatePreview();
+        observer.disconnect();
+        return;
+      }
+
       this.codeBlocks = {};
       this.reloadCode();
-      const preview = this.querySelector('[slot="preview"]');
-      if (preview?.textContent) {
-        observer.disconnect();
-      }
     });
     observer.observe(this, { childList: true, subtree: true });
   }
@@ -205,10 +207,6 @@ export default class CodeBubble extends LitElement {
   private reloadCode() {
     this.getCode();
     this.updatePreview();
-  }
-
-  private handleSlotChange() {
-    this.reloadCode();
   }
 
   private createPreview() {
@@ -232,13 +230,8 @@ export default class CodeBubble extends LitElement {
       this.framework = Object.keys(this.codeBlocks)[0];
     }
 
-    const preview = this.querySelector('[slot="preview"]');
-    if (preview) {
-      preview.innerHTML = this.codeBlocks[this.framework!] || '';
-      this.loadScripts(preview as HTMLDivElement);
-    } else {
-      this.createPreview();
-    }
+    this.querySelector('[slot="preview"]')?.remove();
+    this.createPreview();
   }
 
   private loadScripts(preview: HTMLDivElement) {
@@ -591,7 +584,6 @@ export default class CodeBubble extends LitElement {
             : nothing}
         </div>
       </div>
-      <slot @slotchange=${this.handleSlotChange} hidden></slot>
     `;
   }
 }
