@@ -1,4 +1,4 @@
-import type CodeBubble from '../components/code-bubble/code-bubble';
+import type CodeBubble from '../components/code-bubble/code-bubble.js';
 
 declare global {
   interface WindowEventMap {

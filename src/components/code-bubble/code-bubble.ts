@@ -8,12 +8,12 @@ import type {
   FrameworkConfig,
   StackBlitz,
 } from '../../configs/types.js';
-import { configs } from '../../configs/index.js';
 import {
   useCodePenSandbox,
   useStackBlitzSandbox,
 } from '../../utilities/sandbox-helpers.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { configs } from '../../configs/configs.js';
 
 type CodeBlock = { [key: string]: string };
 
@@ -76,7 +76,7 @@ type CodeBlock = { [key: string]: string };
  *
  */
 export default class CodeBubble extends LitElement {
-  static styles = [styles];
+  static override styles = [styles];
   private _config: CodeBubbleConfig = {};
   private _openShowCode = false;
 
@@ -167,7 +167,7 @@ export default class CodeBubble extends LitElement {
     this.updateConfig();
   }
 
-  connectedCallback(): void {
+  override connectedCallback(): void {
     super.connectedCallback();
     this.setAttribute('code-bubble', '');
     if (this.hasAttribute('framework')) {
@@ -175,7 +175,7 @@ export default class CodeBubble extends LitElement {
     }
   }
 
-  protected firstUpdated() {
+  protected override firstUpdated() {
     this.loadCode();
     this.initObserver();
   }
@@ -192,7 +192,7 @@ export default class CodeBubble extends LitElement {
     }
 
     const observer = new MutationObserver(() => {
-      if(Object.values(this.codeBlocks)[0]) {
+      if (Object.values(this.codeBlocks)[0]) {
         this.updatePreview();
         observer.disconnect();
         return;
@@ -371,9 +371,11 @@ export default class CodeBubble extends LitElement {
       this.config.hooks.onSandboxOpen(config);
     }
 
-    this.config.sandbox === 'codepen'
-      ? useCodePenSandbox(config, code)
-      : useStackBlitzSandbox(config, code);
+    if (this.config.sandbox === 'codepen') {
+      useCodePenSandbox(config, code);
+    } else {
+      useStackBlitzSandbox(config, code);
+    }
   }
 
   private handleCopyClick(e: MouseEvent | TouchEvent) {
@@ -443,7 +445,7 @@ export default class CodeBubble extends LitElement {
     }
   }
 
-  render() {
+  override render() {
     return html`
       <div class="code-bubble-base" part="code-bubble-base">
         ${!this.hidePreview && !this.componentConfig.preview?.hide
