@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.10
+
+- Updated project linting
+- Updated project to use rollup to prevent issues with storybook
+- Removed unused code
+- Removed circular references
+
 ## 1.1.9
 
 - Fixed timeout issue with reloaded code
