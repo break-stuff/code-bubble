@@ -482,6 +482,20 @@ This is called when the example code window is toggled after the `isShowCode` va
 
 This is called when the language example is changed and the `language` value has been updated.
 
+## Reload Attempts
+
+Depending on the framework and the library used to format your code, there may be a delay between when Code Bubble loads and when the code examples are rendered. To prevent empty examples, Code bubble will retry to load the code at a specified interval until the code is loaded or until the max number of attempts has been reached. The default `max` is `5` and the default `delay` is `500` (milliseconds).
+
+```ts
+/** Configuration for the number of reload attempts */
+export type ReloadAttemptsConfig = { 
+  /** Number of times the sandbox will try to reload before giving up */
+  max?: number;
+  /** Amount of time in milliseconds between each reload attempt */
+  delay?: number;
+};
+```
+
 ## Component-level Overrides
 
 Code bubble is managed using a global configuration, but there may be times where specific instances need to behave differently. The following attributes can be added to the component to modify the behavior.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+- Removed MutationObserver that was causing Storybook MDX pages to lock up
+- Added user configuration for reload attempts
+
 ## 1.1.10
 
 - Updated project linting

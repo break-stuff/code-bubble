@@ -150,6 +150,9 @@ export default class CodeBubble extends LitElement {
   @state()
   protected sandboxConfig: FrameworkConfig<CodePen | StackBlitz> = {};
 
+  @state()
+  protected reloadAttempt = 0;
+
   @query('.resize-handle')
   private resizeHandle!: HTMLButtonElement;
 
@@ -177,7 +180,7 @@ export default class CodeBubble extends LitElement {
 
   protected override firstUpdated() {
     this.loadCode();
-    this.initObserver();
+    this.reloadCode();
   }
 
   private loadCode() {
@@ -185,28 +188,17 @@ export default class CodeBubble extends LitElement {
     this.createPreview();
   }
 
-  private initObserver() {
-    const preview = this.querySelector('[slot="preview"]');
-    if (preview?.textContent) {
+  private reloadCode() {
+    if (Object.values(this.codeBlocks)[0] || this.reloadAttempt > (this.config.reloadAttempts?.max || 5)) {
       return;
     }
 
-    const observer = new MutationObserver(() => {
-      if (Object.values(this.codeBlocks)[0]) {
-        this.updatePreview();
-        observer.disconnect();
-        return;
-      }
-
-      this.codeBlocks = {};
-      this.reloadCode();
-    });
-    observer.observe(this, { childList: true, subtree: true });
-  }
-
-  private reloadCode() {
+    this.codeBlocks = {};
     this.getCode();
     this.updatePreview();
+    this.reloadAttempt++;
+
+    setTimeout(() => this.reloadCode(), this.config.reloadAttempts?.delay || 500);
   }
 
   private createPreview() {
