@@ -5,25 +5,11 @@ export type CodeBubbleConfig = {
   /** Configuration for the component rendered on the site */
   component?: ComponentConfig;
   /** Configurations for the sandboxes */
-  sandboxConfig?: {
-    /** CodePen sandbox configuration */
-    codePen?: FrameworkConfig<CodePen>;
-    /** StackBlitz sandbox configuration */
-    stackBlitz?: FrameworkConfig<StackBlitz>;
-  };
+  sandboxConfig?: SandboxConfig;
   /** Callback functions for the code bubble component */
-  hooks?: {
-    /** Callback function that runs when the code is copied */
-    onCopy?: () => void;
-    /** Callback function when the RTL button is toggled */
-    onRtl?: (isRtl: boolean) => void;
-    /** Callback function that runs when a sandbox is opened */
-    onSandboxOpen?: (config: ProjectConfig<CodePen | StackBlitz>) => void;
-    /** Callback function that runs when the code is shown */
-    onShowCode?: (isShowCode: boolean) => void;
-    /** Callback function that runs when a language is selected */
-    onLanguageChange?: (language: string) => void;
-  };
+  hooks?: LifeCycleHooks;
+  /** Configuration for the number of reload attempts */
+  reloadAttempts?: ReloadAttemptsConfig;
 };
 
 /** Configuration for the component rendered on the site */
@@ -111,6 +97,14 @@ export type ComponentConfig = {
   };
 };
 
+/** Configuration for the sandbox environments */
+export type SandboxConfig = {
+  /** CodePen sandbox configuration */
+  codePen?: FrameworkConfig<CodePen>;
+  /** StackBlitz sandbox configuration */
+  stackBlitz?: FrameworkConfig<StackBlitz>;
+};
+
 /** Configuration for the sandbox environments using the language tag as the key (`html`, `jsx`, `ts`, etc.) */
 export type FrameworkConfig<T extends CodePen | StackBlitz> = {
   /** CodePen project configuration for language examples */
@@ -128,7 +122,6 @@ export type ProjectConfig<T extends CodePen | StackBlitz> = {
 /** Configuration for the code block that's rendered in the sandbox environment */
 export type ExampleTemplateConfig = {
   /** Indicates which code block has the template */
-  // eslint-disable-next-line @typescript-eslint/ban-types
   fileName: 'html' | 'css' | 'js' | (string & {});
   /** Template function that returns the code block with the example in it */
   template: string;
@@ -193,4 +186,26 @@ export type StackBlitz = {
   files?: {
     [name: string]: string;
   };
+};
+
+/** Code bubble life cycle hooks */
+export type LifeCycleHooks = {
+  /** Callback function that runs when the code is copied */
+  onCopy?: () => void;
+  /** Callback function when the RTL button is toggled */
+  onRtl?: (isRtl: boolean) => void;
+  /** Callback function that runs when a sandbox is opened */
+  onSandboxOpen?: (config: ProjectConfig<CodePen | StackBlitz>) => void;
+  /** Callback function that runs when the code is shown */
+  onShowCode?: (isShowCode: boolean) => void;
+  /** Callback function that runs when a language is selected */
+  onLanguageChange?: (language: string) => void;
+};
+
+/** Configuration for the number of reload attempts */
+export type ReloadAttemptsConfig = { 
+  /** Number of times the sandbox will try to reload before giving up */
+  max?: number;
+  /** Amount of time in milliseconds between each reload attempt */
+  delay?: number;
 };

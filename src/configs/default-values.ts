@@ -259,4 +259,8 @@ export const defaultCodeBubbleConfig: CodeBubbleConfig = {
     codePen: codePenDefaultConfig,
     stackBlitz: stackBlitzDefaultConfig,
   },
+  reloadAttempts: {
+    max: 5,
+    delay: 500,
+  }
 };
