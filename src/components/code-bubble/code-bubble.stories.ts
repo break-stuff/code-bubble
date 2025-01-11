@@ -9,18 +9,7 @@ const { events, args, argTypes, template } =
 
 let selectedLang = 'html';
 
-new CodeBlock({
-  sandbox: 'stackblitz',
-  component: {
-    frameworkButtons: {
-      label: framework =>
-        ({
-          html: 'HTML',
-          jsx: 'React',
-        })[framework] || framework,
-    },
-  },
-});
+
 
 new CodeBlock({
   sandbox: 'codepen',
@@ -82,7 +71,7 @@ new CodeBlock({
 });
 
 const meta: Meta<CodeBubble> = {
-  title: 'Components/Code Block',
+  title: 'Components/Code Bubble',
   component: 'code-bubble',
   args,
   argTypes,

@@ -1,6 +1,6 @@
 import sdk from '@stackblitz/sdk';
-import { formatCode } from "./format-code";
-import type { CodePen, ProjectConfig, StackBlitz } from "../configs/types";
+import { formatCode } from "./format-code.js";
+import type { CodePen, ProjectConfig, StackBlitz } from "../configs/types.js";
 
 export function useCodePenSandbox(config: ProjectConfig<CodePen>, example = '') {
   const sandboxConfig = {

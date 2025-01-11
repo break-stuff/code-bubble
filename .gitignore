@@ -132,4 +132,5 @@ dist
 *storybook.log
 
 cdn
+public
 custom-elements.json
