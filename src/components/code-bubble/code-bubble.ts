@@ -393,6 +393,27 @@ export default class CodeBubble extends LitElement {
     );
   }
 
+  private handleKeydown(e: KeyboardEvent) {
+    const resizeHandle = this.shadowRoot?.querySelector('.resize-handle');
+    if (e.target !== resizeHandle) {
+      return;
+    }
+
+    const resizeContainer = this.resizeContainer;
+    const startWidth = parseInt(getComputedStyle(resizeContainer).width, 10);
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        resizeContainer.style.maxWidth = `${startWidth - 10}px`;
+        break;
+      case 'ArrowRight':
+        resizeContainer.style.maxWidth = `${startWidth + 10}px`;
+        break;
+      default:
+        break;
+    }
+  }
+
   @eventOptions({ passive: true })
   private handleDrag(e: TouchEvent) {
     const startX = e.changedTouches
@@ -451,6 +472,7 @@ export default class CodeBubble extends LitElement {
                 ${!this.hideResize && !this.componentConfig.resizeButton?.hide
                   ? html`<button
                       class="resize-handle"
+                      @keydown=${this.handleKeydown}
                       @mousedown=${this.handleDrag}
                       @touchstart=${this.handleDrag}
                     >
