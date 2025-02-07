@@ -392,6 +392,53 @@ describe('CodeBubble', () => {
     });
   });
 
+  describe('resize', () => {
+    it('should decrease maxWidth when ArrowLeft is pressed', async () => {
+      const codeBubble = await getCodeBubble();
+
+      const resizeHandle = codeBubble.shadowRoot?.querySelector<HTMLButtonElement>('.resize-handle');
+      const resizeContainer = codeBubble.shadowRoot?.querySelector<HTMLElement>('.resize-container');
+  
+      resizeContainer.style.maxWidth = '160px';
+      resizeHandle.focus();
+  
+      const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+      resizeHandle.dispatchEvent(event);
+  
+      expect(resizeContainer.style.maxWidth).to.equal('150px');
+    });
+  
+    it('should increase maxWidth when ArrowRight is pressed', async () => {
+      const codeBubble = await getCodeBubble();
+
+      const resizeHandle = codeBubble.shadowRoot?.querySelector<HTMLButtonElement>('.resize-handle');
+      const resizeContainer = codeBubble.shadowRoot?.querySelector<HTMLElement>('.resize-container');
+  
+      resizeContainer.style.maxWidth = '160px';
+      resizeHandle.focus();
+  
+      const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+      resizeHandle.dispatchEvent(event);
+  
+      expect(resizeContainer.style.maxWidth).to.equal('170px');
+    });
+  
+    it('should not change maxWidth for other keys', async () => {
+      const codeBubble = await getCodeBubble();
+
+      const resizeHandle = codeBubble.shadowRoot?.querySelector<HTMLButtonElement>('.resize-handle');
+      const resizeContainer = codeBubble.shadowRoot?.querySelector<HTMLElement>('.resize-container');
+  
+      resizeContainer.style.maxWidth = '160px';
+      resizeHandle.focus();
+  
+      const event = new KeyboardEvent('keydown', { key: 'Enter' });
+      resizeHandle.dispatchEvent(event);
+  
+      expect(resizeContainer.style.maxWidth).to.equal('160px');
+    });  
+  });
+
   describe('preview', () => {
     it('should hide the preview', async () => {
       const codeBubble = await getCodeBubble();
