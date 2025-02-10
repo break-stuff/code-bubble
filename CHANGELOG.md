@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+- Added keyboard controls to resize handle
+
 ## 1.2.0
 
 - Removed MutationObserver that was causing Storybook MDX pages to lock up
