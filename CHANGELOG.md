@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+- Added missing methods: setLanguage and updateConfig
+
 ## 1.3.0
 
 - Added keyboard controls to resize handle
