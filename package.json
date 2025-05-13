@@ -1,6 +1,6 @@
 {
   "name": "code-bubble",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Reusable components for displaying code examples and providing links to a sandbox environment.",
   "main": "index.js",
   "types": "index.d.ts",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3
+
+- Enable focus for "Copy Code" button
+
 ## 1.3.2
 
 - Shift focus to code when "Show Code" button is clicked

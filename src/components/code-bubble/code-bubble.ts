@@ -493,7 +493,7 @@ export default class CodeBubble extends LitElement {
           id="code-bubble"
           class="code-bubble"
           part="code-bubble-code"
-          tabindex="-1"
+          tabindex=${this.openShowCode ? '0' : '-1'}
           ?open=${this.openShowCode}
         >
           <!-- required to prevent the user-agent summery from displaying -->
