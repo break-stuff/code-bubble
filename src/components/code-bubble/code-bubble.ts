@@ -314,6 +314,10 @@ export default class CodeBubble extends LitElement {
   private handleShowSourceClick() {
     this.openShowCode = !this.openShowCode;
 
+    if(this.openShowCode) {
+      this.shadowRoot?.querySelector('details')?.focus();
+    }
+
     if (typeof this.config.hooks?.onShowCode === 'function') {
       this.config.hooks.onShowCode(this.openShowCode);
     }
@@ -489,6 +493,7 @@ export default class CodeBubble extends LitElement {
           id="code-bubble"
           class="code-bubble"
           part="code-bubble-code"
+          tabindex="-1"
           ?open=${this.openShowCode}
         >
           <!-- required to prevent the user-agent summery from displaying -->

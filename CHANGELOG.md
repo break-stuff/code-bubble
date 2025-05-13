@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2
+
+- Shift focus to code when "Show Code" button is clicked
+
 ## 1.3.1
 
 - Added missing methods: setLanguage and updateConfig
